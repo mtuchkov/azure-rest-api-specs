@@ -3153,7 +3153,6 @@
       },
       "required": [
         "name",
-        "vhd",
         "createOption"
       ],
       "description": "Describes an Operating System disk."
@@ -3212,7 +3211,6 @@
       "required": [
         "lun",
         "name",
-        "vhd",
         "createOption"
       ],
       "description": "Describes a data disk."

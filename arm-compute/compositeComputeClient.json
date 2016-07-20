@@ -5,6 +5,7 @@
   },
   "documents": [
     "./arm-compute/2016-03-30/swagger/compute.json",
-    "./arm-compute/2016-03-30/swagger/containerService.json"
+    "./arm-compute/2016-03-30/swagger/containerService.json",
+    "./arm-compute/2016-04-30-preview/swagger/disk.json"
   ]
 }
