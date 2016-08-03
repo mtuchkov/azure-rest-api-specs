@@ -64,7 +64,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -109,7 +109,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -142,7 +142,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -194,7 +194,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -234,7 +234,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -277,7 +277,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -316,7 +316,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -354,7 +354,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -392,7 +392,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -444,7 +444,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -496,7 +496,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -548,7 +548,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -600,7 +600,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -652,7 +652,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -704,7 +704,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -749,7 +749,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -782,7 +782,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -833,7 +833,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -873,7 +873,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -909,7 +909,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -955,7 +955,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -994,7 +994,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1032,7 +1032,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1069,7 +1069,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1095,7 +1095,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1121,7 +1121,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1157,7 +1157,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1204,7 +1204,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1246,7 +1246,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1279,7 +1279,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1312,7 +1312,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1357,7 +1357,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1402,7 +1402,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1445,7 +1445,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1483,7 +1483,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1525,7 +1525,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1576,7 +1576,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1616,7 +1616,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1660,7 +1660,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1693,7 +1693,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1726,7 +1726,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -1771,7 +1771,7 @@
             }
           },
           "default": {
-            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "description": "Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.",
             "schema": {
               "$ref": "#/definitions/KeyVaultError"
             }
@@ -2032,7 +2032,7 @@
           "description": "Application-specific metadata in the form of key-value pairs"
         },
         "x5t": {
-          "x-ms-client-name": "X5T",
+          "x-ms-client-name": "X509Thumbprint",
           "type": "string",
           "format": "base64url",
           "description": "Thumbprint of the certificate."
@@ -2071,6 +2071,7 @@
           "readOnly": true
         },
         "x5t": {
+          "x-ms-client-name": "X509Thumbprint",
           "type": "string",
           "format": "base64url",
           "description": "Thumbprint of the certificate.",
@@ -2940,13 +2941,11 @@
     "Error": {
       "properties": {
         "code": {
-          "x-ms-client-name": "code",
           "type": "string",
           "readOnly": true,
           "description": "The error code."
         },
         "message": {
-          "x-ms-client-name": "message",
           "type": "string",
           "readOnly": true,
           "description": "The error message."
