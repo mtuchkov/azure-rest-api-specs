@@ -22,7 +22,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Retrieves all the managers in a subscription.",
+        "description": "Retrieves all the managers in a subscription.",
         "operationId": "Managers_ListBySubscription",
         "consumes": [
           "application/json",
@@ -59,7 +59,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Retrieves all the managers in a resource group.",
+        "description": "Retrieves all the managers in a resource group.",
         "operationId": "Managers_ListByResourceGroup",
         "consumes": [
           "application/json",
@@ -99,7 +99,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Returns the properties of the specified manager name.",
+        "description": "Returns the properties of the specified manager name.",
         "operationId": "Managers_Get",
         "consumes": [
           "application/json",
@@ -144,7 +144,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Creates or updates the manager.",
+        "description": "Creates or updates the manager.",
         "operationId": "Managers_CreateOrUpdate",
         "consumes": [
           "application/json",
@@ -204,7 +204,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Deletes the manager.",
+        "description": "Deletes the manager.",
         "operationId": "Managers_Delete",
         "consumes": [
           "application/json",
@@ -251,7 +251,7 @@
         "tags": [
           "Devices"
         ],
-        "summary": "Retrieves all the devices in a manager.",
+        "description": "Retrieves all the devices in a manager.",
         "operationId": "Devices_List",
         "consumes": [
           "application/json",
@@ -305,7 +305,7 @@
         "tags": [
           "Devices"
         ],
-        "summary": "Returns the properties of the specified device name.",
+        "description": "Returns the properties of the specified device name.",
         "operationId": "Devices_Get",
         "consumes": [
           "application/json",
@@ -364,7 +364,7 @@
         "tags": [
           "Devices"
         ],
-        "summary": "Deletes the device.",
+        "description": "Deletes the device.",
         "operationId": "Devices_Delete",
         "consumes": [
           "application/json",
@@ -417,7 +417,7 @@
         "tags": [
           "Devices"
         ],
-        "summary": "Patches the device.",
+        "description": "Patches the device.",
         "operationId": "Devices_Patch",
         "consumes": [
           "application/json",
@@ -484,7 +484,7 @@
         "tags": [
           "DeviceSettings"
         ],
-        "summary": "Returns the time settings of the specified device name.",
+        "description": "Returns the time settings of the specified device name.",
         "operationId": "DeviceSettings_GetTimeSettings",
         "consumes": [
           "application/json",
@@ -538,7 +538,7 @@
         "tags": [
           "ManagerKeys"
         ],
-        "summary": "Returns the encryption settings of the manager.",
+        "description": "Returns the encryption settings of the manager.",
         "operationId": "ManagerKeys_GetEncryptionSettings",
         "consumes": [
           "application/json",
@@ -585,7 +585,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Returns the extended information of the specified manager name.",
+        "description": "Returns the extended information of the specified manager name.",
         "operationId": "Managers_GetExtendedInfo",
         "consumes": [
           "application/json",
@@ -630,7 +630,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Creates the extended info of the manager.",
+        "description": "Creates the extended info of the manager.",
         "operationId": "Managers_CreateExtendedInfo",
         "consumes": [
           "application/json",
@@ -690,7 +690,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Deletes the extended info of the manager.",
+        "description": "Deletes the extended info of the manager.",
         "operationId": "Managers_DeleteExtendedInfo",
         "consumes": [
           "application/json",
@@ -735,7 +735,7 @@
         "tags": [
           "Managers"
         ],
-        "summary": "Updates the extended info of the manager.",
+        "description": "Updates the extended info of the manager.",
         "operationId": "Managers_UpdateExtendedInfo",
         "consumes": [
           "application/json",
@@ -798,7 +798,7 @@
         "tags": [
           "ManagerKeys"
         ],
-        "summary": "Returns the activation key of the manager.",
+        "description": "Returns the activation key of the manager.",
         "operationId": "ManagerKeys_GetActivationKey",
         "consumes": [
           "application/json",
@@ -1136,10 +1136,7 @@
       }
     },
     "Manager": {
-      "description": "Model of the Manager",
-      "required": [
-        "location"
-      ],
+      "description": "Model of the Manager",      
       "type": "object",
       "allOf": [
         {
@@ -1238,6 +1235,7 @@
     },
     "ManagerProperties": {
       "type": "object",
+      "description": "The Manager Properties.",
       "properties": {
         "cisIntrinsicSettings": {
           "$ref": "#/definitions/ManagerIntrinsicSettings",
