@@ -1248,60 +1248,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/devices/{deviceName}/networkSettings/default": {
-      "get": {
-        "tags": [
-          "DeviceSettings"
-        ],
-        "summary": "Returns the network settings of the specified device name.",
-        "operationId": "DeviceSettings_GetNetworkSettings",
-        "consumes": [
-          "application/json",
-          "text/json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The device name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/providerNamespaceParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/NetworkSettings"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/devices/{deviceName}/securitySettings/default/update": {
       "post": {
         "tags": [
@@ -2848,33 +2794,6 @@
         }
       }
     },
-    "IPConfig": {
-      "description": "Class containing details related to the IP address configuration",
-      "required": [
-        "ipAddress",
-        "gateway"
-      ],
-      "type": "object",
-      "properties": {
-        "ipAddress": {
-          "description": "Gets or sets the ipaddress of the network adapter.",
-          "type": "string"
-        },
-        "prefixLength": {
-          "format": "int32",
-          "description": "Gets or sets the prefix length of the network adapter.",
-          "type": "integer"
-        },
-        "gateway": {
-          "description": "Gets or sets the gateway of the network adapter.",
-          "type": "string"
-        },
-        "ipConfigStatus": {
-          "description": "Gets or sets the ipconfig status of the network adapter.",
-          "type": "string"
-        }
-      }
-    },
     "Key": {
       "description": "Model to represent the Key",
       "required": [
@@ -3025,109 +2944,6 @@
         "name": {
           "description": "Refers to the sku name which should be \"standard\"",
           "type": "string"
-        }
-      }
-    },
-    "NetworkAdapter": {
-      "description": "Represents a networkAdapter in a particular node.",
-      "required": [
-        "networkAdapterName",
-        "dhcpStatus"
-      ],
-      "type": "object",
-      "properties": {
-        "networkAdapterName": {
-          "description": "Gets or sets the name of the network adapter.",
-          "type": "string"
-        },
-        "iPv4Info": {
-          "$ref": "#/definitions/IPConfig",
-          "description": "Gets or sets the ipv4configuration of the network adapter."
-        },
-        "iPv6Info": {
-          "$ref": "#/definitions/IPConfig",
-          "description": "Gets or sets the ipv6configuration of the network adapter."
-        },
-        "dhcpStatus": {
-          "description": "Gets or sets the flag which represents state of DHCP.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DhcpStatus",
-            "modelAsString": false
-          }
-        },
-        "linkSpeed": {
-          "format": "int64",
-          "description": "Gets or sets the speed of the network adapter.",
-          "type": "integer"
-        }
-      }
-    },
-    "NetworkSettings": {
-      "description": "Model to represent the NetworkSettings of a device",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSettingsProperties",
-          "description": "Properties are encased in this object",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkSettingsProperties": {
-      "description": "Class containing the properties of NetworkSettings",
-      "required": [
-        "primaryDNSServer",
-        "nodeNetworks"
-      ],
-      "type": "object",
-      "properties": {
-        "primaryDNSServer": {
-          "description": "Gets or sets the Primary DNS server for the appliance",
-          "type": "string"
-        },
-        "secondaryDNSServer": {
-          "description": "Gets or sets the secondary DNS server for the appliance",
-          "type": "string"
-        },
-        "nodeNetworks": {
-          "description": "Gets or sets the NetworkAdapters under each node of the device.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NodeNetwork"
-          }
-        }
-      }
-    },
-    "NodeNetwork": {
-      "description": "Represents a single node in a device. In Helsinki VA, only 1 Node is present",
-      "required": [
-        "networkAdapters"
-      ],
-      "type": "object",
-      "properties": {
-        "networkAdapters": {
-          "description": "Gets or sets the list of network adapters in the node.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkAdapter"
-          }
         }
       }
     },
