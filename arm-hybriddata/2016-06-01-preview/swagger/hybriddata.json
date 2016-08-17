@@ -1135,23 +1135,12 @@
     "DataService": {
       "description": "Data Service.",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataServiceProperties",
           "description": "DataService properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
@@ -1197,24 +1186,14 @@
     },
     "DataStore": {
       "description": "Data store entity.",
+      "required": [ "properties" ],
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataStoreProperties",
           "description": "DataStore properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
@@ -1283,23 +1262,12 @@
     "DataStoreType": {
       "description": "Data Store Type entity.",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataStoreTypeProperties",
           "description": "DataStoreType properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
@@ -1347,6 +1315,24 @@
         }
       }
     },
+    "DmsBaseObject": {
+      "description": "All Data contract objects have to derive from this object\r\n            and override the Version property and implement the \r\n            Validate() method.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the object.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the object.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "Error Details",
       "type": "object",
@@ -1373,46 +1359,24 @@
     "Job": {
       "description": "Job entity.",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "Job properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
     "JobDefinition": {
       "description": "Job Definition.",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/JobDefinitionProperties",
           "description": "JobDefinition properties.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
@@ -1679,23 +1643,12 @@
     "PublicKey": {
       "description": "Public key",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublicKeyProperties",
           "description": "Public key property.",
           "x-ms-client-flatten": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string"
         }
       }
     },
@@ -1792,11 +1745,8 @@
     "Sku": {
       "description": "The sku type.",
       "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
-        "name": {
-          "description": "The sku name. Required for data manager creation, optional for update.",
-          "type": "string"
-        },
         "tier": {
           "description": "The sku tier. This is based on the SKU name.",
           "type": "string"
