@@ -23,7 +23,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of resources available under the subscription.",
+            "description": "List of data manager resources available under the subscription.",
             "schema": { "$ref": "#/definitions/DataManagerList" }
           }
         },
@@ -45,7 +45,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of resources by resource group.",
+            "description": "List of data manager resources by resource group.",
             "schema": { "$ref": "#/definitions/DataManagerList" }
           }
         },
@@ -74,7 +74,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource object.",
+            "description": "Data Manager Resource object.",
             "schema": { "$ref": "#/definitions/DataManager" }
           }
         },
@@ -108,11 +108,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource object.",
+            "description": "Data Manager Resource object.",
             "schema": { "$ref": "#/definitions/DataManager" }
           },
           "201": {
-            "description": "Resource created.",
+            "description": "Data Manager Resource created.",
             "schema": { "$ref": "#/definitions/DataManager" }
           }
         },
@@ -138,8 +138,8 @@
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
-          "200": { "description": "Resource deleted." },
-          "204": { "description": "Resource deleted." }
+          "200": { "description": "Data Manager Resource deleted." },
+          "204": { "description": "Data Manager Resource deleted." }
         },
         "deprecated": false
       },
@@ -171,11 +171,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource object.",
+            "description": "Data Manager Resource object.",
             "schema": { "$ref": "#/definitions/DataManager" }
           },
           "201": {
-            "description": "Resource updated.",
+            "description": "Data Manager Resource updated.",
             "schema": { "$ref": "#/definitions/DataManager" }
           }
         },
@@ -1186,7 +1186,6 @@
     },
     "DataStore": {
       "description": "Data store entity.",
-      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
