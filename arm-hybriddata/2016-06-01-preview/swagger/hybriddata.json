@@ -1133,7 +1133,7 @@
       }
     },
     "DmsBaseObject": {
-      "description": "All Data contract objects have to derive from this object\r\nand override the Version property and implement the \r\nValidate() method.",
+      "description": "Base class for all objects under DataManager.",
       "type": "object",
       "properties": {
         "name": {
@@ -1394,7 +1394,7 @@
         },
         "details": {
           "$ref": "#/definitions/JobDetails",
-          "description": "Job Details\r\nThis field will only be sent for expand details filter."
+          "description": "Details of a job run. This field will only be sent for expand details filter."
         },
         "dataSourceName": {
           "description": "Name of the data source on which the job was triggered.",
@@ -1495,19 +1495,19 @@
       }
     },
     "Resource": {
-      "description": "Model of the Resource",
+      "description": "Model of the Resource.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "The Resource Id",
+          "description": "The Resource Id.",
           "type": "string"
         },
         "name": {
-          "description": "The Resource Name",
+          "description": "The Resource Name.",
           "type": "string"
         },
         "type": {
-          "description": "The Resouce type",
+          "description": "The Resource type.",
           "type": "string"
         },
         "location": {
