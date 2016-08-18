@@ -9,15 +9,13 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/managers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/managers": {
       "get": {
         "tags": [
           "Managers"
@@ -25,19 +23,14 @@
         "description": "Retrieves all the managers in a subscription.",
         "operationId": "Managers_ListBySubscription",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/providerNamespaceParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -45,16 +38,19 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The collection of StorSimple managers.",
             "schema": {
-              "$ref": "#/definitions/Managers"
+              "$ref": "#/definitions/ManagerList"
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers": {
       "get": {
         "tags": [
           "Managers"
@@ -62,19 +58,14 @@
         "description": "Retrieves all the managers in a resource group.",
         "operationId": "Managers_ListByResourceGroup",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/providerNamespaceParameter"
           },
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -85,16 +76,19 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The collection of StorSimple managers.",
             "schema": {
-              "$ref": "#/definitions/Managers"
+              "$ref": "#/definitions/ManagerList"
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}": {
       "get": {
         "tags": [
           "Managers"
@@ -102,29 +96,20 @@
         "description": "Returns the properties of the specified manager name.",
         "operationId": "Managers_Get",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -132,7 +117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The StorSimple manager.",
             "schema": {
               "$ref": "#/definitions/Manager"
             }
@@ -147,21 +132,12 @@
         "description": "Creates or updates the manager.",
         "operationId": "Managers_CreateOrUpdate",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "Manager",
             "in": "body",
@@ -175,10 +151,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -186,13 +162,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The StorSimple manager has been successfully updated",
             "schema": {
               "$ref": "#/definitions/Manager"
             }
           },
           "201": {
-            "description": "",
+            "description": "The StorSimple manager has been successfully created",
             "schema": {
               "$ref": "#/definitions/Manager"
             }
@@ -207,29 +183,20 @@
         "description": "Deletes the manager.",
         "operationId": "Managers_Delete",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -237,16 +204,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "The StorSimple manager has been successfully deleted"
           },
           "204": {
-            "description": ""
+            "description": "The StorSimple manager is already in a deleted state"
           }
         },
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/devices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices": {
       "get": {
         "tags": [
           "Devices"
@@ -254,29 +221,20 @@
         "description": "Retrieves all the devices in a manager.",
         "operationId": "Devices_List",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -291,16 +249,19 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The collection of devices.",
             "schema": {
               "$ref": "#/definitions/DeviceList"
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/devices/{deviceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}": {
       "get": {
         "tags": [
           "Devices"
@@ -308,12 +269,10 @@
         "description": "Returns the properties of the specified device name.",
         "operationId": "Devices_Get",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -324,20 +283,13 @@
             "type": "string"
           },
           {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -352,7 +304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The device.",
             "schema": {
               "$ref": "#/definitions/Device"
             }
@@ -367,12 +319,10 @@
         "description": "Deletes the device.",
         "operationId": "Devices_Delete",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -383,20 +333,13 @@
             "type": "string"
           },
           {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -404,10 +347,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted the request to delete the device."
           },
           "204": {
-            "description": ""
+            "description": "Successfully deleted the device."
           }
         },
         "deprecated": false,
@@ -420,12 +363,10 @@
         "description": "Patches the device.",
         "operationId": "Devices_Patch",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -445,20 +386,13 @@
             }
           },
           {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -466,33 +400,31 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully patched the device.",
             "schema": {
               "$ref": "#/definitions/Device"
             }
           },
           "202": {
-            "description": ""
+            "description": "Accepted the request to patch the device."
           }
         },
         "deprecated": false,
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/devices/{deviceName}/timeSettings/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default": {
       "get": {
         "tags": [
-          "DeviceSettings"
+          "Devices"
         ],
         "description": "Returns the time settings of the specified device name.",
-        "operationId": "DeviceSettings_GetTimeSettings",
+        "operationId": "Devices_GetTimeSettings",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -503,20 +435,13 @@
             "type": "string"
           },
           {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -524,7 +449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The time settings.",
             "schema": {
               "$ref": "#/definitions/TimeSettings"
             }
@@ -533,37 +458,28 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/encryptionSettings/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default": {
       "get": {
         "tags": [
-          "ManagerKeys"
+          "Managers"
         ],
         "description": "Returns the encryption settings of the manager.",
-        "operationId": "ManagerKeys_GetEncryptionSettings",
+        "operationId": "Managers_GetEncryptionSettings",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -571,7 +487,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The encryption settings.",
             "schema": {
               "$ref": "#/definitions/EncryptionSettings"
             }
@@ -580,7 +496,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/extendedInformation/vaultExtendedInfo": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/extendedInformation/vaultExtendedInfo": {
       "get": {
         "tags": [
           "Managers"
@@ -588,29 +504,20 @@
         "description": "Returns the extended information of the specified manager name.",
         "operationId": "Managers_GetExtendedInfo",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -618,7 +525,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The manager extended information.",
             "schema": {
               "$ref": "#/definitions/ManagerExtendedInfo"
             }
@@ -633,21 +540,12 @@
         "description": "Creates the extended info of the manager.",
         "operationId": "Managers_CreateExtendedInfo",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "ManagerExtendedInfo",
             "in": "body",
@@ -661,10 +559,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -672,13 +570,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ManagerExtendedInfo"
-            }
-          },
-          "201": {
-            "description": "",
+            "description": "The extended information on the manager has been successfully created",
             "schema": {
               "$ref": "#/definitions/ManagerExtendedInfo"
             }
@@ -693,40 +585,28 @@
         "description": "Deletes the extended info of the manager.",
         "operationId": "Managers_DeleteExtendedInfo",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": ""
-          },
           "204": {
-            "description": ""
+            "description": "The extended information on the manager has been successfully deleted"
           }
         },
         "deprecated": false
@@ -738,21 +618,12 @@
         "description": "Updates the extended info of the manager.",
         "operationId": "Managers_UpdateExtendedInfo",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "ManagerExtendedInfo",
             "in": "body",
@@ -766,10 +637,10 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -784,7 +655,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The extended information on the manager has been successfully created",
             "schema": {
               "$ref": "#/definitions/ManagerExtendedInfo"
             }
@@ -793,37 +664,28 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/managers/{managerName}/getActivationKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getActivationKey": {
       "post": {
         "tags": [
-          "ManagerKeys"
+          "Managers"
         ],
         "description": "Returns the activation key of the manager.",
-        "operationId": "ManagerKeys_GetActivationKey",
+        "operationId": "Managers_GetActivationKey",
         "consumes": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
-          {
-            "name": "managerName",
-            "in": "path",
-            "description": "The manager name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/providerNamespaceParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "#/parameters/managerNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -831,7 +693,45 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The activation key.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Re-generates and returns the activation key of the manager.",
+        "operationId": "Managers_RegenerateActivationKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The regenerated activation key.",
             "schema": {
               "$ref": "#/definitions/Key"
             }
@@ -852,12 +752,15 @@
           "x-ms-client-flatten": true
         },
         "id": {
+          "description": "The identifier.",
           "type": "string"
         },
         "name": {
+          "description": "The name.",
           "type": "string"
         },
         "type": {
+          "description": "The type.",
           "type": "string"
         }
       }
@@ -878,7 +781,7 @@
         },
         "totalLocalStorageInBytes": {
           "format": "int64",
-          "description": "Total local storage capacity in device",
+          "description": "Total local storage capacity in device in bytes.",
           "type": "integer"
         },
         "provisionedStorageInBytes": {
@@ -931,7 +834,7 @@
       }
     },
     "DevicePatch": {
-      "description": "Class that represents the Input for the PATCH call on Device\r\n            Currently the only patchable property on device is \"DeviceDescription\"",
+      "description": "Class that represents the Input for the PATCH call on Device. Currently the only patchable property on device is \"DeviceDescription\"",
       "type": "object",
       "properties": {
         "deviceDescription": {
@@ -971,7 +874,7 @@
           }
         },
         "culture": {
-          "description": "Language culture setting on the device",
+          "description": "Language culture setting on the device. For eg: \"en-US\"",
           "type": "string"
         },
         "deviceCapabilities": {
@@ -1007,7 +910,7 @@
           "type": "string"
         },
         "deviceConfigurationStatus": {
-          "description": "\"Complete\" if the device has been successfully registered as File/IscsiServer and the creation of share/volume is complete\r\n            \"Pending\" if the device is only registered but the creation of share/volume is complete is still pending",
+          "description": "\"Complete\" if the device has been successfully registered as File/IscsiServer and the creation of share/volume is complete, \"Pending\" if the device is only registered but the creation of share/volume is complete is still pending",
           "enum": [
             "Complete",
             "Pending"
@@ -1061,12 +964,12 @@
         },
         "details": {
           "$ref": "#/definitions/DeviceDetails",
-          "description": "subclass containing more storage-related information about the device\r\n            This field will be populated only if the get call is made with $expand = details"
+          "description": "subclass containing more storage-related information about the device. This field will be populated only if the get call is made with $expand = details."
         }
       }
     },
     "EncryptionSettings": {
-      "description": "Model to represent the EncryptionSettings",
+      "description": "The EncryptionSettings",
       "required": [
         "properties"
       ],
@@ -1074,22 +977,25 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EncryptionSettingsProperties",
-          "description": "properties are encased in this object",
+          "description": "Properties of the EncryptionSettings.",
           "x-ms-client-flatten": true
         },
         "id": {
+          "description": "The identifier.",
           "type": "string"
         },
         "name": {
+          "description": "The name.",
           "type": "string"
         },
         "type": {
+          "description": "The type.",
           "type": "string"
         }
       }
     },
     "EncryptionSettingsProperties": {
-      "description": "Class containing the properties of EncryptionSettings",
+      "description": "The properties of EncryptionSettings",
       "required": [
         "encryptionStatus",
         "keyRolloverStatus"
@@ -1097,7 +1003,7 @@
       "type": "object",
       "properties": {
         "encryptionStatus": {
-          "description": "Gets or sets the encryption status which indicates if encryption is enabled or not.",
+          "description": "The encryption status which indicates if encryption is enabled or not.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1109,7 +1015,7 @@
           }
         },
         "keyRolloverStatus": {
-          "description": "Gets or sets the key rollover status which indicates if key rollover is required or not.\r\n            If secrets encryption has been upgraded, then it requires key rollover.",
+          "description": "The key rollover status which indicates if key rollover is required or not. If secrets encryption has been upgraded, then it requires key rollover.",
           "enum": [
             "Required",
             "NotRequired"
@@ -1123,20 +1029,20 @@
       }
     },
     "Key": {
-      "description": "Model to represent the Key",
+      "description": "The key.",
       "required": [
         "activationKey"
       ],
       "type": "object",
       "properties": {
         "activationKey": {
-          "description": "Gets or sets the activation key for Series-9000 device",
+          "description": "The activation key for the device",
           "type": "string"
         }
       }
     },
     "Manager": {
-      "description": "Model of the Manager",      
+      "description": "The StorSimple Manager",
       "type": "object",
       "allOf": [
         {
@@ -1156,7 +1062,7 @@
       }
     },
     "ManagerExtendedInfo": {
-      "description": "Model of the ManagerExtendedInfo",
+      "description": "The extended info of the manager.",
       "required": [
         "properties"
       ],
@@ -1164,7 +1070,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagerExtendedInfoProperties",
-          "description": "XML Serialized string containing the following properties:\r\n            Algorithm, ChannelEncryptionKey, ChannelIntegrationKey,Version",
+          "description": "The extended info properties.",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -1172,18 +1078,21 @@
           "type": "string"
         },
         "id": {
+          "description": "The identifier.",
           "type": "string"
         },
         "name": {
+          "description": "The name.",
           "type": "string"
         },
         "type": {
+          "description": "The type.",
           "type": "string"
         }
       }
     },
     "ManagerExtendedInfoProperties": {
-      "description": "Contains properties of the ManagerExtendedInfo object",
+      "description": "Properties of the ManagerExtendedInfo",
       "type": "object",
       "properties": {
         "version": {
@@ -1203,11 +1112,11 @@
           "type": "string"
         },
         "portalCertificateThumbprint": {
-          "description": "Represents the thumbprint of the portal thumbprint which can be optionally\r\n            used to encrypt the entire data before persisting in core services DB",
+          "description": "Represents the thumbprint of the portal thumbprint which can be optionally used to encrypt the entire data before persisting in core services DB",
           "type": "string"
         },
         "algorithm": {
-          "description": "Represents the encryption algorithm used to encrypt the other keys\r\n            None - if EncryptionKey is saved in plain text format\r\n            AlgorithmName - if encryption is used",
+          "description": "Represents the encryption algorithm used to encrypt the other keys. None - if EncryptionKey is saved in plain text format. AlgorithmName - if encryption is used",
           "type": "string"
         }
       }
@@ -1233,29 +1142,12 @@
         }
       }
     },
-    "ManagerProperties": {
-      "type": "object",
-      "description": "The Manager Properties.",
-      "properties": {
-        "cisIntrinsicSettings": {
-          "$ref": "#/definitions/ManagerIntrinsicSettings",
-          "description": "Specifies if the Manager is Garda or Helsinki"
-        },
-        "sku": {
-          "$ref": "#/definitions/Managersku",
-          "description": "Specifies the name of the sku"
-        },
-        "provisioningState": {
-          "description": "Specifies the state of the resouce as it is getting provisioned\r\n            Value of \"Succeeded\" means the Manager was successfully created",
-          "type": "string"
-        }
-      }
-    },
-    "Managers": {
-      "description": "Model to represent a list of storsimple Managers under a particular resourceGroup",
+    "ManagerList": {
+      "description": "List of storsimple Managers under a particular resourceGroup",
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of Managers",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Manager"
@@ -1263,13 +1155,38 @@
         }
       }
     },
+    "ManagerProperties": {
+      "description": "The properties of the Manager",
+      "type": "object",
+      "properties": {
+        "cisIntrinsicSettings": {
+          "$ref": "#/definitions/ManagerIntrinsicSettings",
+          "description": "Specifies if the Manager is Garda or Helsinki"
+        },
+        "sku": {
+          "$ref": "#/definitions/Managersku",
+          "description": "Specifies the Sku"
+        },
+        "provisioningState": {
+          "description": "Specifies the state of the resouce as it is getting provisioned. Value of \"Succeeded\" means the Manager was successfully created",
+          "type": "string"
+        }
+      }
+    },
     "Managersku": {
-      "description": "Sku object which is part of the Manager",
+      "description": "The Sku.",
       "type": "object",
       "properties": {
         "name": {
           "description": "Refers to the sku name which should be \"standard\"",
-          "type": "string"
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagerSkuType",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -1331,7 +1248,7 @@
       }
     },
     "TimeSettings": {
-      "description": "Model to represent the TimeSettings of a device",
+      "description": "The TimeSettings of a device",
       "required": [
         "properties"
       ],
@@ -1339,22 +1256,25 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TimeSettingsProperties",
-          "description": "properties are encased in this object",
+          "description": "Properties of the TimeSettings.",
           "x-ms-client-flatten": true
         },
         "id": {
+          "description": "The identifier.",
           "type": "string"
         },
         "name": {
+          "description": "The name.",
           "type": "string"
         },
         "type": {
+          "description": "The type.",
           "type": "string"
         }
       }
     },
     "TimeSettingsProperties": {
-      "description": "Class containing the properties of TimeSettings",
+      "description": "The properties of TimeSettings",
       "required": [
         "timeZone",
         "primaryTimeServer"
@@ -1362,15 +1282,15 @@
       "type": "object",
       "properties": {
         "timeZone": {
-          "description": "Gets or sets the timezone for Helsinki device.",
+          "description": "The timezone of device.",
           "type": "string"
         },
         "primaryTimeServer": {
-          "description": "Gets or sets the primary time server for Helsinki device.",
+          "description": "The primary time server of device.",
           "type": "string"
         },
         "secondaryTimeServer": {
-          "description": "Gets or sets the secondary time server for Helsinki device.",
+          "description": "The secondary time server of device.",
           "type": "string"
         }
       }
@@ -1380,30 +1300,32 @@
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "The API Version",
+      "description": "The api version",
       "required": true,
       "type": "string"
     },
-    "providerNamespaceParameter": {
-      "name": "providerNamespace",
+    "managerNameParameter": {
+      "name": "managerName",
       "in": "path",
-      "description": "The Provider Namespace",
+      "description": "The manager name",
       "required": true,
       "type": "string",
-      "default": "Microsoft.StorSimple"
+      "maxLength": 50,
+      "minLength": 2,
+      "x-ms-parameter-location": "method"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
-      "description": "The Resource Group Name",
+      "description": "The resource group name",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The Subscription Id",
+      "description": "The subscription id",
       "required": true,
       "type": "string"
     }
