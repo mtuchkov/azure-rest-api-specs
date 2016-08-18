@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2016-06-01",
+    "version": "2016-06-01-preview",
     "title": "HybridDataManagementClient"
   },
   "host": "management.azure.com",
@@ -9,7 +9,7 @@
   "consumes": [ "application/json" ],
   "produces": [ "application/json" ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/dataManagers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridData/dataManagers": {
       "get": {
         "tags": [ "DataManagers" ],
         "description": "Lists all the data manager resources available under the subscription.",
@@ -18,7 +18,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -27,10 +26,11 @@
             "schema": { "$ref": "#/definitions/DataManagerList" }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": null }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers": {
       "get": {
         "tags": [ "DataManagers" ],
         "description": "Lists all the data manager resources available under the given resource group.",
@@ -39,7 +39,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
@@ -49,10 +48,11 @@
             "schema": { "$ref": "#/definitions/DataManagerList" }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": null }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}": {
       "get": {
         "tags": [ "DataManagers" ],
         "description": "Gets information about the specified data manager resource.",
@@ -60,16 +60,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Name of data manager resource.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -88,13 +81,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Name of data manager resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataManagerResource",
             "in": "body",
             "description": "Data manager resource details from request body.",
@@ -102,8 +88,8 @@
             "schema": { "$ref": "#/definitions/DataManager" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -125,16 +111,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Name of data manager resource.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -151,13 +130,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Name of data manager resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataManagerResource",
             "in": "body",
             "description": "Data manager resource details from request body.",
@@ -165,8 +137,8 @@
             "schema": { "$ref": "#/definitions/DataManager" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -182,7 +154,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
       "get": {
         "tags": [ "DataServices" ],
         "description": "This method gets all the data services.",
@@ -190,16 +162,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -212,7 +177,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}": {
       "get": {
         "tags": [ "DataServices" ],
         "description": "Gets the data service that match the data service name given.",
@@ -221,13 +186,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The name of the data service that is being queried.",
@@ -235,8 +193,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -248,7 +206,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions": {
       "get": {
         "tags": [ "JobDefinitions" ],
         "description": "This method gets all the job definitions of the given data service type.",
@@ -257,13 +215,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of interest.",
@@ -271,8 +222,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -293,7 +244,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}": {
       "get": {
         "tags": [ "JobDefinitions" ],
         "description": "This method gets job definition object by name.",
@@ -301,13 +252,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -323,8 +267,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -342,13 +286,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -371,8 +308,8 @@
             "schema": { "$ref": "#/definitions/JobDefinition" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -393,13 +330,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The data service type of the job definition.",
@@ -414,8 +344,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -426,7 +356,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs of a given job definition.",
@@ -434,13 +364,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -456,8 +379,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -478,7 +401,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}": {
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets a data manager job given the jobId.",
@@ -486,13 +409,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -515,8 +431,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$expand",
@@ -535,7 +451,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/cancel": {
       "post": {
         "tags": [ "Jobs" ],
         "description": "Cancels the given job.",
@@ -543,13 +459,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -572,8 +481,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -584,7 +493,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
       "post": {
         "tags": [ "Jobs" ],
         "description": "Resumes the given job.",
@@ -592,13 +501,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -621,8 +523,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -633,7 +535,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
       "post": {
         "tags": [ "JobDefinitions" ],
         "description": "This method runs a job instance of the given job definition.",
@@ -641,13 +543,6 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name which contains the job definition.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "dataServiceName",
             "in": "path",
@@ -670,8 +565,8 @@
             "schema": { "$ref": "#/definitions/RunParameters" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -682,7 +577,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs": {
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs of a data service type in a given resource.",
@@ -691,13 +586,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataServiceName",
             "in": "path",
             "description": "The name of the data service of interest.",
@@ -705,8 +593,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -727,7 +615,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataStores": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStores": {
       "get": {
         "tags": [ "DataStores" ],
         "description": "Gets all the data stores/repositories in the given resource.",
@@ -735,16 +623,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Resource where the data store exists.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -765,7 +646,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataStores/{dataStoreName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStores/{dataStoreName}": {
       "get": {
         "tags": [ "DataStores" ],
         "description": "This method gets the data store/repository by name.",
@@ -774,13 +655,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Resource where data store/repository exists.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataStoreName",
             "in": "path",
             "description": "The data store/repository name queried.",
@@ -788,8 +662,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -808,13 +682,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataStoreName",
             "in": "path",
             "description": "The data store/repository name to be created or updated.",
@@ -829,8 +696,8 @@
             "schema": { "$ref": "#/definitions/DataStore" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -851,13 +718,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The resource where the data store/repository exists.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataStoreName",
             "in": "path",
             "description": "The data store/repository name to be deleted.",
@@ -865,8 +725,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -877,7 +737,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataStoreTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes": {
       "get": {
         "tags": [ "DataStoreTypes" ],
         "description": "Gets all the data store/repository types that the resource supports.",
@@ -885,16 +745,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -907,7 +760,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/dataStoreTypes/{dataStoreTypeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes/{dataStoreTypeName}": {
       "get": {
         "tags": [ "DataStoreTypes" ],
         "description": "Gets the data store/repository type given its name.",
@@ -916,13 +769,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "dataStoreTypeName",
             "in": "path",
             "description": "The data store/repository type name for which details are needed.",
@@ -930,8 +776,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -943,7 +789,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/jobDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/jobDefinitions": {
       "get": {
         "tags": [ "JobDefinitions" ],
         "description": "This method gets all the job definitions of the given data manager resource.",
@@ -951,16 +797,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -981,7 +820,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/jobs": {
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs at the data manager resource level.",
@@ -989,16 +828,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "The data manager resource name.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
             "name": "$filter",
@@ -1019,7 +851,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/publicKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/publicKeys": {
       "get": {
         "tags": [ "PublicKeys" ],
         "description": "This method gets the list view of public keys, however it will only have one element.",
@@ -1027,16 +859,9 @@
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
-          {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Resource of the public keys.",
-            "required": true,
-            "type": "string"
-          },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -1049,7 +874,7 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/dataManagers/{dataManagerName}/publicKeys/{publicKeyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/publicKeys/{publicKeyName}": {
       "get": {
         "tags": [ "PublicKeys" ],
         "description": "This method gets the public keys.",
@@ -1058,13 +883,6 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerName",
-            "in": "path",
-            "description": "Resource of the public keys.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "publicKeyName",
             "in": "path",
             "description": "Name of the public key.",
@@ -1072,8 +890,8 @@
             "type": "string"
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/providerNamespaceParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" }
         ],
         "responses": {
@@ -1244,8 +1062,8 @@
           }
         },
         "extendedProperty": {
-          "$ref": "#/definitions/Object",
-          "description": "A generic json used differently by each data source type."
+          "description": "A generic json used differently by each data source type.",
+          "type": "object"
         },
         "dataStoreTypeId": {
           "description": "The arm id of the data store type/",
@@ -1315,7 +1133,7 @@
       }
     },
     "DmsBaseObject": {
-      "description": "All Data contract objects have to derive from this object\r\n            and override the Version property and implement the \r\n            Validate() method.",
+      "description": "All Data contract objects have to derive from this object\r\nand override the Version property and implement the \r\nValidate() method.",
       "type": "object",
       "properties": {
         "name": {
@@ -1458,8 +1276,8 @@
           }
         },
         "dataServiceInput": {
-          "$ref": "#/definitions/Object",
-          "description": "A generic json used differently by each data service type."
+          "description": "A generic json used differently by each data service type.",
+          "type": "object"
         },
         "customerSecrets": {
           "description": "List of customer secrets containing a key identifier and key value. The key identifier is a way for the specific data source to understand the key. Value contains customer secret encrypted by the encryptionKeys.",
@@ -1576,7 +1394,7 @@
         },
         "details": {
           "$ref": "#/definitions/JobDetails",
-          "description": "Job Details\r\n            This field will only be sent for expand details filter."
+          "description": "Job Details\r\nThis field will only be sent for expand details filter."
         },
         "dataSourceName": {
           "description": "Name of the data source on which the job was triggered.",
@@ -1606,8 +1424,8 @@
           }
         },
         "jobStageDetails": {
-          "$ref": "#/definitions/Object",
-          "description": "Job Stage Details"
+          "description": "Job Stage Details",
+          "type": "object"
         },
         "errorDetails": {
           "description": "Error details for the stage. This is optional",
@@ -1634,10 +1452,6 @@
           "type": "integer"
         }
       }
-    },
-    "Object": {
-      "type": "object",
-      "properties": {}
     },
     "PublicKey": {
       "description": "Public key",
@@ -1726,8 +1540,8 @@
           }
         },
         "dataServiceInput": {
-          "$ref": "#/definitions/Object",
-          "description": "A generic json used differently by each data service type."
+          "description": "A generic json used differently by each data service type.",
+          "type": "object"
         },
         "customerSecrets": {
           "description": "List of customer secrets containing a key identifier and key value. The key identifier is a way for the specific data source to understand the key. Value contains customer secret encrypted by the encryptionKeys.",
@@ -1761,21 +1575,24 @@
       "required": true,
       "type": "string"
     },
-    "providerNamespaceParameter": {
-      "name": "providerNamespace",
+    "dataManagerNameParameter": {
+      "name": "dataManagerName",
       "in": "path",
-      "description": "The Provider Namespace",
+      "description": "The name of the DataManager Resource within the specified resource group. DataManager names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
       "required": true,
       "type": "string",
-      "default": "Microsoft.HybridData"
+      "maxLength": 24,
+      "minLength": 3,
+      "pattern": "^[-\\w\\.]+$",
+      "x-ms-parameter-location": "method"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "description": "The Resource Group Name",
       "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
