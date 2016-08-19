@@ -764,7 +764,7 @@ If an operation requires that a parameter is exposed as a method parameter, it i
 ```
 
 ## x-ms-odata
->TODO: x-ms-odata
+>TODO: x-ms-odata. should be done.
 
 TODO: naming standards for operations Create, CreateOrUpdate, Update (respect etag), Get, List, Delete, Patch
 TODO: patch => no validate
