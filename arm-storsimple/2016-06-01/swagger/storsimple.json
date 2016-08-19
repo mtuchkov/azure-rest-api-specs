@@ -1,0 +1,1351 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-06-01",
+    "title": "StorSimpleManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorSimple/managers": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Retrieves all the managers in a subscription.",
+        "operationId": "Managers_ListBySubscription",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of StorSimple managers.",
+            "schema": {
+              "$ref": "#/definitions/ManagerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Retrieves all the managers in a resource group.",
+        "operationId": "Managers_ListByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of StorSimple managers.",
+            "schema": {
+              "$ref": "#/definitions/ManagerList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Returns the properties of the specified manager name.",
+        "operationId": "Managers_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager.",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Creates or updates the manager.",
+        "operationId": "Managers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Manager",
+            "in": "body",
+            "description": "The manager.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          "201": {
+            "description": "The StorSimple manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Deletes the manager.",
+        "operationId": "Managers_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The StorSimple manager has been successfully deleted"
+          },
+          "204": {
+            "description": "The StorSimple manager is already in a deleted state"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Retrieves all the devices in a manager.",
+        "operationId": "Devices_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the device.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The collection of devices.",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Returns the properties of the specified device name.",
+        "operationId": "Devices_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify $expand=details to populate additional fields related to the device.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Deletes the device.",
+        "operationId": "Devices_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the device."
+          },
+          "204": {
+            "description": "Successfully deleted the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Patches the device.",
+        "operationId": "Devices_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePatch",
+            "in": "body",
+            "description": "Patch representation of the device.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevicePatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully patched the device.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "202": {
+            "description": "Accepted the request to patch the device."
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/timeSettings/default": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Returns the time settings of the specified device name.",
+        "operationId": "Devices_GetTimeSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time settings.",
+            "schema": {
+              "$ref": "#/definitions/TimeSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/encryptionSettings/default": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Returns the encryption settings of the manager.",
+        "operationId": "Managers_GetEncryptionSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The encryption settings.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionSettings"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/extendedInformation/vaultExtendedInfo": {
+      "get": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Returns the extended information of the specified manager name.",
+        "operationId": "Managers_GetExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The manager extended information.",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Creates the extended info of the manager.",
+        "operationId": "Managers_CreateExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "description": "The manager extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extended information on the manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Deletes the extended info of the manager.",
+        "operationId": "Managers_DeleteExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The extended information on the manager has been successfully deleted"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Updates the extended info of the manager.",
+        "operationId": "Managers_UpdateExtendedInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ManagerExtendedInfo",
+            "in": "body",
+            "description": "The manager extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Pass the ETag of ExtendedInfo fetched from GET call",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extended information on the manager has been successfully created",
+            "schema": {
+              "$ref": "#/definitions/ManagerExtendedInfo"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/getActivationKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Returns the activation key of the manager.",
+        "operationId": "Managers_GetActivationKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The activation key.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey": {
+      "post": {
+        "tags": [
+          "Managers"
+        ],
+        "description": "Re-generates and returns the activation key of the manager.",
+        "operationId": "Managers_RegenerateActivationKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/managerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The regenerated activation key.",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "description": "Represents a StorSimple device object along with its properties",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "Collection of properties for the device",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The identifier.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceDetails": {
+      "description": "Class containing more granular details about the device",
+      "type": "object",
+      "properties": {
+        "endpointCount": {
+          "format": "int32",
+          "description": "Total number of endpoints that are currently on the device ( i.e. number of shares on FileServer or number of volumes on IscsiServer)",
+          "type": "integer"
+        },
+        "totalStorageInBytes": {
+          "format": "int64",
+          "description": "Total storage available on the device in bytes.",
+          "type": "integer"
+        },
+        "totalLocalStorageInBytes": {
+          "format": "int64",
+          "description": "Total local storage capacity in device in bytes.",
+          "type": "integer"
+        },
+        "provisionedStorageInBytes": {
+          "format": "int64",
+          "description": "Storage in bytes that has been provisioned on the device including both local and cloud",
+          "type": "integer"
+        },
+        "provisionedLocalStorageInBytes": {
+          "format": "int64",
+          "description": "Storage in bytes that has been provisioned locally on the device",
+          "type": "integer"
+        },
+        "usingStorageInBytes": {
+          "format": "int64",
+          "description": "Storage that is being currently used in bytes including both local and cloud",
+          "type": "integer"
+        },
+        "usingLocalStorageInBytes": {
+          "format": "int64",
+          "description": "Local Storage that is being currently used in bytes",
+          "type": "integer"
+        },
+        "totalBackupSizeInBytes": {
+          "format": "int64",
+          "description": "Total size taken up by backups in bytes",
+          "type": "integer"
+        },
+        "availableStorageInBytes": {
+          "format": "int64",
+          "description": "Total pending available storage on the device in bytes",
+          "type": "integer"
+        },
+        "availableLocalStorageInBytes": {
+          "format": "int64",
+          "description": "Local pending storage available on the device in bytes",
+          "type": "integer"
+        }
+      }
+    },
+    "DeviceList": {
+      "description": "Collection of Devices",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        }
+      }
+    },
+    "DevicePatch": {
+      "description": "Class that represents the Input for the PATCH call on Device. Currently the only patchable property on device is \"DeviceDescription\"",
+      "type": "object",
+      "properties": {
+        "deviceDescription": {
+          "description": "Short description given for the device",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceProperties": {
+      "description": "Encases all the properties of the Device",
+      "type": "object",
+      "properties": {
+        "activationTime": {
+          "format": "date-time",
+          "description": "The UTC time at which the device was activated",
+          "type": "string"
+        },
+        "allowedDeviceOperations": {
+          "description": "Operations that are allowed on the device based on its current state",
+          "type": "array",
+          "items": {
+            "enum": [
+              "None",
+              "Delete",
+              "DeleteWithWarning",
+              "Decommission",
+              "DRSource",
+              "DRTarget",
+              "Browsable",
+              "ReadOnlyForDR"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DeviceOperation",
+              "modelAsString": false
+            }
+          }
+        },
+        "culture": {
+          "description": "Language culture setting on the device. For eg: \"en-US\"",
+          "type": "string"
+        },
+        "deviceCapabilities": {
+          "description": "Device can be configured either as FileServer or IscsiServer",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "FileServer",
+              "IscsiServer"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SupportedDeviceCapabilities",
+              "modelAsString": false
+            }
+          }
+        },
+        "deviceDescription": {
+          "description": "Short description given for the device",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "Fully qualified name of the domain to which the device is attached",
+          "type": "string"
+        },
+        "deviceSoftwareVersion": {
+          "description": "Version number of the software running on the device",
+          "type": "string"
+        },
+        "friendlySoftwareName": {
+          "description": "Friendly name for the software version",
+          "type": "string"
+        },
+        "deviceConfigurationStatus": {
+          "description": "\"Complete\" if the device has been successfully registered as File/IscsiServer and the creation of share/volume is complete, \"Pending\" if the device is only registered but the creation of share/volume is complete is still pending",
+          "enum": [
+            "Complete",
+            "Pending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceConfigurationStatus",
+            "modelAsString": false
+          }
+        },
+        "modelDescription": {
+          "description": "Name of the device model",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current status of the device",
+          "enum": [
+            "Unknown",
+            "Online",
+            "Offline",
+            "Decommissioned",
+            "RequiresAttention",
+            "MaintenanceMode",
+            "Creating",
+            "Provisioning",
+            "Decommissioning",
+            "Deleted",
+            "PendingConfiguration"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceStatus",
+            "modelAsString": false
+          }
+        },
+        "type": {
+          "description": "Type of the device",
+          "enum": [
+            "Invalid",
+            "Appliance",
+            "VirtualAppliance",
+            "HelsinkiOnPremVirtualAppliance",
+            "HelsinkiVirtualAppliance",
+            "HelsinkiPhysicalAppliance"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeviceType",
+            "modelAsString": false
+          }
+        },
+        "details": {
+          "$ref": "#/definitions/DeviceDetails",
+          "description": "subclass containing more storage-related information about the device. This field will be populated only if the get call is made with $expand = details."
+        }
+      }
+    },
+    "EncryptionSettings": {
+      "description": "The EncryptionSettings",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EncryptionSettingsProperties",
+          "description": "Properties of the EncryptionSettings.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The identifier.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        }
+      }
+    },
+    "EncryptionSettingsProperties": {
+      "description": "The properties of EncryptionSettings",
+      "required": [
+        "encryptionStatus",
+        "keyRolloverStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "encryptionStatus": {
+          "description": "The encryption status which indicates if encryption is enabled or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": false
+          }
+        },
+        "keyRolloverStatus": {
+          "description": "The key rollover status which indicates if key rollover is required or not. If secrets encryption has been upgraded, then it requires key rollover.",
+          "enum": [
+            "Required",
+            "NotRequired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyRolloverStatus",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Key": {
+      "description": "The key.",
+      "required": [
+        "activationKey"
+      ],
+      "type": "object",
+      "properties": {
+        "activationKey": {
+          "description": "The activation key for the device",
+          "type": "string"
+        }
+      }
+    },
+    "Manager": {
+      "description": "The StorSimple Manager",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagerProperties",
+          "description": "List of properties of the Manager",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "description": "ETag of the Manager",
+          "type": "string"
+        }
+      }
+    },
+    "ManagerExtendedInfo": {
+      "description": "The extended info of the manager.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagerExtendedInfoProperties",
+          "description": "The extended info properties.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "description": "ETag of the Resource",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagerExtendedInfoProperties": {
+      "description": "Properties of the ManagerExtendedInfo",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Represents the version of the ExtendedInfo object being persisted",
+          "type": "string"
+        },
+        "integrityKey": {
+          "description": "Represents the CIK of the resource",
+          "type": "string"
+        },
+        "encryptionKey": {
+          "description": "Represents the CEK of the resource",
+          "type": "string"
+        },
+        "encryptionKeyThumbprint": {
+          "description": "Represents the Cert thumbprint that was used to encrypt the CEK",
+          "type": "string"
+        },
+        "portalCertificateThumbprint": {
+          "description": "Represents the thumbprint of the portal thumbprint which can be optionally used to encrypt the entire data before persisting in core services DB",
+          "type": "string"
+        },
+        "algorithm": {
+          "description": "Represents the encryption algorithm used to encrypt the other keys. None - if EncryptionKey is saved in plain text format. AlgorithmName - if encryption is used",
+          "type": "string"
+        }
+      }
+    },
+    "ManagerIntrinsicSettings": {
+      "description": "Intrinsic settings which refers to the type of the Storsimple manager",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Refers to the type of the StorSimple Manager",
+          "enum": [
+            "GardaV1",
+            "HelsinkiV1"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagerType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ManagerList": {
+      "description": "List of storsimple Managers under a particular resourceGroup",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Managers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Manager"
+          }
+        }
+      }
+    },
+    "ManagerProperties": {
+      "description": "The properties of the Manager",
+      "type": "object",
+      "properties": {
+        "cisIntrinsicSettings": {
+          "$ref": "#/definitions/ManagerIntrinsicSettings",
+          "description": "Specifies if the Manager is Garda or Helsinki"
+        },
+        "sku": {
+          "$ref": "#/definitions/Managersku",
+          "description": "Specifies the Sku"
+        },
+        "provisioningState": {
+          "description": "Specifies the state of the resouce as it is getting provisioned. Value of \"Succeeded\" means the Manager was successfully created",
+          "type": "string"
+        }
+      }
+    },
+    "Managersku": {
+      "description": "The Sku.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Refers to the sku name which should be \"standard\"",
+          "enum": [
+            "Standard"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagerSkuType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Azure Resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Resource Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Resource Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "The Resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "The Geo location of the Manager",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags attached to the Manager",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Time": {
+      "description": "The Time.",
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "description": "The hour.",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "description": "The minute.",
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "TimeSettings": {
+      "description": "The TimeSettings of a device",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TimeSettingsProperties",
+          "description": "Properties of the TimeSettings.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The identifier.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        }
+      }
+    },
+    "TimeSettingsProperties": {
+      "description": "The properties of TimeSettings",
+      "required": [
+        "timeZone",
+        "primaryTimeServer"
+      ],
+      "type": "object",
+      "properties": {
+        "timeZone": {
+          "description": "The timezone of device.",
+          "type": "string"
+        },
+        "primaryTimeServer": {
+          "description": "The primary time server of device.",
+          "type": "string"
+        },
+        "secondaryTimeServer": {
+          "description": "The secondary time server of device.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version",
+      "required": true,
+      "type": "string"
+    },
+    "managerNameParameter": {
+      "name": "managerName",
+      "in": "path",
+      "description": "The manager name",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 2,
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription id",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
