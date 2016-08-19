@@ -1,4 +1,4 @@
-[![Repo Status](http://img.shields.io/travis/Azure/azure-rest-api-specs/master.svg?style=flat-square&label=repo-status)](https://travis-ci.org/Azure/azure-rest-api-specs)
+[![Repo Status](https://travis-ci.com/Azure/azure-rest-api-specs-pr.svg?token=xo9zuajRdvztgZpxFirm&branch=master)](https://travis-ci.com/Azure/azure-rest-api-specs-pr)
 
 # Azure REST API Specifications
 
