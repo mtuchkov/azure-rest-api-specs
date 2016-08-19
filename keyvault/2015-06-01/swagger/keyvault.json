@@ -1822,11 +1822,10 @@
         },
         "kty": {
           "type": "string",
-          "description": "Key type, usually RSA",
+          "description": "Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet, usually RSA",
           "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
-            "description": "Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet",
             "modelAsString": true
           }
         },
@@ -2482,11 +2481,10 @@
         "kty": {
           "type": "string",
           "minLength": 1,
-          "description": "The type of key to create. Valid key types, see JsonWebKeyType.",
+          "description": "The type of key to create. Valid key types, see JsonWebKeyType. Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet",
           "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
-            "description": "Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet",
             "modelAsString": true
           }
         },
@@ -2503,7 +2501,6 @@
             "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
-              "description": "Supported JsonWebKey operations.",
               "modelAsString": true
             }
           }
@@ -2559,7 +2556,6 @@
           "enum": [ "RSA-OAEP", "RSA1_5" ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
-            "description": "Supported JsonWebKey algorithms.",
             "modelAsString": true
           }
         },
@@ -2581,7 +2577,6 @@
           "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
-            "description": "Supported JsonWebKey algorithms.",
             "modelAsString": true
           }
         },
@@ -2603,7 +2598,6 @@
           "enum": [ "RS256", "RS384", "RS512", "RSNULL" ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
-            "description": "Supported JsonWebKey algorithms.",
             "modelAsString": true
           }
         },
@@ -2631,7 +2625,6 @@
             "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
-              "description": "Supported JsonWebKey operations.",
               "modelAsString": true
             }
           },
