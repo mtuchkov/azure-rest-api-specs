@@ -930,6 +930,7 @@
     },
     "DataManager": {
       "description": "The DataManager resource.",
+      "required": [ "location" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/Resource" } ],
       "properties": {
@@ -1249,8 +1250,9 @@
           "type": "string"
         },
         "schedules": {
-          "$ref": "#/definitions/Schedule",
-          "description": "Schedule for running the job definition"
+          "description": "Schedule for running the job definition",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Schedule" }
         },
         "state": {
           "description": "State of the job definition.",
@@ -1496,6 +1498,7 @@
     },
     "Resource": {
       "description": "Model of the Resource.",
+      "required": [ "location" ],
       "type": "object",
       "properties": {
         "id": {
@@ -1553,13 +1556,26 @@
     "Schedule": {
       "description": "Schedule for the job run.",
       "type": "object",
-      "properties": {}
+      "properties": {
+        "name": {
+          "description": "Name of the schedule.",
+          "type": "string"
+        },
+        "policyList": {
+          "description": "A list of repetition intervals in ISO 8601 format.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
     },
     "Sku": {
       "description": "The sku type.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
+        "name": {
+          "description": "The sku name. Required for data manager creation, optional for update.",
+          "type": "string"
+        },
         "tier": {
           "description": "The sku tier. This is based on the SKU name.",
           "type": "string"
