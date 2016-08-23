@@ -1019,14 +1019,9 @@
       "description": "Contains the information about the filters for the DataStore entity.",
       "type": "object",
       "properties": {
-        "dataStoreType": {
-          "description": "The data store type.",
-          "enum": [ "None", "StorSimple8000Series", "AzureStorageAccount", "AzureMediaServicesAccount" ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataStoreType",
-            "modelAsString": false
-          }
+        "dataStoreTypeId": {
+          "description": "The data store type id.",
+          "type": "string"
         }
       }
     },
