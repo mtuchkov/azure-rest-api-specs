@@ -130,11 +130,11 @@
         "produces": [ "application/json" ],
         "parameters": [
           {
-            "name": "dataManagerResource",
+            "name": "dataManagerUpdateParameter",
             "in": "body",
-            "description": "Data manager resource details from request body.",
+            "description": "Data manager update parameters from request body.",
             "required": true,
-            "schema": { "$ref": "#/definitions/DataManager" }
+            "schema": { "$ref": "#/definitions/DataManagerUpdateParameter" }
           },
           { "$ref": "#/parameters/subscriptionIdParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
@@ -907,6 +907,7 @@
   "definitions": {
     "CustomerSecret": {
       "description": "The pair of every customer secret which shall be passed explicitly by the portal.",
+      "required": [ "keyIdentifier", "keyValue", "algorithm" ],
       "type": "object",
       "properties": {
         "keyIdentifier": {
@@ -951,8 +952,24 @@
         }
       }
     },
+    "DataManagerUpdateParameter": {
+      "description": "The DataManagerUpdateParameter.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
     "DataService": {
       "description": "Data Service.",
+      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
@@ -980,6 +997,7 @@
     },
     "DataServiceProperties": {
       "description": "Data Service properties.",
+      "required": [ "state" ],
       "type": "object",
       "properties": {
         "state": {
@@ -1005,6 +1023,7 @@
     },
     "DataStore": {
       "description": "Data store entity.",
+      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
@@ -1042,6 +1061,7 @@
     },
     "DataStoreProperties": {
       "description": "Data Store for sources and sinks",
+      "required": [ "state", "dataStoreTypeId" ],
       "type": "object",
       "properties": {
         "repositoryId": {
@@ -1057,7 +1077,7 @@
             "modelAsString": false
           }
         },
-        "extendedProperty": {
+        "extendedProperties": {
           "description": "A generic json used differently by each data source type.",
           "type": "object"
         },
@@ -1074,6 +1094,7 @@
     },
     "DataStoreType": {
       "description": "Data Store Type entity.",
+      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
@@ -1101,6 +1122,7 @@
     },
     "DataStoreTypeProperties": {
       "description": "Data Store Type properties.",
+      "required": [ "state" ],
       "type": "object",
       "properties": {
         "repositoryType": {
@@ -1146,6 +1168,21 @@
         }
       }
     },
+    "Error": {
+      "description": "Top level error for the job.",
+      "required": [ "code" ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code that can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string"
+        }
+      }
+    },
     "ErrorDetails": {
       "description": "Error Details",
       "type": "object",
@@ -1170,19 +1207,44 @@
       }
     },
     "Job": {
-      "description": "Job entity.",
+      "description": "Data service job.",
+      "required": [ "status", "startTime", "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
+        "status": {
+          "description": "Status of the job.",
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time at which the job was started in UTC ISO 8601 format.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Time at which the job ended in UTC ISO 8601 format.",
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "Job properties.",
           "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Top level error for the job."
         }
       }
     },
     "JobDefinition": {
       "description": "Job Definition.",
+      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
@@ -1234,6 +1296,7 @@
     },
     "JobDefinitionProperties": {
       "description": "Job Definition",
+      "required": [ "dataSourceId", "dataSinkId", "state" ],
       "type": "object",
       "properties": {
         "dataSourceId": {
@@ -1313,7 +1376,7 @@
       "properties": {
         "status": {
           "description": "The status of the job entity.",
-          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling", "Aborted" ],
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
           "type": "string",
           "x-ms-enum": {
             "name": "JobStatus",
@@ -1346,25 +1409,6 @@
       "description": "Job Properties",
       "type": "object",
       "properties": {
-        "jobStatus": {
-          "description": "Status of the job.",
-          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling", "Aborted" ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": false
-          }
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Time at which the job was started.",
-          "type": "string"
-        },
-        "stoppedTime": {
-          "format": "date-time",
-          "description": "Time at which the job was stopped",
-          "type": "string"
-        },
         "isCancellable": {
           "description": "Describes whether the job is cancellable.",
           "type": "boolean"
@@ -1413,7 +1457,7 @@
         },
         "stageStatus": {
           "description": "Status of the job stage.",
-          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling", "Aborted" ],
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
           "type": "string",
           "x-ms-enum": {
             "name": "JobStatus",
@@ -1433,6 +1477,7 @@
     },
     "Key": {
       "description": "Key entity.",
+      "required": [ "keyModulus", "keyExponent", "encryptionChunkSizeInBytes" ],
       "type": "object",
       "properties": {
         "keyModulus": {
@@ -1452,6 +1497,7 @@
     },
     "PublicKey": {
       "description": "Public key",
+      "required": [ "properties" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
       "properties": {
@@ -1479,6 +1525,7 @@
     },
     "PublicKeyProperties": {
       "description": "PublicKey Properties",
+      "required": [ "dataServiceLevel1Key", "dataServiceLevel2Key" ],
       "type": "object",
       "properties": {
         "dataServiceLevel1Key": {
