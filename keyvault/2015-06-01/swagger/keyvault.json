@@ -40,6 +40,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
             "description": "The name of the key"
           },
           {
@@ -85,6 +86,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
             "description": "The name of the key"
           },
           {
@@ -725,6 +727,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
             "description": "The name of the secret in the given vault"
           },
           {
@@ -1184,13 +1187,14 @@
             "description": "The name of the issuer."
           },
           {
-            "name": "issuer",
+            "name": "parameter",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/IssuerBundle"
+              "$ref": "#/definitions/CertificateIssuerSetParameters"
             },
-            "description": "The issuer bundle."
+            "description": "Certificate issuer set parameter."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1226,13 +1230,14 @@
             "description": "The name of the issuer."
           },
           {
-            "name": "issuer",
+            "name": "parameter",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/IssuerBundle"
+              "$ref": "#/definitions/CertificateIssuerUpdateParameters"
             },
-            "description": "The issuer bundle."
+            "description": "Certificate issuer update parameter."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1333,6 +1338,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
             "description": "The name of the certificate"
           },
           {
@@ -1378,6 +1384,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
             "description": "The name of the certificate"
           },
           {
@@ -1643,8 +1650,9 @@
             "name": "certificateOperation",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CertificateOperation"
+              "$ref": "#/definitions/CertificateOperationUpdateParameter"
             },
             "description": "The certificate operation response."
           },
@@ -1879,7 +1887,7 @@
           "format": "base64url",
           "description": "RSA secret prime, with p < q"
         },
-        "K": {
+        "k": {
           "type": "string",
           "format": "base64url",
           "description": "Symmetric key"
@@ -1917,6 +1925,11 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs"
+        },
+        "managed": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if the key's lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its Attributes"
@@ -1937,6 +1950,11 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs"
+        },
+        "managed": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if the key's lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true."
         }
       },
       "description": "The key item containing key metadata"
@@ -1968,7 +1986,13 @@
         },
         "kid": {
           "type": "string",
-          "description": "The key id for certificate."
+          "readOnly": true,
+          "description": "If this is a secret backing a KV certificate, then this field specifies the corresponding key backing the KV certificate."
+        },
+        "managed": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if the secret's lifetime is managed by key vault i.e. if this is a secret backing a certificate, then managed will be true."
         }
       },
       "description": "A Secret consisting of a value, id and its attributes."
@@ -1993,6 +2017,11 @@
         "contentType": {
           "type": "string",
           "description": "Type of the secret value such as a password"
+        },
+        "managed": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if the secret's lifetime is managed by key vault i.e. if this is a key backing a certificate, then managed will be true."
         }
       },
       "description": "The secret item containing secret metadata"
@@ -2047,7 +2076,7 @@
         },
         "provider": {
           "type": "string",
-          "description": "The name of the issuer."
+          "description": "The issuer provider."
         }
       },
       "description": "The certificate issuer item containing certificate issuer metadata"
@@ -2265,7 +2294,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the referenced issuer object."
+          "description": "Name of the referenced issuer object e.g. 'Self', 'Unknown'."
         }
       },
       "description": "Reference to the issuer of the X509 component of a certificate."
@@ -2349,7 +2378,7 @@
         },
         "provider": {
           "type": "string",
-          "description": "The name of the issuer."
+          "description": "The issuer provider."
         },
         "credentials": {
           "$ref": "#/definitions/IssuerCredentials",
@@ -2760,6 +2789,11 @@
     },
     "CertificateUpdateParameters": {
       "properties": {
+        "policy": {
+          "x-ms-client-name": "CertificatePolicy",
+          "$ref": "#/definitions/CertificatePolicy",
+          "description": "The management policy for the certificate"
+        },
         "attributes": {
           "x-ms-client-name": "CertificateAttributes",
           "$ref": "#/definitions/CertificateAttributes",
@@ -2801,6 +2835,61 @@
       },
       "description": "The certificate merge parameters",
       "required": [ "x5c" ]
+    },
+    "CertificateIssuerSetParameters": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        },
+        "credentials": {
+          "$ref": "#/definitions/IssuerCredentials",
+          "description": "The credentials to be used for the issuer."
+        },
+        "org_details": {
+          "x-ms-client-name": "OrganizationDetails",
+          "$ref": "#/definitions/OrganizationDetails",
+          "description": "Details of the organization as provided to the issuer."
+        },
+        "attributes": {
+          "$ref": "#/definitions/IssuerAttributes",
+          "description": "Attributes of the issuer object."
+        }
+      },
+      "description": "The certificate issuer set parameters.",
+      "required": [ "provider" ]
+    },
+    "CertificateIssuerUpdateParameters": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The issuer provider."
+        },
+        "credentials": {
+          "$ref": "#/definitions/IssuerCredentials",
+          "description": "The credentials to be used for the issuer."
+        },
+        "org_details": {
+          "x-ms-client-name": "OrganizationDetails",
+          "$ref": "#/definitions/OrganizationDetails",
+          "description": "Details of the organization as provided to the issuer."
+        },
+        "attributes": {
+          "$ref": "#/definitions/IssuerAttributes",
+          "description": "Attributes of the issuer object."
+        }
+      },
+      "description": "The certificate issuer update parameters."
+    },
+    "CertificateOperationUpdateParameter": {
+      "properties": {
+        "cancellation_requested": {
+          "type": "boolean",
+          "description": "Indicates if cancellation was requested on the certificate operation."
+        }
+      },
+      "description": "The certificate operation update parameters.",
+      "required": [ "cancellation_requested" ]
     },
     "KeyOperationResult": {
       "properties": {
