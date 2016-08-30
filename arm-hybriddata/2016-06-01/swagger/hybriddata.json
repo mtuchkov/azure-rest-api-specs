@@ -1257,6 +1257,7 @@
     },
     "JobDefinitionFilter": {
       "description": "Contains the supported job definition filters.",
+      "required": [ "state" ],
       "type": "object",
       "properties": {
         "state": {
@@ -1372,6 +1373,7 @@
     },
     "JobFilter": {
       "description": "Contains the information about the filters for the job entity.",
+      "required": [ "status" ],
       "type": "object",
       "properties": {
         "status": {
@@ -1407,6 +1409,7 @@
     },
     "JobProperties": {
       "description": "Job Properties",
+      "required": [ "isCancellable" ],
       "type": "object",
       "properties": {
         "isCancellable": {
@@ -1449,6 +1452,7 @@
     },
     "JobStages": {
       "description": "Job stages.",
+      "required": [ "stageStatus" ],
       "type": "object",
       "properties": {
         "stageName": {
