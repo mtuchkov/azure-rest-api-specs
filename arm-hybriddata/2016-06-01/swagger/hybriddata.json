@@ -210,7 +210,7 @@
       "get": {
         "tags": [ "JobDefinitions" ],
         "description": "This method gets all the job definitions of the given data service type.",
-        "operationId": "JobDefinitions_ListAtDataService",
+        "operationId": "JobDefinitions_ListByDataService",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -360,7 +360,7 @@
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs of a given job definition.",
-        "operationId": "Jobs_ListAtJobDefinition",
+        "operationId": "Jobs_ListByJobDefinition",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -581,7 +581,7 @@
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs of a data service type in a given resource.",
-        "operationId": "Jobs_ListAtDataService",
+        "operationId": "Jobs_ListByDataService",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
