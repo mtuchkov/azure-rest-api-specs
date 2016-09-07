@@ -158,7 +158,7 @@
       "get": {
         "tags": [ "DataServices" ],
         "description": "This method gets all the data services.",
-        "operationId": "DataServices_List",
+        "operationId": "DataServices_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -209,7 +209,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions": {
       "get": {
         "tags": [ "JobDefinitions" ],
-        "description": "This method gets all the job definitions of the given data service type.",
+        "description": "This method gets all the job definitions of the given data service name.",
         "operationId": "JobDefinitions_ListByDataService",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
@@ -437,7 +437,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "$expand is supported",
+            "description": "$expand is supported on details parameter for job, which provides details on the job stages.",
             "required": false,
             "type": "string"
           }
@@ -619,7 +619,7 @@
       "get": {
         "tags": [ "DataStores" ],
         "description": "Gets all the data stores/repositories in the given resource.",
-        "operationId": "DataStores_List",
+        "operationId": "DataStores_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -741,7 +741,7 @@
       "get": {
         "tags": [ "DataStoreTypes" ],
         "description": "Gets all the data store/repository types that the resource supports.",
-        "operationId": "DataStoreTypes_List",
+        "operationId": "DataStoreTypes_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -793,7 +793,7 @@
       "get": {
         "tags": [ "JobDefinitions" ],
         "description": "This method gets all the job definitions of the given data manager resource.",
-        "operationId": "JobDefinitions_List",
+        "operationId": "JobDefinitions_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -824,7 +824,7 @@
       "get": {
         "tags": [ "Jobs" ],
         "description": "This method gets all the jobs at the data manager resource level.",
-        "operationId": "Jobs_List",
+        "operationId": "Jobs_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -855,7 +855,7 @@
       "get": {
         "tags": [ "PublicKeys" ],
         "description": "This method gets the list view of public keys, however it will only have one element.",
-        "operationId": "PublicKeys_List",
+        "operationId": "PublicKeys_ListByDataManager",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -906,16 +906,16 @@
   },
   "definitions": {
     "CustomerSecret": {
-      "description": "The pair of every customer secret which shall be passed explicitly by the portal.",
+      "description": "The pair of customer secret.",
       "required": [ "keyIdentifier", "keyValue", "algorithm" ],
       "type": "object",
       "properties": {
         "keyIdentifier": {
-          "description": "The identifier to the data service input object which this secret corresponds to upto the data service and portal to form a way for identification.",
+          "description": "The identifier to the data service input object which this secret corresponds to.",
           "type": "string"
         },
         "keyValue": {
-          "description": "This shall contain the encrypted customer secret while being passed from the portal and the key vault url before storing in DB.",
+          "description": "It contains the encrypted customer secret.",
           "type": "string"
         },
         "algorithm": {
@@ -963,7 +963,7 @@
         "tags": {
           "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
           "type": "object",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": { "type": "string", "maxLength": 256 }
         }
       }
     },
@@ -1082,7 +1082,7 @@
           "type": "object"
         },
         "dataStoreTypeId": {
-          "description": "The arm id of the data store type/",
+          "description": "The arm id of the data store type.",
           "type": "string"
         },
         "customerSecrets": {
@@ -1566,7 +1566,7 @@
         "tags": {
           "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
           "type": "object",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": { "type": "string", "maxLength": 256 }
         },
         "sku": {
           "$ref": "#/definitions/Sku",
