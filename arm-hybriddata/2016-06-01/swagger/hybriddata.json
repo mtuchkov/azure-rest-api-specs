@@ -931,7 +931,6 @@
     },
     "DataManager": {
       "description": "The DataManager resource.",
-      "required": [ "location" ],
       "type": "object",
       "allOf": [ { "$ref": "#/definitions/Resource" } ],
       "properties": {
@@ -961,9 +960,9 @@
           "description": "The sku type."
         },
         "tags": {
-          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
           "type": "object",
-          "additionalProperties": { "type": "string", "maxLength": 256 }
+          "additionalProperties": { "type": "string" }
         }
       }
     },
@@ -1564,9 +1563,9 @@
           "type": "string"
         },
         "tags": {
-          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
           "type": "object",
-          "additionalProperties": { "type": "string", "maxLength": 256 }
+          "additionalProperties": { "type": "string" }
         },
         "sku": {
           "$ref": "#/definitions/Sku",
