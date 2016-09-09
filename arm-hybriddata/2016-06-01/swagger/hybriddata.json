@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "version": "2016-06-01",
@@ -114,7 +114,13 @@
           { "$ref": "#/parameters/subscriptionIdParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/dataManagerNameParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" }
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The delete will be performed only if the ETag of the data manager resource on the server matches this value.",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": { "description": "Data Manager Resource deleted." },
@@ -139,7 +145,13 @@
           { "$ref": "#/parameters/subscriptionIdParameter" },
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/dataManagerNameParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" }
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the data manager resource on the server matches this value.",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -1327,7 +1339,8 @@
           "type": "string"
         },
         "userConfirmation": {
-          "description": "Enum to detect if user confirmation is required",
+          "description": "Enum to detect if user confirmation is required. If not passed will default to NotRequired.",
+          "default": "NotRequired",
           "enum": [ "NotRequired", "Required" ],
           "type": "string",
           "x-ms-enum": {
@@ -1579,7 +1592,8 @@
       "type": "object",
       "properties": {
         "userConfirmation": {
-          "description": "Enum to detect if user confirmation is required",
+          "description": "Enum to detect if user confirmation is required. If not passed will default to NotRequired.",
+          "default": "NotRequired",
           "enum": [ "NotRequired", "Required" ],
           "type": "string",
           "x-ms-enum": {
