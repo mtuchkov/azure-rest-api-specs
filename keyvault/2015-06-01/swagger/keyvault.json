@@ -265,7 +265,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -304,7 +306,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -898,7 +902,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of secrets to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -944,7 +950,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -983,7 +991,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1146,7 +1156,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1438,7 +1450,9 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Maximum number of results to return."
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2232,7 +2246,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. e.g. 1024 or 2048."
+          "description": "The key size in bytes. e.g. 2048."
         },
         "reuse_key": {
           "type": "boolean",
@@ -2261,7 +2275,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The enhaunced key usage."
+          "description": "The enhanced key usage."
         },
         "sans": {
           "x-ms-client-name": "SubjectAlternativeNames",
@@ -2285,7 +2299,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "The subject alternate names."
+          "description": "The duration that the ceritifcate is valid in months."
         }
       },
       "description": "Properties of the X509 component of a certificate."
@@ -2294,7 +2308,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the referenced issuer object e.g. 'Self', 'Unknown'."
+          "description": "Name of the referenced issuer object or reserved names e.g. 'Self', 'Unknown'."
         }
       },
       "description": "Reference to the issuer of the X509 component of a certificate."
@@ -3013,7 +3027,6 @@
     "KeyVaultError": {
       "properties": {
         "error": {
-          "type": "string",
           "readOnly": true,
           "$ref": "#/definitions/Error"
         }
