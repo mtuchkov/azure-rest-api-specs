@@ -3384,7 +3384,7 @@
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "the create option.",
+          "description": "the create option."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -3422,11 +3422,11 @@
         },
         "caching": {
           "$ref": "#/definitions/Caching",
-          "description": "the caching type.",
+          "description": "the caching type."
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "the create option.",
+          "description": "the create option."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -4186,11 +4186,11 @@
         },
         "caching": {
           "$ref": "#/definitions/Caching",
-          "description": "the caching type.",
+          "description": "the caching type."
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "the create option.",
+          "description": "the create option."
         },
         "osType": {
           "type": "string",
@@ -4238,11 +4238,11 @@
         },
         "caching": {
           "$ref": "#/definitions/Caching",
-          "description": "Gets or sets the caching type.",
+          "description": "Gets or sets the caching type."
         },
         "createOption": {
           "$ref": "#/definitions/CreateOption",
-          "description": "Gets or sets the create option.",
+          "description": "Gets or sets the create option."
         },
         "diskSizeGB": {
           "type": "integer",
