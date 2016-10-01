@@ -725,7 +725,7 @@
                     "items": {
                         "$ref": "#/definitions/Disk"
                     },
-                    "description": "Gets a list of disks."
+                    "description": "a list of disks."
                 }
             },
             "description": "The List Disks operation response."
@@ -747,11 +747,11 @@
                     "readOnly": true,
                     "type": "string",
                     "format": "date-time",
-                    "description": "Gets the time when the disk was created."
+                    "description": "the time when the disk was created."
                 },
                 "osType": {
                     "type": "string",
-                    "description": "Gets or sets the Operating System type.",
+                    "description": "the Operating System type.",
                     "enum": [
                         "Windows",
                         "Linux"
@@ -763,7 +763,7 @@
                 },
                 "osState": {
                     "type": "string",
-                    "description": "Gets or sets the Operating System state.",
+                    "description": "the Operating System state.",
                     "enum": [
                         "Generalized",
                         "Specialized"
@@ -775,7 +775,7 @@
                 },
                 "creationData": {
                     "$ref": "#/definitions/CreationData",
-                    "description": "Gets or sets disk source information. CreationData information cannot be changed after the disk has been created."
+                    "description": "disk source information. CreationData information cannot be changed after the disk has been created."
                 },
                 "diskSizeGB": {
                     "type": "integer",
@@ -790,7 +790,7 @@
                 "provisioningState": {
                     "readOnly": true,
                     "type": "string",
-                    "description": "Gets the disk provisioning state."
+                    "description": "the disk provisioning state."
                 }
             },
             "description": "Disk resource properties.",
@@ -815,7 +815,7 @@
                 },
                 "imageReference": {
                     "$ref": "#/definitions/ImageDiskReference",
-                    "description": "Gets or sets disk source information."
+                    "description": "disk source information."
                 },
                 "sourceUri": {
                     "type": "string",
@@ -914,7 +914,7 @@
                     "items": {
                         "$ref": "#/definitions/Snapshot"
                     },
-                    "description": "Gets a list of snapshots."
+                    "description": "a list of snapshots."
                 }
             },
             "description": "The List Snapshots operation response."
