@@ -793,9 +793,7 @@
           "description": "the disk provisioning state."
         }
       },
-      "description": "Disk resource properties.",
-      "required": [
-      ]
+      "description": "Disk resource properties."
     },
     "CreationData": {
       "properties": {
@@ -859,8 +857,6 @@
           "description": "Time duration in seconds until the SAS access expires."
         }
       },
-      "required": [
-      ],
       "description": "Data used for requesting a SAS."
     },
     "AccessUri": {
