@@ -24,24 +24,16 @@
           "Disks"
         ],
         "operationId": "Disks_CreateOrUpdate",
-        "description": "The operation to create or update a disk.",
+        "description": "Creates or updates a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -58,11 +50,13 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
           },
           "202": {
+            "description":"Accepted",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
@@ -75,24 +69,16 @@
           "Disks"
         ],
         "operationId": "Disks_Update",
-        "description": "The operation to patch a disk.",
+        "description": "Updates (patches) a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -109,11 +95,13 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
           },
           "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
@@ -126,24 +114,16 @@
           "Disks"
         ],
         "operationId": "Disks_Get",
-        "description": "The operation to get a disk.",
+        "description": "Gets information about a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -151,7 +131,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
@@ -163,7 +143,7 @@
           "Disks"
         ],
         "operationId": "Disks_Delete",
-        "description": "The operation to delete a disk.",
+        "description": "Deletes a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -176,11 +156,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -188,7 +164,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -200,7 +176,7 @@
           "Disks"
         ],
         "operationId": "Disks_List",
-        "description": "The operation to list disks under a resource group.",
+        "description": "Lists all the disks under a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -218,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiskList"
             }
@@ -235,7 +211,7 @@
           "Disks"
         ],
         "operationId": "Disks_ListAll",
-        "description": "The operation to list disks under a subscription.",
+        "description": "Lists all the disks under a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -246,7 +222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DiskList"
             }
@@ -263,7 +239,7 @@
           "Disks"
         ],
         "operationId": "Disks_GrantAccess",
-        "description": "The operation to grant access to a disk.",
+        "description": "Grants access to a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -276,11 +252,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -297,7 +269,7 @@
         ],
         "responses": {
           "202": {
-            "description": "",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/AccessUri"
             }
@@ -312,7 +284,7 @@
           "Disks"
         ],
         "operationId": "Disks_RevokeAccess",
-        "description": "The operation to revoke access to a disk.",
+        "description": "Revokes access to a disk.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -325,11 +297,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "diskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the disk within the given subscription and resource group."
+            "$ref": "#/parameters/DiskNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -337,7 +305,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -349,24 +317,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_CreateOrUpdate",
-        "description": "The operation to create or update a snapshot.",
+        "description": "Creates or updates a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -383,11 +343,13 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
           },
           "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -400,24 +362,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_Update",
-        "description": "The operation to patch a snapshot.",
+        "description": "Updates (patches) a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -434,11 +388,13 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
           },
           "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -451,24 +407,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_Get",
-        "description": "The operation to get a snapshot.",
+        "description": "Gets information about a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -476,7 +424,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -488,24 +436,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_Delete",
-        "description": "The operation to delete a snapshot.",
+        "description": "Deletes a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -513,7 +453,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -525,17 +465,13 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_List",
-        "description": "The operation to list snapshots under a resource group.",
+        "description": "Lists snapshots under a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -543,7 +479,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/SnapshotList"
             }
@@ -560,7 +496,7 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_ListAll",
-        "description": "The operation to list snapshots under a subscription.",
+        "description": "Lists snapshots under a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -571,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/SnapshotList"
             }
@@ -588,24 +524,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_GrantAccess",
-        "description": "The operation to grant access to a snapshot.",
+        "description": "Grants access to a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -622,7 +550,7 @@
         ],
         "responses": {
           "202": {
-            "description": "",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/AccessUri"
             }
@@ -637,24 +565,16 @@
           "Snapshots"
         ],
         "operationId": "Snapshots_RevokeAccess",
-        "description": "The operation to revoke access to a snapshot.",
+        "description": "Revokes access to a snapshot.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "snapshotName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the snapshot within the given subscription and resource group."
+            "$ref": "#/parameters/SnapshotNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -662,7 +582,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -671,6 +591,7 @@
   },
   "definitions": {
     "Resource": {
+      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -780,7 +701,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "If creationData.creationOption is Empty, this field is mandatory and contains the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
         "ownerId": {
           "readOnly": true,
@@ -930,6 +851,30 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskNameParameter": {
+      "name": "diskName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the disk within the given subscription and resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotNameParameter": {
+      "name": "snapshotName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the snapshot within the given subscription and resource group.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
