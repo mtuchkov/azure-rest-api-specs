@@ -647,6 +647,10 @@
             "$ref": "#/definitions/Disk"
           },
           "description": "a list of disks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of disks. Call ListNext() with this to fetch the next page of disks."
         }
       },
       "description": "The List Disks operation response."
@@ -832,6 +836,10 @@
             "$ref": "#/definitions/Snapshot"
           },
           "description": "a list of snapshots."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
         }
       },
       "description": "The List Snapshots operation response."
