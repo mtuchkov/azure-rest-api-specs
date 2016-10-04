@@ -4512,6 +4512,7 @@
       "description": "Compute-specific operation properties, including output"
     },
     "Resource": {
+      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
