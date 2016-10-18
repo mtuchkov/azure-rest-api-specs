@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}": {
@@ -88,7 +86,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Disk"
+              "$ref": "#/definitions/DiskUpdate"
             },
             "description": "Disk object supplied in the body of the Patch disk operation."
           }
@@ -163,6 +161,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           }
@@ -175,7 +176,7 @@
         "tags": [
           "Disks"
         ],
-        "operationId": "Disks_List",
+        "operationId": "Disks_ListByResourceGroup",
         "description": "Lists all the disks under a resource group.",
         "parameters": [
           {
@@ -210,7 +211,7 @@
         "tags": [
           "Disks"
         ],
-        "operationId": "Disks_ListAll",
+        "operationId": "Disks_List",
         "description": "Lists all the disks under a subscription.",
         "parameters": [
           {
@@ -258,16 +259,22 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "accessData",
+            "name": "grantAccessData",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AccessData"
+              "$ref": "#/definitions/GrantAccessData"
             },
             "description": "Access data object supplied in the body of the get disk access operation."
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -304,6 +311,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           }
@@ -381,7 +391,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Snapshot"
+              "$ref": "#/definitions/SnapshotUpdate"
             },
             "description": "Snapshot object supplied in the body of the Patch snapshot operation."
           }
@@ -452,6 +462,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           }
@@ -464,7 +477,7 @@
         "tags": [
           "Snapshots"
         ],
-        "operationId": "Snapshots_List",
+        "operationId": "Snapshots_ListByResourceGroup",
         "description": "Lists snapshots under a resource group.",
         "parameters": [
           {
@@ -495,7 +508,7 @@
         "tags": [
           "Snapshots"
         ],
-        "operationId": "Snapshots_ListAll",
+        "operationId": "Snapshots_List",
         "description": "Lists snapshots under a subscription.",
         "parameters": [
           {
@@ -539,16 +552,22 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "accessData",
+            "name": "grantAccessData",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AccessData"
+              "$ref": "#/definitions/GrantAccessData"
             },
             "description": "Access data object supplied in the body of the get snapshot access operation."
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -581,6 +600,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           }
@@ -625,6 +647,23 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ResourceUpdate": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "Disk": {
       "properties": {
         "properties": {
@@ -638,6 +677,20 @@
         }
       ],
       "description": "Disk resource."
+    },
+    "DiskUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Disk update resource."
     },
     "DiskList": {
       "properties": {
@@ -653,6 +706,9 @@
           "description": "the uri to fetch the next page of disks. Call ListNext() with this to fetch the next page of disks."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Disks operation response."
     },
     "DiskProperties": {
@@ -720,6 +776,55 @@
       },
       "description": "Disk resource properties."
     },
+    "DiskUpdateProperties": {
+      "properties": {
+        "accountType": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": false
+          }
+        },
+        "osType": {
+          "type": "string",
+          "description": "the Operating System type.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemType",
+            "modelAsString": false
+          }
+        },
+        "osState": {
+          "type": "string",
+          "description": "the Operating System state.",
+          "enum": [
+            "Generalized",
+            "Specialized"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemStateType",
+            "modelAsString": false
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "disk source information. CreationData information cannot be changed after the disk has been created."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+        }
+      },
+      "description": "Disk resource update properties."
+    },
     "CreationData": {
       "properties": {
         "createOption": {
@@ -762,13 +867,17 @@
           "description": "If the disk is created from an image's data disk, this is an index that indicates which of the data disks in the image to use. For OS disks, this field is null."
         }
       },
+      "required": [
+        "id"
+      ],
       "description": "The source image used for creating the disk."
     },
-    "AccessData": {
+    "GrantAccessData": {
       "properties": {
         "access": {
           "type": "string",
           "enum": [
+            "None",
             "Read"
           ],
           "x-ms-enum": {
@@ -782,6 +891,9 @@
           "description": "Time duration in seconds until the SAS access expires."
         }
       },
+      "required": [
+        "access"
+      ],
       "description": "Data used for requesting a SAS."
     },
     "AccessUri": {
@@ -828,6 +940,20 @@
       ],
       "description": "Snapshot resource."
     },
+    "SnapshotUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Snapshot update resource."
+    },
     "SnapshotList": {
       "properties": {
         "value": {
@@ -842,6 +968,9 @@
           "description": "the uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Snapshots operation response."
     }
   },
