@@ -1,0 +1,2366 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2015-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/pipelineRuns": {
+      "post": {
+        "operationId": "PipelineRuns_List",
+        "description": "Retrieve information for past runs of pipelines.",
+        "tags": [
+          "factory",
+          "pipeline",
+          "run"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "query",
+            "in": "body",
+            "required": false,
+            "description": "An OData query to select specific pipeline runs.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunListResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/pipelineRuns/{runId}": {
+      "get": {
+        "operationId": "PipelineRuns_Get",
+        "description": "Retrieve information for a single past run of a pipeline.",
+        "tags": [
+          "factory",
+          "pipeline",
+          "run"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "description": "The unique ID of the pipeline run.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/indexes": {
+      "get": {
+        "tags": [
+          "monitoring",
+          "index",
+          "proxyOnly"
+        ],
+        "operationId": "MonitoringIndexes_List",
+        "description": "Retrieve the shape of monitoring indexes. Indexes are used by ADF to store monitoring-related information such as past pipeline runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MonitoringIndexListResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/indexes/{indexName}": {
+      "get": {
+        "operationId": "MonitoringIndexes_Get",
+        "description": "Gets the shape of a single monitoring index. Indexes are used by ADF to store monitoring-related information such as past pipeline runs.",
+        "tags": [
+          "monitoring",
+          "index"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "indexName",
+            "description": "The index name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MonitoringIndex"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories": {
+      "get": {
+        "tags": [
+          "datafactories"
+        ],
+        "operationId": "DataFactories_List",
+        "description": "Lists data factories.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataFactoryListResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}": {
+      "put": {
+        "tags": [
+          "datafactories"
+        ],
+        "operationId": "DataFactories_CreateOrUpdate",
+        "description": "Creates or updates a data factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFactoryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataFactoryResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataFactoryResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DataFactoryResource"
+            }
+          },
+          "404": {
+            "description": "Subscription or resource group does not exist"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "datafactories"
+        ],
+        "operationId": "DataFactories_Get",
+        "description": "Gets a data factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataFactoryResource"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datafactories"
+        ],
+        "operationId": "DataFactories_Delete",
+        "description": "Deletes a data factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Subscription or resource group does not exist"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/linkedservices": {
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_List",
+        "description": "Lists linked services.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/linkedservices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "description": "Creates or updates a Linked Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linkedService entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_Get",
+        "description": "Gets a Linked Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_Delete",
+        "description": "Deletes a Linked Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/datasets": {
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_List",
+        "description": "Lists datasets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/datasets/{datasetName}": {
+      "put": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_CreateOrUpdate",
+        "description": "Creates or updates a Dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the dataset entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_Get",
+        "description": "Gets a Dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_Delete",
+        "description": "Deletes a Dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/datapipelines": {
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_List",
+        "description": "Lists pipelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories/{dataFactoryName}/datapipelines/{pipelineName}": {
+      "put": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_CreateOrUpdate",
+        "description": "Creates or updates a Pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the datapipeline entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_Get",
+        "description": "Gets a Pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_Delete",
+        "description": "Deletes a Pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/datafactories{dataFactoryName}/datapipelines/{pipelineName}/createRun": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_CreateRun",
+        "description": "Creates a run of a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataFactoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/appmodel"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArgumentSetSpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunTaskResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/RunTaskResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "SecureString": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "SecureString" ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SecureObject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "SecureObject" ]
+        },
+        "value": {
+          "$ref": "#/definitions/Object"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "AdfTask": {
+      "discriminator": "type",
+      "type": "object",
+      "description": "A runnable Adf task definition.",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Duration after which the Adf task will be cancelled.",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DataFactoryListResponse": {
+      "description": "A list of DataFactory resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFactoryResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedServiceListResponse": {
+      "description": "A list of LinkedService resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetListResponse": {
+      "description": "A list of Dataset resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineListResponse": {
+      "description": "A list of Pipeline resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoringIndexListResponse": {
+      "description": "A list of monitoring indexes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringIndex"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoringIndex": {
+      "description": "A monitoring index is used by ADF to store monitoring-related information such as past pipeline runs.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the index.",
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringIndexField"
+          }
+        }
+      }
+    },
+    "MonitoringIndexField": {
+      "type": "object",
+      "description": "A single field in a monitoring index, i.e. a column of data for a monitoring event.",
+      "properties": {
+        "name": {
+          "description": "The name of the monitoring index field.",
+          "type": "string"
+        },
+        "isSearchable": {
+          "description": "Indicates whether or not this monitoring index field can be used by full-text searches.",
+          "type": "boolean"
+        },
+        "isSortable": {
+          "description": "Indicates whether or not monitoring event queries can be sorted by this field.",
+          "type": "boolean"
+        },
+        "isFilterable": {
+          "description": "Indicates whether or not monitoring event queries can specify this field for filter expressions.",
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/MonitoringIndexFieldType"
+        }
+      }
+    },
+    "MonitoringIndexFieldType": {
+      "description": "Data types for monitoring index fields.",
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MonitoringIndexFieldType",
+        "modelAsString": true
+      },
+      "enum": [
+        "String",
+        "Tags",
+        "Int",
+        "Long",
+        "Numeric",
+        "Boolean",
+        "DateTime"
+      ]
+    },
+    "PipelineRunListResponse": {
+      "description": "A list of pipeline runs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "Describes information about a past pipeline run.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "dataFactoryName": {
+          "type": "string"
+        },
+        "pipelineName": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runStart": {
+          "type": "string"
+        },
+        "runEnd": {
+          "type": "string"
+        },
+        "durationInMs": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/MonitoringIndexFieldType"
+        }
+      }
+    },
+    "RunTaskResponse": {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "RunLog": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Run status",
+          "type": "string"
+        },
+        "input": {
+          "description": "Task input, which includes input parameter values",
+          "$ref": "#/definitions/AdfTask"
+        },
+        "output": {
+          "description": "Task output parameters",
+          "type": "object"
+        },
+        "error": {
+          "description": "Error information for a failed run",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "details": {
+          "description": "Additional detailed run information",
+          "type": "object"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ParameterSetSpecification": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ParameterSpecification"
+      }
+    },
+    "ParameterSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "int"
+          ]
+        },
+        "defaultValue": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ArgumentSetSpecification": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ArgumentSpecification"
+      }
+    },
+    "ArgumentSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "PipelineTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdfTask"
+        }
+      ],
+      "properties": {
+        "payload": {
+          "$ref": "#/definitions/Pipeline"
+        }
+      }
+    },
+    "DataFactoryProperties": {
+      "properties": {
+        "dataFactoryId": {
+          "description": "Internal data factory identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Data factory provisioning state, example Succeeded",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Data factory provisioning error code, or null",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Data factory error message, or null",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Pipeline": {
+      "properties": {
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterSetSpecification"
+        }
+      }
+    },
+    "PipelineReference": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "PipelineReference" ]
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "arguments": {
+          "$ref": "#/definitions/ArgumentSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "PipelineResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Pipeline"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataFactoryResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataFactoryProperties"
+        }
+      }
+    },
+    "Activity": {
+      "discriminator": "type",
+      "properties": {
+        "name": {
+          "description": "Activity name.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "description": "Activity description.",
+          "type": "string"
+        },
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "dependsOn": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Skipped",
+                "Completed"
+              ],
+              "x-ms-enum": {
+                "name": "ActivityState"
+              }
+            }
+          }
+        },
+        "policy": {
+          "type": "object"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetReference"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetReference"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "CopyActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "source": {
+              "$ref": "#/definitions/CopyActivitySource"
+            },
+            "sink": {
+              "$ref": "#/definitions/CopyActivitySink"
+            },
+            "translator": {
+              "$ref": "#/definitions/CopyActivityTranslator"
+            },
+            "enableStaging": {
+              "type": "boolean"
+            },
+            "stagingSettings": {
+              "$ref": "#/definitions/CopyActivityStagingSettings"
+            },
+            "parallelCopies": {
+              "type": "object"
+            },
+            "cloudDataMovementUnits": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "source",
+            "sink"
+          ]
+        }
+      }
+    },
+    "CopyActivitySource": {
+      "discriminator": "type",
+      "description": "A copy activity source.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "sourceRetryCount": {
+          "description": "Source retry count.",
+          "type": "integer"
+        },
+        "sourceRetryWait": {
+          "description": "Source retry wait.",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CopyActivityBlobSource": {
+      "x-ms-discriminator-value": "BlobSource",
+      "description": "A copy activity blob source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySource"
+        }
+      ],
+      "properties": {
+        "treatEmptyAsNull": {
+          "description": "Treat empty as null.",
+          "type": "boolean"
+        },
+        "skipHeaderLineCount": {
+          "description": "Number of header lines to skip from each blob",
+          "type": "integer"
+        }
+      }
+    },
+    "CopyActivitySqlSource": {
+      "x-ms-discriminator-value": "SqlSource",
+      "description": "A copy activity SQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySource"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "CopyActivitySink": {
+      "discriminator": "type",
+      "description": "A copy activity sink.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "writeBatchSize": {
+          "description": "Write batch size.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "writeBatchTimeout": {
+          "description": "Write batch timeout.",
+          "type": "string",
+          "format": "duration"
+        },
+        "sinkRetryCount": {
+          "description": "Sink retry count.",
+          "type": "integer"
+        },
+        "sinkRetryWait": {
+          "description": "Sink retry wait.",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CopyActivitySqlDWSink": {
+      "x-ms-discriminator-value": "SqlDWSink",
+      "description": "A copy activity SQL data warehouse sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySink"
+        }
+      ],
+      "properties": {
+        "sliceIdentifierColumnName": {
+          "description": "Name of the SQL column which is used to save slice identifier information, to support idempotent copy.",
+          "type": "string"
+        },
+        "sqlWriterCleanupScript": {
+          "description": "SQL writer cleanup script.",
+          "type": "string"
+        },
+        "allowPolyBase": {
+          "description": "Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable.",
+          "type": "boolean"
+        },
+        "polyBaseSettings": {
+          "description": "Specifies PolyBase-related settings when AllowPolyBase is true.",
+          "$ref": "#/definitions/CopyActivityPolybaseSettings"
+        }
+      }
+    },
+    "CopyActivityPolybaseSettings": {
+      "description": "PolyBase settings.",
+      "type": "object",
+      "properties": {
+        "rejectType": {
+          "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
+          "type": "string",
+          "enum": [
+            "value",
+            "percentage"
+          ]
+        },
+        "rejectValue": {
+          "description": "Specifies the value or the percentage of rows that can be rejected before the query fails.",
+          "type": "number",
+          "minimum": 0
+        },
+        "rejectSampleValue": {
+          "description": "Determines the number of rows to attempt to retrieve before the PolyBase recalculates the percentage of rejected rows.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "useTypeDefault": {
+          "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CopyActivityStagingSettings": {
+      "description": "Staging settings.",
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference"
+        }
+      }
+    },
+    "CopyActivityTranslator": {
+      "discriminator": "type",
+      "description": "A copy activity translator.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "TabularTranslator": {
+      "description": "A copy activity tabular translator.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivityTranslator"
+        }
+      ],
+      "properties": {
+        "columnMappings": {
+          "description": "Column mappings.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetReference": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "DatasetReference" ]
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "$ref": "#/definitions/ArgumentSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "Dataset": {
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "description": "Dataset description.",
+          "type": "string"
+        },
+        "structure": {
+          "description": "Columns that define the structure of the dataset.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetDataElement"
+          }
+        },
+        "linkedService": {
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "linkedService"
+      ]
+    },
+    "DatasetResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dataset"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DatasetDataElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the column",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the column",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlob": {
+      "description": "The Azure blob storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "folderPath": {
+              "description": "The path of the Azure blob storage.",
+              "type": "string"
+            },
+            "tableRootLocation": {
+              "description": "The root of blob path.",
+              "type": "string"
+            },
+            "fileName": {
+              "description": "The name of the Azure blob.",
+              "type": "string"
+            },
+            "format": {
+              "description": "The format of the Azure blob storage.",
+              "$ref": "#/definitions/DatasetStorageFormat"
+            },
+            "compression": {
+              "description": "The data compression method used for the blob storage.",
+              "$ref": "#/definitions/DatasetCompression"
+            },
+            "recursive": {
+              "description": "If true, files under the folder path will be read recursively.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "DatasetStorageFormat": {
+      "discriminator": "type",
+      "description": "The format definition of a storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "serializer": {
+          "description": "Serializer.",
+          "type": "string"
+        },
+        "deserializer": {
+          "description": "Deserializer.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "TextFormat": {
+      "description": "Text format.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetStorageFormat"
+        }
+      ],
+      "properties": {
+        "columnDelimiter": {
+          "description": "The column delimiter.",
+          "type": "string"
+        },
+        "rowDelimiter": {
+          "description": "The row delimiter.",
+          "type": "string"
+        },
+        "escapeChar": {
+          "description": "The escape character.",
+          "type": "string"
+        },
+        "quoteChar": {
+          "description": "The quote character.",
+          "type": "string"
+        },
+        "nullValue": {
+          "description": "The null value string.",
+          "type": "string"
+        },
+        "encodingName": {
+          "description": "The code page name of the preferred encoding. If miss, the default value is ΓÇ£utf-8ΓÇ¥, unless BOM denotes another Unicode encoding. Refer to the ΓÇ£NameΓÇ¥ column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx.",
+          "type": "string"
+        },
+        "treatEmptyAsNull": {
+          "description": "Treat empty column values in the text file as null. The default value is true.",
+          "type": "boolean"
+        },
+        "skipLineCount": {
+          "description": "The number of lines/rows to be skipped when parsing text files. The default value is 0.",
+          "type": "integer"
+        },
+        "firstRowAsHeader": {
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatasetCompression": {
+      "discriminator": "type",
+      "description": "The compression method used on a dataset.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DatasetBZip2Compression": {
+      "x-ms-discriminator-value": "BZip2",
+      "description": "The BZip2 compression method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "AzureSqlDWTable": {
+      "description": "The Azure SQL data warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "tableName": {
+              "description": "The table name of the Azure SQL data warehouse dataset.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tableName"
+          ]
+        }
+      }
+    },
+    "SqlServerTable": {
+      "description": "The on-premises SQL Server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "tableName": {
+              "description": "The table name of the SQL Server dataset.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tableName"
+          ]
+        }
+      }
+    },
+    "LinkedService": {
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties"
+      ]
+    },
+    "LinkedServiceReference": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "LinkedServiceReference" ]
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "arguments": {
+          "$ref": "#/definitions/ArgumentSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkedService"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "AzureStorage": {
+      "description": "The storage account linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "#/definitions/SecureString"
+            }
+          },
+          "required": [
+            "connectionString"
+          ]
+        }
+      }
+    },
+    "AzureSqlDW": {
+      "description": "Azure SQL data warehouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "#/definitions/SecureString"
+            }
+          },
+          "required": [
+            "connectionString"
+          ]
+        }
+      }
+    },
+    "OnPremisesSqlServer": {
+      "description": "On-Premises SQL Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "#/definitions/SecureString"
+            },
+            "gatewayName": {
+              "description": "Name of the data movement gateway.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionString",
+            "gatewayName"
+          ]
+        }
+      }
+    },
+    "HDInsightHiveActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDInsight activity properties.",
+          "type": "object",
+          "properties": {
+            "storageLinkedServices": {
+              "description": "Storage linked services.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkedServiceReference"
+              }
+            },
+            "arguments": {
+              "description": "User specified arguments to HDInsightActivity.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "getDebugInfo": {
+              "$ref": "#/definitions/HDInsightActivityDebugInfoOption"
+            },
+            "scriptPath": {
+              "description": "Script path.",
+              "type": "string"
+            },
+            "scriptLinkedService": {
+              "description": "Script linked service.",
+              "$ref": "#/definitions/LinkedServiceReference"
+            },
+            "defines": {
+              "description": "Allows user to specify defines for Hive job request.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "HDInsightActivityDebugInfoOption": {
+      "description": "The HDInsightActivityDebugInfoOption settings to use.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Always",
+        "Failure"
+      ],
+      "x-ms-enum": {
+        "name": "HDInsightActivityDebugInfoOption"
+      }
+    },
+    "HDInsightPigActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDInsight activity properties.",
+          "type": "object",
+          "properties": {
+            "storageLinkedServices": {
+              "description": "Storage linked services.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkedServiceReference"
+              }
+            },
+            "arguments": {
+              "description": "User specified arguments to HDInsightActivity.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "getDebugInfo": {
+              "$ref": "#/definitions/HDInsightActivityDebugInfoOption"
+            },
+            "scriptPath": {
+              "description": "Script path.",
+              "type": "string"
+            },
+            "scriptLinkedService": {
+              "description": "Script linked service.",
+              "$ref": "#/definitions/LinkedServiceReference"
+            },
+            "defines": {
+              "description": "Allows user to specify defines for Hive job request.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DotNetActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": ".NET activity properties.",
+          "type": "object",
+          "properties": {
+            "assemblyName": {
+              "description": "Assembly name.",
+              "type": "string"
+            },
+            "entryPoint": {
+              "description": "Entry point.",
+              "type": "string"
+            },
+            "packageLinkedService": {
+              "description": "Package linkedService.",
+              "type": "string"
+            },
+            "packageFile": {
+              "description": "PackageFile.",
+              "type": "string"
+            },
+            "extendedProperties": {
+              "description": "User defined property bag. There is no restriction on the keys or values that can be used. The user specified .NET activity has the full responsibility to consume and interpret the content defined.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "assemblyName",
+            "entryPoint",
+            "packageFile"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "The subscription id.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "dataFactoryName": {
+      "name": "dataFactoryName",
+      "description": "The workflow name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "linkedServiceName": {
+      "name": "linkedServiceName",
+      "description": "The linked service name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "datasetName": {
+      "name": "datasetName",
+      "description": "The dataest name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "pipelineName": {
+      "name": "pipelineName",
+      "description": "The datapipeline name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "The API version.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    },
+    "appmodel": {
+      "name": "x-ms-datafactory-appmodel",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "enum": [ "datafactoryV2" ]
+    }
+  }
+}
