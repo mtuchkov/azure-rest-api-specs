@@ -1,0 +1,38 @@
+﻿{
+  "definitions": {
+    "BaseModelShouldNotHaveMarkObjectAsImmediateProperty": {
+      "type": "object",
+      "x-ms-mark-object": true
+    },
+    "MarkObjectChildrenShouldNotHaveComplexObject": {
+      "properties": {
+        "firstProperty": {
+          "type": "object",
+          "x-ms-mark-object": true,
+          "additionalProperties": {
+            "properties": {
+              "childFirstProperty": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "MarkArrayChildrenShouldNotHaveComplexObject": {
+      "properties": {
+        "firstProperty": {
+          "type": "array",
+          "x-ms-mark-object": true,
+          "items": {
+            "properties": {
+              "childFirstProperty": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
