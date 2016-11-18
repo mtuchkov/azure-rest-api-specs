@@ -1,0 +1,223 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "Dataset": {
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "description": "Dataset description.",
+          "type": "string"
+        },
+        "structure": {
+          "description": "Columns that define the structure of the dataset.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetDataElement"
+          }
+        },
+        "linkedService": {
+          "$ref": "../service.json#/definitions/LinkedServiceReference"
+        },
+        "parameters": {
+          "$ref": "../service.json#/definitions/ParameterSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "linkedService"
+      ]
+    },
+    "DatasetDataElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the column",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the column",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlob": {
+      "description": "The Azure blob storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "folderPath": {
+              "description": "The path of the Azure blob storage.",
+              "type": "string"
+            },
+            "tableRootLocation": {
+              "description": "The root of blob path.",
+              "type": "string"
+            },
+            "fileName": {
+              "description": "The name of the Azure blob.",
+              "type": "string"
+            },
+            "format": {
+              "description": "The format of the Azure blob storage.",
+              "$ref": "#/definitions/DatasetStorageFormat"
+            },
+            "compression": {
+              "description": "The data compression method used for the blob storage.",
+              "$ref": "#/definitions/DatasetCompression"
+            },
+            "recursive": {
+              "description": "If true, files under the folder path will be read recursively.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "DatasetStorageFormat": {
+      "discriminator": "type",
+      "description": "The format definition of a storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "serializer": {
+          "description": "Serializer.",
+          "type": "string"
+        },
+        "deserializer": {
+          "description": "Deserializer.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "TextFormat": {
+      "description": "Text format.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetStorageFormat"
+        }
+      ],
+      "properties": {
+        "columnDelimiter": {
+          "description": "The column delimiter.",
+          "type": "string"
+        },
+        "rowDelimiter": {
+          "description": "The row delimiter.",
+          "type": "string"
+        },
+        "escapeChar": {
+          "description": "The escape character.",
+          "type": "string"
+        },
+        "quoteChar": {
+          "description": "The quote character.",
+          "type": "string"
+        },
+        "nullValue": {
+          "description": "The null value string.",
+          "type": "string"
+        },
+        "encodingName": {
+          "description": "The code page name of the preferred encoding. If miss, the default value is ΓÇ£utf-8ΓÇ¥, unless BOM denotes another Unicode encoding. Refer to the ΓÇ£NameΓÇ¥ column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx.",
+          "type": "string"
+        },
+        "treatEmptyAsNull": {
+          "description": "Treat empty column values in the text file as null. The default value is true.",
+          "type": "boolean"
+        },
+        "skipLineCount": {
+          "description": "The number of lines/rows to be skipped when parsing text files. The default value is 0.",
+          "type": "integer"
+        },
+        "firstRowAsHeader": {
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatasetCompression": {
+      "discriminator": "type",
+      "description": "The compression method used on a dataset.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DatasetBZip2Compression": {
+      "x-ms-discriminator-value": "BZip2",
+      "description": "The BZip2 compression method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "AzureSqlDWTable": {
+      "description": "The Azure SQL data warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "tableName": {
+              "description": "The table name of the Azure SQL data warehouse dataset.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tableName"
+          ]
+        }
+      }
+    },
+    "SqlServerTable": {
+      "description": "The on-premises SQL Server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "tableName": {
+              "description": "The table name of the SQL Server dataset.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "tableName"
+          ]
+        }
+      }
+    }
+  }
+}

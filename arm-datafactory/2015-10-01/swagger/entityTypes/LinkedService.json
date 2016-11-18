@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "LinkedService": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "../service.json#/definitions/ParameterSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties"
+      ]
+    },
+    "AzureStorage": {
+      "description": "The storage account linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "../service.json#/definitions/SecureString"
+            }
+          },
+          "required": [
+            "connectionString"
+          ]
+        }
+      }
+    },
+    "AzureSqlDW": {
+      "description": "Azure SQL data warehouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "../service.json#/definitions/SecureString"
+            }
+          },
+          "required": [
+            "connectionString"
+          ]
+        }
+      }
+    },
+    "OnPremisesSqlServer": {
+      "description": "On-Premises SQL Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "connectionString": {
+              "description": "The connection string.",
+              "$ref": "../service.json#/definitions/SecureString"
+            },
+            "gatewayName": {
+              "description": "Name of the data movement gateway.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionString",
+            "gatewayName"
+          ]
+        }
+      }
+    }
+  }
+}
