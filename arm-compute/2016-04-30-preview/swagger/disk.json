@@ -715,6 +715,7 @@
       "properties": {
         "accountType": {
           "type": "string",
+          "description": "the storage account type of the disk.",
           "enum": [
             "Standard_LRS",
             "Premium_LRS"
