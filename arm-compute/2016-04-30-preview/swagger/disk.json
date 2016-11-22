@@ -276,10 +276,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/AccessUri"
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -569,10 +566,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/AccessUri"
-            }
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
