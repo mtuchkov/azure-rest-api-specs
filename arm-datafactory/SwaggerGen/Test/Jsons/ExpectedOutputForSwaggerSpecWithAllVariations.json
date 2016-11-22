@@ -1,0 +1,111 @@
+﻿{
+  "definitions": {
+    "primitiveProperties": {
+      "properties": {
+        "intProperty": {
+          "description": "Something fancy. type: integer, format: int32, minimum: 0, maximum: 420.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "format": "int32",
+            "maximum": 420,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "stringProperty": {
+          "description": "type: string, format: duration.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "format": "duration",
+            "type": "string"
+          }
+        },
+        "booleanProperty": {
+          "description": "Not so fancy description. type: boolean.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "type": "boolean"
+          }
+        },
+        "arrayProperty1": {
+          "description": "type: array, itemType: auxillaryType.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "items": {
+              "$ref": "#/definitions/auxillaryType"
+            },
+            "type": "array"
+          }
+        },
+        "arrayProperty2": {
+          "description": "Hello, how are you. type: array, itemType: string.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "objectProperty1": {
+          "description": "type: object, itemType: auxillaryType.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "additionalProperties": {
+              "$ref": "#/definitions/auxillaryType"
+            },
+            "type": "object"
+          }
+        },
+        "objectProperty2": {
+          "description": "Khana kha ke jaana. type: object, itemType: integer.",
+          "type": "object",
+          "x-ms-mark-object": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "auxillaryType": {
+      "properties": {
+        "none": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "primaryArrayType1": {
+      "items": {
+        "properties": {
+          "someProperty": {
+            "description": "type: string.",
+            "type": "object",
+            "x-ms-mark-object": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "array"
+    },
+    "primaryObjectType1": {
+      "additionalProperties": {
+        "properties": {
+          "someProperty": {
+            "description": "type: string.",
+            "type": "object",
+            "x-ms-mark-object": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "properties": {},
+      "type": "object"
+    }
+  }
+}
