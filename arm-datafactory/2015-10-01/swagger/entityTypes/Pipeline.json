@@ -83,7 +83,7 @@
         "typeProperties"
       ]
     },
-     "Copy": {
+    "CopyActivity": {
       "allOf": [
         {
           "$ref": "#/definitions/Activity"
@@ -93,35 +93,24 @@
         "typeProperties": {
           "properties": {
             "source": {
-              "description": "Copy activity source.",
-              "$ref": "#/definitions/CopySource"
+              "$ref": "#/definitions/CopyActivitySource"
             },
             "sink": {
-              "description": "Copy activity sink.",
-              "$ref": "#/definitions/CopySink"
+              "$ref": "#/definitions/CopyActivitySink"
             },
             "translator": {
-              "description": "Copy activity translator. If not specificed, tabular translator is used.",
-              "$ref": "#/definitions/CopyTranslator"
+              "$ref": "#/definitions/CopyActivityTranslator"
             },
             "enableStaging": {
-              "x-ms-mark-object": true,
-              "description": "Specifies whether to copy data via an interim staging. Default value is false.",
               "type": "boolean"
             },
             "stagingSettings": {
-              "description": "Specifies interim staging settings when EnableStaging is true.",
-              "$ref": "#/definitions/StagingSettings"
+              "$ref": "#/definitions/CopyActivityStagingSettings"
             },
             "parallelCopies": {
-              "x-ms-mark-object": true,
-              "description": "Maximum number of concurrent sessions opened on the source or sink to avoid overloading the data store.",
-              "type": "integer",
-              "minimum": 0
+              "type": "object"
             },
             "cloudDataMovementUnits": {
-              "x-ms-mark-object": true,
-              "description": "Maximum number of cloud data movement units that can be used to perform this data movement.",
               "type": "integer",
               "minimum": 0
             }
@@ -133,22 +122,19 @@
         }
       }
     },
-    "CopySource": {
+    "CopyActivitySource": {
       "discriminator": "type",
       "description": "A copy activity source.",
       "type": "object",
       "properties": {
         "type": {
-          "x-ms-mark-object": true,
           "type": "string"
         },
         "sourceRetryCount": {
-          "x-ms-mark-object": true,
           "description": "Source retry count.",
           "type": "integer"
         },
         "sourceRetryWait": {
-          "x-ms-mark-object": true,
           "description": "Source retry wait.",
           "type": "string",
           "format": "duration"
@@ -158,99 +144,39 @@
         "type"
       ]
     },
-    "BlobSource": {
+    "CopyActivityBlobSource": {
+      "x-ms-discriminator-value": "BlobSource",
       "description": "A copy activity blob source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/CopyActivitySource"
         }
       ],
       "properties": {
         "treatEmptyAsNull": {
-          "x-ms-mark-object": true,
           "description": "Treat empty as null.",
           "type": "boolean"
         },
         "skipHeaderLineCount": {
-          "x-ms-mark-object": true,
           "description": "Number of header lines to skip from each blob",
           "type": "integer"
-        },
-        "recursive": {
-          "x-ms-mark-object": true,
-          "description": "If true, files under the folder path will be read recursively.",
-          "type": "boolean"
         }
       }
     },
-    "SqlSource": {
+    "CopyActivitySqlSource": {
+      "x-ms-discriminator-value": "SqlSource",
       "description": "A copy activity SQL source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/CopyActivitySource"
         }
       ],
       "properties": {
-        "sqlReaderQuery": {
-          "x-ms-mark-object": true,
-          "description": "SQL reader query.",
-          "type": "string"
-        },
-        "sqlReaderStoredProcedureName": {
-          "x-ms-mark-object": true,
-          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery.",
-          "type": "string"
-        },
-        "storedProcedureParameters": {
-          "x-ms-mark-object": true,
-          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/StoredProcedureParameter"
-              }
-            ]
-          }
-        }
       }
     },
-    "StoredProcedureParameter": {
-      "description": "SQL stored procedure parameter.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "x-ms-mark-object": true,
-          "description": "Stored procedure parameter type.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Stored procedure parameter type.",
-          "$ref": "#/definitions/StoredProcedureParameterType"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "StoredProcedureParameterType": {
-      "description": "Stored procedure parameter type.",
-      "type": "string",
-      "enum": [
-        "String",
-        "Int",
-        "Decimal",
-        "Guid",
-        "Boolean",
-        "Date"
-      ],
-      "x-ms-enum": {
-        "name": "StoredProcedureParameterType"
-      }
-    },
-    "CopySink": {
+    "CopyActivitySink": {
       "discriminator": "type",
       "description": "A copy activity sink.",
       "type": "object",
@@ -259,24 +185,20 @@
           "type": "string"
         },
         "writeBatchSize": {
-          "x-ms-mark-object": true,
           "description": "Write batch size.",
           "type": "integer",
           "minimum": 0
         },
         "writeBatchTimeout": {
-          "x-ms-mark-object": true,
           "description": "Write batch timeout.",
           "type": "string",
           "format": "duration"
         },
         "sinkRetryCount": {
-          "x-ms-mark-object": true,
           "description": "Sink retry count.",
           "type": "integer"
         },
         "sinkRetryWait": {
-          "x-ms-mark-object": true,
           "description": "Sink retry wait.",
           "type": "string",
           "format": "duration"
@@ -286,94 +208,72 @@
         "type"
       ]
     },
-    "SqlDWSink": {
+    "CopyActivitySqlDWSink": {
+      "x-ms-discriminator-value": "SqlDWSink",
       "description": "A copy activity SQL data warehouse sink.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySink"
+          "$ref": "#/definitions/CopyActivitySink"
         }
       ],
       "properties": {
         "sliceIdentifierColumnName": {
-          "x-ms-mark-object": true,
           "description": "Name of the SQL column which is used to save slice identifier information, to support idempotent copy.",
           "type": "string"
         },
         "sqlWriterCleanupScript": {
-          "x-ms-mark-object": true,
           "description": "SQL writer cleanup script.",
           "type": "string"
         },
         "allowPolyBase": {
-          "x-ms-mark-object": true,
           "description": "Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable.",
           "type": "boolean"
         },
         "polyBaseSettings": {
           "description": "Specifies PolyBase-related settings when AllowPolyBase is true.",
-          "$ref": "#/definitions/PolybaseSettings"
+          "$ref": "#/definitions/CopyActivityPolybaseSettings"
         }
       }
     },
-    "PolybaseSettings": {
+    "CopyActivityPolybaseSettings": {
       "description": "PolyBase settings.",
       "type": "object",
       "properties": {
         "rejectType": {
-          "x-ms-mark-object": true,
-          "$ref": "#/definitions/PolybaseSettingsRejectType"
+          "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
+          "type": "string",
+          "enum": [
+            "value",
+            "percentage"
+          ]
         },
         "rejectValue": {
-          "x-ms-mark-object": true,
           "description": "Specifies the value or the percentage of rows that can be rejected before the query fails.",
           "type": "number",
           "minimum": 0
         },
         "rejectSampleValue": {
-          "x-ms-mark-object": true,
           "description": "Determines the number of rows to attempt to retrieve before the PolyBase recalculates the percentage of rejected rows.",
           "type": "integer",
           "minimum": 0
         },
         "useTypeDefault": {
-          "x-ms-mark-object": true,
           "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file.",
           "type": "boolean"
         }
       }
     },
-    "PolybaseSettingsRejectType": {
-      "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
-      "type": "string",
-      "enum": [
-        "value",
-        "percentage"
-      ],
-      "x-ms-enum": {
-        "name": "PolybaseSettingsRejectType"
-      }
-    },
-    "StagingSettings": {
+    "CopyActivityStagingSettings": {
       "description": "Staging settings.",
       "type": "object",
       "properties": {
         "linkedService": {
           "$ref": "../service.json#/definitions/LinkedServiceReference"
-        },
-        "path": {
-          "x-ms-mark-object": true,
-          "description": "The path to storage for storing the interim data",
-          "type": "string"
-        },
-        "enableCompression": {
-          "x-ms-mark-object": true,
-          "description": "Specifies whether to use compression when copying data via an interim staging. Default value is false.",
-          "type": "boolean"
         }
       }
     },
-    "CopyTranslator": {
+    "CopyActivityTranslator": {
       "discriminator": "type",
       "description": "A copy activity translator.",
       "type": "object",
@@ -391,12 +291,11 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopyTranslator"
+          "$ref": "#/definitions/CopyActivityTranslator"
         }
       ],
       "properties": {
         "columnMappings": {
-          "x-ms-mark-object": true,
           "description": "Column mappings.",
           "type": "string"
         }
