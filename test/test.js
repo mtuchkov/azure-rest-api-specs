@@ -10,10 +10,9 @@ util = require('util');
 var extensionSwaggerSchemaUrl = "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json";
 var swaggerSchemaUrl = "http://json.schemastore.org/swagger-2.0";
 var swaggerSchemaAltUrl = "http://swagger.io/v2/schema.json";
-var schemaUrl = "http://json-schema.org/draft-04/schema";
+// z-schema package has the JsonSchemaDraftV4 specification and uses it if a remote resolver for draftv4 url is not provided.
 var swaggerSchema; 
 var extensionSwaggerSchema;
-var schema4;
 
 var globPath = path.join(__dirname, '../', '/**/swagger/*.json');
 var swaggers = _(glob.sync(globPath));
@@ -35,12 +34,9 @@ describe('Azure Swagger Schema Validation', function() {
   before(function(done) {
     request({url: extensionSwaggerSchemaUrl, json:true}, function (error, response, extensionSwaggerSchemaBody) {        
       request({url: swaggerSchemaAltUrl, json:true}, function (error, response, swaggerSchemaBody) {
-        request({url: schemaUrl, json:true}, function (error, response, schemaBody) {
-          extensionSwaggerSchema = extensionSwaggerSchemaBody;
-          swaggerSchema = swaggerSchemaBody;
-          schema4 = schemaBody;
-          done();
-        });
+        extensionSwaggerSchema = extensionSwaggerSchemaBody;
+        swaggerSchema = swaggerSchemaBody;
+        done();
       });
     });
   });
@@ -56,7 +52,6 @@ describe('Azure Swagger Schema Validation', function() {
           done();
         }
         var validator = new z();
-        validator.setRemoteReference(schemaUrl, schema4);
         validator.setRemoteReference(swaggerSchemaUrl, swaggerSchema);
         var valid = validator.validate(JSON.parse(stripBOM(data)), extensionSwaggerSchema);
         if (!valid) {
