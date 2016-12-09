@@ -1,0 +1,839 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure MySQL API",
+    "description": "Provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases and firewall rules.",
+    "version": "2016-02-01-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+     "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}": {
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "CreateOrUpdateServer",
+        "description": "Creates a new MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "The required parameters for creating or updating a MySQL server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "UpdateServer",
+        "description": "Update a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "The required parameters for updating a MySQL server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "DeleteServer",
+        "description": "Deletes a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "GetServer",
+        "description": "Gets information about a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "ListServersByResourceGroup",
+        "description": "Returns information about all the MySQL servers in given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+         "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "ListServers",
+        "description": "Returns information about all the MySQL servers in given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+         "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "CreateOrUpdateFirewallRule",
+        "description": "Creates a new firewall rule or updates an existing firewall rule. Location is a required property in the request body, and it must be the same as the location of the server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL server firewall rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "DeleteFirewallRule",
+        "description": "Deletes a MySQL server firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL server firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "GetFirewallRule",
+        "description": "Gets information about a MySQL server firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL server firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules": {
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "ListFirewallRules",
+        "description": "Returns information about all the firewall rules in a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          }
+        },
+         "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "CreateOrUpdateDatabase",
+        "description": "Creates a new MySQL Databases or updates an existing MySQL Databases. Location is a required property in the request body, and it must be the same as the location of the server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL database."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The required parameters for creating or updating a MySQL database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "DeleteDatabase",
+        "description": "Deletes a MySQL database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL database to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "GetDatabase",
+        "description": "Gets information about a MySQL database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the MySQL database to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "ListDatabases",
+        "description": "Returns information about all the databases in a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          }
+        },
+         "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerProperties": {
+      "properties": {
+        "storageMB" : {
+          "type": "integer",
+          "description": "Gets or sets storageMB."
+        },
+        "userVisibleState" : {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets user visible state of the MySQL server."
+        },
+        "fullyQualifiedDomainName" : {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets or sets the fully qualified domain name of the MySQL server."
+        },
+        "administratorLogin" : {
+          "type": "string",
+          "description": "Gets or sets administrator username for the MySQL server. Can only be specified when the server is being created (and is required for creation)."
+        },
+        "administratorLoginPassword" : {
+          "type": "string",
+          "description": "Gets or sets administrator login password."
+        },
+        "version" : {
+          "type": "string",
+          "description": "Gets or sets version of the server.",
+          "enum": ["5.6"],
+          "x-ms-enum": {
+            "name": "ServerVersions",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Represents the properties of an MySQL server."
+    },
+    "Sku": {
+      "properties": {
+        "name" : {
+          "type": "string",
+          "description": "Gets or sets the name of the sku."
+        },
+        "tier" : {
+          "type": "string",
+          "description": "Gets or sets tier.",
+          "enum": ["Basic"],
+          "x-ms-enum": {
+            "name": "SkuTiers",
+            "modelAsString": true
+          }
+        },
+        "capacity" : {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets capacity."
+        },
+        "size" : {
+          "type": "string",
+          "description": "Gets or sets size."
+        },
+        "family" : {
+          "type": "string",
+          "description": "Gets or sets family."
+        }
+      },
+      "description": "Billing information related properties of the resource."
+    },
+    "Resource": {
+      "description": "Resource properties",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID"
+        },
+        "name" : {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type" : {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location" : {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+          "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Server": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Represents the sku of the MySQL server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Represents the properties of the MySQL server."
+        }
+      },
+      "allOf": [
+        {
+         "$ref": "#/definitions/Resource"
+        }
+      ],
+     "description": "Represents a MySQL server."
+    },
+    "ServerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "description": "The list of MySQL servers"
+        }
+      },
+      "description": "Represents the response to a List MySQL servers request."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the MySQL server firewall rule. Must be IPv4 format."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the MySQL server firewall rule. Must be IPv4 format."
+        }
+      },
+      "description": "Represents the properties of a MySQL server firewall rule."
+    },
+    "FirewallRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "The properties representing the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a MySQL server firewall rule."
+    },
+    "FirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The list of firewall rules for the server."
+        }
+      },
+      "description": "Represents the response to a List Firewall Rules request."
+    },
+    "DatabaseProperties": {
+      "properties": {
+        "charset": {
+          "type": "string",
+          "description": "Gets or sets charset of MySQL database."
+        },
+        "collation": {
+          "type": "string",
+          "description": "Gets or sets collation of MySQL database."
+        }
+      },
+      "description": "Represents the properties of a MySQL database."
+    },
+    "Database": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "The properties representing the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a MySQL Database."
+    },
+    "DatabaseListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          },
+          "description": "The list of databases housed in a MySQL server"
+        }
+      },
+      "required": ["value"],
+      "description": "Represents the response to a List Databases request."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID that identifies an Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the MySQL server.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
