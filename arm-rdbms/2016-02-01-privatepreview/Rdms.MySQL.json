@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure MySQL API",
-    "description": "Provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases and firewall rules.",
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure MySQL management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases and firewall rules.",
     "version": "2016-02-01-privatepreview"
   },
   "host": "management.azure.com",
@@ -22,7 +22,7 @@
           "Servers"
         ],
         "operationId": "CreateOrUpdateServer",
-        "description": "Creates a new MySQL server.",
+        "description": "Creates or updates a MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -73,7 +73,7 @@
           "Servers"
         ],
         "operationId": "UpdateServer",
-        "description": "Update a MySQL server.",
+        "description": "Updates a MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -104,17 +104,14 @@
               "$ref": "#/definitions/Server"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
           "202": {
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Server"
             }
+          },
+          "404": {
+            "description": "NotFound"
           }
         },
         "x-ms-long-running-operation": true
@@ -250,7 +247,7 @@
           "FirewallRules"
         ],
         "operationId": "CreateOrUpdateFirewallRule",
-        "description": "Creates a new firewall rule or updates an existing firewall rule. Location is a required property in the request body, and it must be the same as the location of the server.",
+        "description": "Creates a new firewall rule or updates an existing firewall rule.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -423,7 +420,7 @@
           "Databases"
         ],
         "operationId": "CreateOrUpdateDatabase",
-        "description": "Creates a new MySQL Databases or updates an existing MySQL Databases. Location is a required property in the request body, and it must be the same as the location of the server.",
+        "description": "Creates a new MySQL Database or updates an existing MySQL Database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -596,29 +593,32 @@
       "properties": {
         "storageMB" : {
           "type": "integer",
-          "description": "Gets or sets storageMB."
+          "format": "int32",
+          "minimum": 1024,
+          "description": "The maximum storage allowed for a MySQL server."
         },
         "userVisibleState" : {
           "readOnly": true,
           "type": "string",
-          "description": "Gets or sets user visible state of the MySQL server."
+          "description": "A value representing state of a MySQL server that is visible to user."
         },
         "fullyQualifiedDomainName" : {
           "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the fully qualified domain name of the MySQL server."
+          "description": "The fully qualified domain name of a MySQL server."
         },
         "administratorLogin" : {
           "type": "string",
-          "description": "Gets or sets administrator username for the MySQL server. Can only be specified when the server is being created (and is required for creation)."
+          "description": "The administrator's login name of a MySQL server. Can only be specified when the server is being created (and is required for creation)."
         },
         "administratorLoginPassword" : {
           "type": "string",
-          "description": "Gets or sets administrator login password."
+          "format": "password",
+          "description": "The password of the administrator login."
         },
         "version" : {
           "type": "string",
-          "description": "Gets or sets version of the server.",
+          "description": "The version of a MySQL server.",
           "enum": ["5.6"],
           "x-ms-enum": {
             "name": "ServerVersions",
@@ -626,17 +626,21 @@
           }
         }
       },
-      "description": "Represents the properties of an MySQL server."
+      "required": [
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "description": "Represents the properties of a MySQL server."
     },
     "Sku": {
       "properties": {
         "name" : {
           "type": "string",
-          "description": "Gets or sets the name of the sku."
+          "description": "The name of the sku, typically, a letter + Number code, e.g. P3."
         },
         "tier" : {
           "type": "string",
-          "description": "Gets or sets tier.",
+          "description": "The tier of the particular SKU, e.g. Basic.",
           "enum": ["Basic"],
           "x-ms-enum": {
             "name": "SkuTiers",
@@ -646,18 +650,19 @@
         "capacity" : {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets capacity."
+          "minimum": 0,
+          "description": "The scale up/out capacity, representing server's DTU allocation."
         },
         "size" : {
           "type": "string",
-          "description": "Gets or sets size."
+          "description": "The size code, to be interpreted by resource as appropriate."
         },
         "family" : {
           "type": "string",
-          "description": "Gets or sets family."
+          "description": "The family of hardware."
         }
       },
-      "description": "Billing information related properties of the resource."
+      "description": "Billing information related properties of the server."
     },
     "Resource": {
       "description": "Resource properties",
@@ -679,14 +684,14 @@
         },
         "location" : {
           "type": "string",
-          "description": "Resource location."
+          "description": "The location the resource resides in."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
           "type": "string"
           },
-          "description": "Resource tags."
+          "description": "The tags assigned to the resource."
         }
       },
       "required": [
@@ -710,6 +715,9 @@
          "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [
+        "properties"
+      ],
      "description": "Represents a MySQL server."
     },
     "ServerListResult": {
@@ -728,13 +736,19 @@
       "properties": {
         "startIpAddress": {
           "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
           "description": "The start IP address of the MySQL server firewall rule. Must be IPv4 format."
         },
         "endIpAddress": {
           "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
           "description": "The end IP address of the MySQL server firewall rule. Must be IPv4 format."
         }
       },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
       "description": "Represents the properties of a MySQL server firewall rule."
     },
     "FirewallRule": {
@@ -749,6 +763,9 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [
+        "properties"
+      ],
       "description": "Represents a MySQL server firewall rule."
     },
     "FirewallRuleListResult": {
@@ -758,7 +775,7 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "The list of firewall rules for the server."
+          "description": "The list of firewall rules for a MySQL server."
         }
       },
       "description": "Represents the response to a List Firewall Rules request."
@@ -767,13 +784,17 @@
       "properties": {
         "charset": {
           "type": "string",
-          "description": "Gets or sets charset of MySQL database."
+          "description": "The charset of MySQL database."
         },
         "collation": {
           "type": "string",
-          "description": "Gets or sets collation of MySQL database."
+          "description": "The collation of MySQL database."
         }
       },
+      "required": [
+        "charset",
+        "collation"
+      ],
       "description": "Represents the properties of a MySQL database."
     },
     "Database": {
@@ -788,6 +809,9 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [
+        "properties"
+      ],
       "description": "Represents a MySQL Database."
     },
     "DatabaseListResult": {
@@ -800,7 +824,6 @@
           "description": "The list of databases housed in a MySQL server"
         }
       },
-      "required": ["value"],
       "description": "Represents the response to a List Databases request."
     }
   },
