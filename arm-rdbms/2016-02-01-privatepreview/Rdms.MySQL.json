@@ -109,9 +109,6 @@
             "schema": {
               "$ref": "#/definitions/Server"
             }
-          },
-          "404": {
-            "description": "NotFound"
           }
         },
         "x-ms-long-running-operation": true
@@ -175,9 +172,6 @@
             "schema": {
               "$ref": "#/definitions/Server"
             }
-          },
-          "404": {
-            "description": "NotFound"
           }
         }
       }
@@ -373,9 +367,6 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
-          },
-          "404": {
-            "description": "NotFound"
           }
         }
       }
@@ -546,9 +537,6 @@
             "schema": {
               "$ref": "#/definitions/Database"
             }
-          },
-          "404": {
-            "description": "NotFound"
           }
         }
       }
