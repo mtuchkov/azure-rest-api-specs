@@ -758,6 +758,10 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
+        "encryptionSettings": {
+          "$ref": "#/definitions/EncryptionSettings",
+          "description": "Encryption settings for disk or snapshot"
+        },
         "ownerId": {
           "readOnly": true,
           "type": "string",
@@ -770,6 +774,66 @@
         }
       },
       "description": "Disk resource properties."
+    },
+    "EncryptionSettings": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Set this flag to true and provide DiskEncryptionKey and optional KeyEncryptionKey to enable encryption. Set this flag to false and remove DiskEncryptionKey and KeyEncryptionKey to disable encryption. If EncryptionSettings is null in the request object, the existing settings remain unchanged."
+        },
+        "diskEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndSecretReference",
+          "description": "Key Vault Secret Url and vault id of the disk encryption key"
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "Key Vault Key Url and vault id of the key encryption key"
+        }
+      },
+      "description": "Encryption settings for disk or snapshot"
+    },
+    "KeyVaultAndSecretReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "secretUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "secretUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Secret Url and vault id of the encryption key "
+    },
+    "KeyVaultAndKeyReference": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Url pointing to a key or secret in KeyVault"
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ],
+      "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
+    },
+    "SourceVault": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "The vault id is an Azure Resource Manager Resoure id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
     },
     "DiskUpdateProperties": {
       "properties": {
@@ -816,7 +880,11 @@
           "type": "integer",
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
-        }
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/EncryptionSettings",
+          "description": "Encryption settings for disk or snapshot"
+        },
       },
       "description": "Disk resource update properties."
     },
@@ -829,12 +897,17 @@
             "Attach",
             "FromImage",
             "Import",
-            "Copy"
+            "Copy",
+            "Restore"
           ],
           "x-ms-enum": {
             "name": "DiskCreateOption",
             "modelAsString": false
           }
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "If createOption is Import, the Azure Resource Manager identifier of the storage account containing the blob to import as a disk. Required only if the blob is in a different subscription"
         },
         "imageReference": {
           "$ref": "#/definitions/ImageDiskReference",
@@ -843,6 +916,10 @@
         "sourceUri": {
           "type": "string",
           "description": "If creationOption is Import, this is a SAS URI to a blob to be imported into a managed disk. If creationOption is Copy, this is a relative Uri containing the id of the source snapshot to be copied into a managed disk."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk. If creationOption is Restore, this is the ARM-like id of the source disk restore point."
         }
       },
       "required": [
