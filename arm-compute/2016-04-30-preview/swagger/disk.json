@@ -884,7 +884,7 @@
         "encryptionSettings": {
           "$ref": "#/definitions/EncryptionSettings",
           "description": "Encryption settings for disk or snapshot"
-        },
+        }
       },
       "description": "Disk resource update properties."
     },
