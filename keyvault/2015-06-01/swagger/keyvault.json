@@ -2155,9 +2155,9 @@
           "readOnly": true
         },
         "issuer": {
-          "x-ms-client-name": "IssuerReference",
-          "$ref": "#/definitions/IssuerReference",
-          "description": "Reference to the issuer of the X509 component of a certificate."
+          "x-ms-client-name": "IssuerParameters",
+          "$ref": "#/definitions/IssuerParameters",
+          "description": "Parameters for the issuer of the X509 component of a certificate."
         },
         "csr": {
           "type": "string",
@@ -2221,9 +2221,9 @@
           "description": "Actions that will be performed by Key Vault over the lifetime of a certificate."
         },
         "issuer": {
-          "x-ms-client-name": "IssuerReference",
-          "$ref": "#/definitions/IssuerReference",
-          "description": "Reference to the issuer of the X509 component of a certificate."
+          "x-ms-client-name": "IssuerParameters",
+          "$ref": "#/definitions/IssuerParameters",
+          "description": "Parameters for the issuer of the X509 component of a certificate."
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
@@ -2304,14 +2304,19 @@
       },
       "description": "Properties of the X509 component of a certificate."
     },
-    "IssuerReference": {
+    "IssuerParameters": {
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of the referenced issuer object or reserved names e.g. 'Self', 'Unknown'."
+        },
+        "cty": {
+          "x-ms-client-name": "CertificateType",
+          "type": "string",
+          "description": "Type of certificate to be requested from the issuer provider."
         }
       },
-      "description": "Reference to the issuer of the X509 component of a certificate."
+      "description": "Parameters for the issuer of the X509 component of a certificate."
     },
     "LifetimeAction": {
       "properties": {
