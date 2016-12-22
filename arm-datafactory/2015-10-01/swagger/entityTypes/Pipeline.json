@@ -1,0 +1,454 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "Pipeline": {
+      "properties": {
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "$ref": "../service.json#/definitions/DatasetResource"
+          }
+        },
+        "linkedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "../service.json#/definitions/LinkedServiceResource"
+          }
+        },
+        "parameters": {
+          "$ref": "../service.json#/definitions/ParameterSetSpecification"
+        }
+      }
+    },
+    "Activity": {
+      "discriminator": "type",
+      "properties": {
+        "name": {
+          "description": "Activity name.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "description": "Activity description.",
+          "type": "string"
+        },
+        "linkedService": {
+          "$ref": "../service.json#/definitions/LinkedServiceReference"
+        },
+        "dependsOn": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Skipped",
+                "Completed"
+              ],
+              "x-ms-enum": {
+                "name": "ActivityState"
+              }
+            }
+          }
+        },
+        "policy": {
+          "type": "object"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "../service.json#/definitions/DatasetReference"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "../service.json#/definitions/DatasetReference"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "CopyActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "properties": {
+            "source": {
+              "$ref": "#/definitions/CopyActivitySource"
+            },
+            "sink": {
+              "$ref": "#/definitions/CopyActivitySink"
+            },
+            "translator": {
+              "$ref": "#/definitions/CopyActivityTranslator"
+            },
+            "enableStaging": {
+              "type": "boolean"
+            },
+            "stagingSettings": {
+              "$ref": "#/definitions/CopyActivityStagingSettings"
+            },
+            "parallelCopies": {
+              "type": "object"
+            },
+            "cloudDataMovementUnits": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "source",
+            "sink"
+          ]
+        }
+      }
+    },
+    "CopyActivitySource": {
+      "discriminator": "type",
+      "description": "A copy activity source.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "sourceRetryCount": {
+          "description": "Source retry count.",
+          "type": "integer"
+        },
+        "sourceRetryWait": {
+          "description": "Source retry wait.",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CopyActivityBlobSource": {
+      "x-ms-discriminator-value": "BlobSource",
+      "description": "A copy activity blob source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySource"
+        }
+      ],
+      "properties": {
+        "treatEmptyAsNull": {
+          "description": "Treat empty as null.",
+          "type": "boolean"
+        },
+        "skipHeaderLineCount": {
+          "description": "Number of header lines to skip from each blob",
+          "type": "integer"
+        }
+      }
+    },
+    "CopyActivitySqlSource": {
+      "x-ms-discriminator-value": "SqlSource",
+      "description": "A copy activity SQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySource"
+        }
+      ],
+      "properties": {
+      }
+    },
+    "CopyActivitySink": {
+      "discriminator": "type",
+      "description": "A copy activity sink.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "writeBatchSize": {
+          "description": "Write batch size.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "writeBatchTimeout": {
+          "description": "Write batch timeout.",
+          "type": "string",
+          "format": "duration"
+        },
+        "sinkRetryCount": {
+          "description": "Sink retry count.",
+          "type": "integer"
+        },
+        "sinkRetryWait": {
+          "description": "Sink retry wait.",
+          "type": "string",
+          "format": "duration"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CopyActivitySqlDWSink": {
+      "x-ms-discriminator-value": "SqlDWSink",
+      "description": "A copy activity SQL data warehouse sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivitySink"
+        }
+      ],
+      "properties": {
+        "sliceIdentifierColumnName": {
+          "description": "Name of the SQL column which is used to save slice identifier information, to support idempotent copy.",
+          "type": "string"
+        },
+        "sqlWriterCleanupScript": {
+          "description": "SQL writer cleanup script.",
+          "type": "string"
+        },
+        "allowPolyBase": {
+          "description": "Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable.",
+          "type": "boolean"
+        },
+        "polyBaseSettings": {
+          "description": "Specifies PolyBase-related settings when AllowPolyBase is true.",
+          "$ref": "#/definitions/CopyActivityPolybaseSettings"
+        }
+      }
+    },
+    "CopyActivityPolybaseSettings": {
+      "description": "PolyBase settings.",
+      "type": "object",
+      "properties": {
+        "rejectType": {
+          "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
+          "type": "string",
+          "enum": [
+            "value",
+            "percentage"
+          ]
+        },
+        "rejectValue": {
+          "description": "Specifies the value or the percentage of rows that can be rejected before the query fails.",
+          "type": "number",
+          "minimum": 0
+        },
+        "rejectSampleValue": {
+          "description": "Determines the number of rows to attempt to retrieve before the PolyBase recalculates the percentage of rejected rows.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "useTypeDefault": {
+          "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CopyActivityStagingSettings": {
+      "description": "Staging settings.",
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "$ref": "../service.json#/definitions/LinkedServiceReference"
+        }
+      }
+    },
+    "CopyActivityTranslator": {
+      "discriminator": "type",
+      "description": "A copy activity translator.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "TabularTranslator": {
+      "description": "A copy activity tabular translator.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyActivityTranslator"
+        }
+      ],
+      "properties": {
+        "columnMappings": {
+          "description": "Column mappings.",
+          "type": "string"
+        }
+      }
+    },
+    "HDInsightHiveActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDInsight activity properties.",
+          "type": "object",
+          "properties": {
+            "storageLinkedServices": {
+              "description": "Storage linked services.",
+              "type": "array",
+              "items": {
+                "$ref": "../service.json#/definitions/LinkedServiceReference"
+              }
+            },
+            "arguments": {
+              "description": "User specified arguments to HDInsightActivity.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "getDebugInfo": {
+              "$ref": "#/definitions/HDInsightActivityDebugInfoOption"
+            },
+            "scriptPath": {
+              "description": "Script path.",
+              "type": "string"
+            },
+            "scriptLinkedService": {
+              "description": "Script linked service.",
+              "$ref": "../service.json#/definitions/LinkedServiceReference"
+            },
+            "defines": {
+              "description": "Allows user to specify defines for Hive job request.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "HDInsightActivityDebugInfoOption": {
+      "description": "The HDInsightActivityDebugInfoOption settings to use.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Always",
+        "Failure"
+      ],
+      "x-ms-enum": {
+        "name": "HDInsightActivityDebugInfoOption"
+      }
+    },
+    "HDInsightPigActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDInsight activity properties.",
+          "type": "object",
+          "properties": {
+            "storageLinkedServices": {
+              "description": "Storage linked services.",
+              "type": "array",
+              "items": {
+                "$ref": "../service.json#/definitions/LinkedServiceReference"
+              }
+            },
+            "arguments": {
+              "description": "User specified arguments to HDInsightActivity.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "getDebugInfo": {
+              "$ref": "#/definitions/HDInsightActivityDebugInfoOption"
+            },
+            "scriptPath": {
+              "description": "Script path.",
+              "type": "string"
+            },
+            "scriptLinkedService": {
+              "description": "Script linked service.",
+              "$ref": "../service.json#/definitions/LinkedServiceReference"
+            },
+            "defines": {
+              "description": "Allows user to specify defines for Hive job request.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DotNetActivity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": ".NET activity properties.",
+          "type": "object",
+          "properties": {
+            "assemblyName": {
+              "description": "Assembly name.",
+              "type": "string"
+            },
+            "entryPoint": {
+              "description": "Entry point.",
+              "type": "string"
+            },
+            "packageLinkedService": {
+              "description": "Package linkedService.",
+              "type": "string"
+            },
+            "packageFile": {
+              "description": "PackageFile.",
+              "type": "string"
+            },
+            "extendedProperties": {
+              "description": "User defined property bag. There is no restriction on the keys or values that can be used. The user specified .NET activity has the full responsibility to consume and interpret the content defined.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "assemblyName",
+            "entryPoint",
+            "packageFile"
+          ]
+        }
+      }
+    }
+  }
+}
