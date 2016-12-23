@@ -669,7 +669,7 @@
         "managedBy": {
           "readOnly": true,
           "type": "string",
-          "description": "A relative URI containing the VM id that has the disk attached."
+          "description": "A relative URI containing the ID of the VM that has the disk attached."
         },
         "sku": {
           "$ref": "#/definitions/DiskSku"
@@ -971,7 +971,6 @@
         "access": {
           "type": "string",
           "enum": [
-            "None",
             "Read"
           ],
           "x-ms-enum": {
