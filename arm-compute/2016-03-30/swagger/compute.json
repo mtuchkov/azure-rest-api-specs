@@ -4524,7 +4524,7 @@
       "description": "Compute-specific operation properties, including output"
     },
     "Resource": {
-      "description": "The resource model definition.",
+      "description": "The Resource model definition.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -4574,14 +4574,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API Version."
+      "description": "Client Api Version."
     }
   }
 }

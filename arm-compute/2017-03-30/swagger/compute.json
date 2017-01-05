@@ -2808,7 +2808,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         }
       }
     },
@@ -5130,9 +5130,6 @@
           "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
-      "required": [
-        "value"
-      ],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
@@ -5366,7 +5363,7 @@
           "description": "Resource name"
         }
       },
-	  "x-ms-azure-resource": true
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "The Resource model definition.",
@@ -5500,7 +5497,7 @@
           "description": "The provisioning details set by the server during Create restore point operation."
         }
       },
-	  "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/RGResourceBase"
         }
@@ -5591,10 +5588,10 @@
           "$ref": "#/definitions/ManagedDiskParameters",
           "description": "The managed disk details"
         },
-		"diskRestorePoint": {
-		  "$ref": "#/definitions/ApiEntityReference",
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
           "description": "The disk restore point Id."
-		}
+        }
       },
       "description": "Describes an Operating System disk."
     },
@@ -5626,10 +5623,10 @@
           "$ref": "#/definitions/ManagedDiskParameters",
           "description": "The managed disk details"
         },
-		"diskRestorePoint": {
-		  "$ref": "#/definitions/ApiEntityReference",
+        "diskRestorePoint": {
+          "$ref": "#/definitions/ApiEntityReference",
           "description": "The disk restore point Id."
-		}
+        }
       },
       "description": "Describes a data disk."
     },
@@ -5684,7 +5681,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

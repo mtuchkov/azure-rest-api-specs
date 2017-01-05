@@ -859,17 +859,6 @@
     },
     "DiskUpdateProperties": {
       "properties": {
-        "accountType": {
-          "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Premium_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": false
-          }
-        },
         "osType": {
           "type": "string",
           "description": "the Operating System type.",

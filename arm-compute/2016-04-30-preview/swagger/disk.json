@@ -839,6 +839,7 @@
       "properties": {
         "accountType": {
           "type": "string",
+          "description": "the storage account type of the disk.",
           "enum": [
             "Standard_LRS",
             "Premium_LRS"
@@ -1052,7 +1053,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",
