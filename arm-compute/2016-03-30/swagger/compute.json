@@ -4529,28 +4529,28 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource ID."
+          "description": "Resource Id"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name."
+          "description": "Resource name"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type."
+          "description": "Resource type"
         },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource location"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags."
+          "description": "Resource tags"
         }
       },
       "required": [
