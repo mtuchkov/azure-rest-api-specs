@@ -74,7 +74,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySet"
             }
@@ -113,10 +113,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         }
       },
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySet"
             }
@@ -182,7 +182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AvailabilitySetListResult"
             }
@@ -224,7 +224,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -276,7 +276,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtensionImage"
             }
@@ -313,7 +313,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -379,7 +379,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -438,13 +438,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
@@ -489,10 +489,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -541,7 +541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
             }
@@ -601,7 +601,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineImage"
             }
@@ -674,7 +674,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -717,7 +717,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -752,7 +752,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -801,7 +801,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -837,7 +837,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
@@ -873,7 +873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -924,13 +924,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Image"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Image"
             }
@@ -968,10 +968,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -1013,7 +1013,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Image"
             }
@@ -1045,14 +1045,14 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ImageListResult"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1073,7 +1073,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ImageListResult"
             }
@@ -1124,13 +1124,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineCaptureResult"
             }
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1176,13 +1176,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
@@ -1220,10 +1220,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -1272,7 +1272,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
@@ -1311,7 +1311,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1348,7 +1348,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1385,7 +1385,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           }
         }
       }
@@ -1414,7 +1414,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
@@ -1442,7 +1442,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
@@ -1484,7 +1484,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
             }
@@ -1526,7 +1526,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1563,7 +1563,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1600,7 +1600,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1637,7 +1637,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1683,13 +1683,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
@@ -1738,7 +1738,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1775,13 +1775,13 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -1816,7 +1816,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSet"
             }
@@ -1864,7 +1864,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -1901,7 +1901,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetInstanceView"
             }
@@ -1933,7 +1933,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListResult"
             }
@@ -1961,7 +1961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListWithLinkResult"
             }
@@ -2003,7 +2003,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListSkusResult"
             }
@@ -2054,7 +2054,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2100,7 +2100,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2146,7 +2146,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2192,7 +2192,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2229,7 +2229,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2266,7 +2266,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2299,7 +2299,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The instance id of the virtual machine."
+            "description": "The instance ID of the virtual machine."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2310,7 +2310,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2354,7 +2354,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2398,7 +2398,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2442,13 +2442,13 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -2490,7 +2490,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVM"
             }
@@ -2536,7 +2536,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView"
             }
@@ -2596,7 +2596,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetVMListResult"
             }
@@ -2646,7 +2646,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2690,7 +2690,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -2734,7 +2734,7 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -4131,7 +4131,7 @@
             "Specialized"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemOSState",
+            "name": "OperatingSystemStateTypes",
             "modelAsString": false
           }
         },

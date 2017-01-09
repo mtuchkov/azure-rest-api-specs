@@ -693,7 +693,7 @@
           "items": {
             "$ref": "#/definitions/Disk"
           },
-          "description": "a list of disks."
+          "description": "A list of disks."
         },
         "nextLink": {
           "type": "string",
@@ -715,7 +715,7 @@
             "Premium_LRS"
           ],
           "x-ms-enum": {
-            "name": "StorageAccountType",
+            "name": "StorageAccountTypes",
             "modelAsString": false
           }
         },
@@ -723,35 +723,35 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "the time when the disk was created."
+          "description": "The time when the disk was created."
         },
         "osType": {
           "type": "string",
-          "description": "the Operating System type.",
+          "description": "The Operating System type.",
           "enum": [
             "Windows",
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemType",
+            "name": "OperatingSystemTypes",
             "modelAsString": false
           }
         },
         "osState": {
           "type": "string",
-          "description": "the Operating System state.",
+          "description": "The Operating System state.",
           "enum": [
             "Generalized",
             "Specialized"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemStateType",
+            "name": "OperatingSystemStateTypes",
             "modelAsString": false
           }
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
-          "description": "disk source information. CreationData information cannot be changed after the disk has been created."
+          "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
         },
         "diskSizeGB": {
           "type": "integer",
@@ -770,7 +770,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "the disk provisioning state."
+          "description": "The disk provisioning state."
         }
       },
       "description": "Disk resource properties."
@@ -845,7 +845,7 @@
             "Premium_LRS"
           ],
           "x-ms-enum": {
-            "name": "StorageAccountType",
+            "name": "StorageAccountTypes",
             "modelAsString": false
           }
         },
@@ -857,7 +857,7 @@
             "Linux"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemType",
+            "name": "OperatingSystemTypes",
             "modelAsString": false
           }
         },
@@ -869,7 +869,7 @@
             "Specialized"
           ],
           "x-ms-enum": {
-            "name": "OperatingSystemStateType",
+            "name": "OperatingSystemStateTypes",
             "modelAsString": false
           }
         },
@@ -912,7 +912,7 @@
         },
         "imageReference": {
           "$ref": "#/definitions/ImageDiskReference",
-          "description": "disk source information."
+          "description": "Disk source information."
         },
         "sourceUri": {
           "type": "string",
@@ -1034,11 +1034,11 @@
           "items": {
             "$ref": "#/definitions/Snapshot"
           },
-          "description": "a list of snapshots."
+          "description": "A list of snapshots."
         },
         "nextLink": {
           "type": "string",
-          "description": "the uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
         }
       },
       "required": [
