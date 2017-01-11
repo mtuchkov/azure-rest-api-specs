@@ -773,6 +773,9 @@
           "description": "The disk provisioning state."
         }
       },
+      "required": [
+        "creationData"
+      ],
       "description": "Disk resource properties."
     },
     "EncryptionSettings": {

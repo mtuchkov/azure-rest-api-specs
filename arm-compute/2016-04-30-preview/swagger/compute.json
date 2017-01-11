@@ -3476,12 +3476,13 @@
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
           "description": "The Storage Account type."
-        },
-        "id": {
-          "type": "string",
-          "description": "The id for the disk."
         }
       },
+      "allof": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "description": "The parameters of a managed disk."
     },
     "OSDisk": {
@@ -4166,6 +4167,10 @@
           "description": "The initial managed disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
+      "required": [
+        "osType",
+        "osState"
+      ],
       "description": "Describes an Operating System disk."
     },
     "ImageDataDisk": {
@@ -4206,6 +4211,9 @@
           "description": "The initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
+      "required": [
+        "lun"
+      ],
       "description": "Describes a data disk."
     },
     "ImageStorageProfile": {
@@ -4222,6 +4230,9 @@
           "description": "The data disks."
         }
       },
+      "required": [
+        "osDisk"
+      ],
       "description": "Describes a storage profile."
     },
     "ImageProperties": {
