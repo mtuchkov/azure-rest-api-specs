@@ -644,10 +644,6 @@
     "ResourceUpdate": {
       "description": "The Resource model definition.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
