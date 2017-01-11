@@ -3628,7 +3628,7 @@
           "description": "The Storage Account type."
         }
       },
-      "allof": [
+      "allOf": [
         {
           "$ref": "#/definitions/SubResource"
         }
