@@ -5339,9 +5339,14 @@
           "type": "string",
           "format": "date-time",
           "description": "End time of the operation"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error"
         }
       },
-      "description": "Operation status"
+      "description": "Operation status response"
     }
   },
   "parameters": {
