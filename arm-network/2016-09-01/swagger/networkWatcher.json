@@ -740,7 +740,8 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetTroubleshoot",
-        "description": "Provide troubleshoot on a specified resource",
+        "x-ms-long-running-operation": true,
+        "description": "Initiate troubleshoot on a specified resource",
         "parameters": [
           {
             "name": "resourceGroupName",
