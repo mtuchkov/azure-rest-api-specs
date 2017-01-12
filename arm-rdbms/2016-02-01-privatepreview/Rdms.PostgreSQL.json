@@ -92,7 +92,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Server"
+              "$ref": "#/definitions/ServerUpdateParameters"
             },
             "description": "The required parameters for updating a PostgreSQL server."
           }
@@ -685,7 +685,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags assigned to the resource."
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "allOf": [
@@ -718,6 +718,48 @@
         "properties"
       ],
      "description": "Represents a PostgreSQL server."
+    },
+    "ServerUpdateParameters": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Represents the sku of the PostgreSQL server."
+        },
+        "properties": {
+          "properties": {
+            "storageMB" : {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1024,
+              "description": "The max storage allowed for a PostgreSQL server."
+            },
+            "administratorLoginPassword" : {
+              "type": "string",
+              "format": "password",
+              "description": "The password of the administrator login."
+            },
+            "version" : {
+              "type": "string",
+              "description": "The version of a PostgreSQL server.",
+              "enum": ["9.5"],
+              "x-ms-enum": {
+                "name": "ServerVersions",
+                "modelAsString": true
+              }
+            }
+          },
+          "x-ms-client-flatten": true,
+          "description": "Represents the properties that can be updated for a PostgreSQL server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+     "description": "Represents server update parameters."
     },
     "ServerListResult": {
       "properties": {
