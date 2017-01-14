@@ -2968,7 +2968,6 @@
           "$ref": "#/definitions/AvailabilitySetProperties"
         },
         "sku": {
-          "x-ms-client-flatten": false,
           "$ref": "#/definitions/Sku",
           "description": "Sku of the availability set"
         }
