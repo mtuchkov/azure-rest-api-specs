@@ -833,10 +833,6 @@
           "description": "The collation of MySQL database."
         }
       },
-      "required": [
-        "charset",
-        "collation"
-      ],
       "description": "Represents the properties of a MySQL database."
     },
     "Database": {
@@ -851,9 +847,6 @@
         {
           "$ref": "#/definitions/SubResource"
         }
-      ],
-      "required": [
-        "properties"
       ],
       "description": "Represents a MySQL Database."
     },
