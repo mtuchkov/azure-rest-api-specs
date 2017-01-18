@@ -75,7 +75,7 @@
           }
         ],
         "responses": {
-		      "200": {
+          "200": {
             "description": "Update successful. The operation returns the resulting NetworkWacher resource.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
@@ -454,6 +454,7 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_Create",
+        "x-ms-long-running-operation": true,
         "description": "Create and start a packet capture on the specified VM.",
         "parameters": [
           {
@@ -684,7 +685,7 @@
             }
           },
           "202": {
-            "description": " Accepted query status of packet capture.",
+            "description": "Accepted query status of packet capture.",
             "schema": {
               "$ref": "#/definitions/PacketCaptureQueryStatusResult"
             }
@@ -758,7 +759,7 @@
             "description": "The name of the network watcher resource."
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -848,7 +849,7 @@
       },
       "description": "Th network watcher properties."
     },
-	  "NetworkWatcherListResult": {
+    "NetworkWatcherListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -963,7 +964,15 @@
         },
         "direction": {
           "type": "string",
-          "description": "The direction of the packet represented by the 5-tuple. Acceptable values are 'Inbound' and 'Outbound'."
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true
+          },
+          "description": "The direction of the packet represented by the 5-tuple."
         },
         "protocol": {
           "type": "string",
@@ -971,10 +980,10 @@
             "TCP",
             "UDP"
           ],
-           "x-ms-enum": {
+          "x-ms-enum": {
             "name": "Protocol",
             "modelAsString": true
-          },         
+          },
           "description": "Protocol to be verified on."
         },
         "localPort": {
@@ -1072,22 +1081,22 @@
         }
       }
     },
-    "SecurityGroupViewParameters" : {
+    "SecurityGroupViewParameters": {
       "description": "Security Group View enables customer to view configured and effective network security groups rule applied on a VM.",
       "required": [
         "targetResourceId"
       ],
       "properties": {
-        "targetResourceId" :{
+        "targetResourceId": {
           "type": "string",
           "description": "ID of the target VM."
         }
       }
     },
-    "SecurityGroupViewResult" : {
+    "SecurityGroupViewResult": {
       "description": "The information about security rules applied to the specified VM.",
       "properties": {
-        "networkInterfaces" : {
+        "networkInterfaces": {
           "type": "array",
           "description": "List of network interfaces on the specified VM.",
           "items": {
@@ -1096,26 +1105,33 @@
         }
       }
     },
-	"SecurityGroupNetworkInterface" : {
+    "SecurityGroupNetworkInterface": {
       "description": "Network interface and all its associated security rules.",
       "properties": {
-        "securityRuleAssociations" : {
-            "$ref": "#/definitions/SecurityRuleAssociations"
+        "id": {
+          "type": "string",
+          "description": "ID of the network interface."
+        },
+        "securityRuleAssociations": {
+          "$ref": "#/definitions/SecurityRuleAssociations"
         }
       }
     },
-    "SecurityRuleAssociations" : {
+    "SecurityRuleAssociations": {
       "description": "All security rules associated with the network interface.",
       "properties": {
-        "networkInterfaceAssocation" :{
-            "$ref": "#/definitions/NetworkInterfaceAssociation"
+        "networkInterfaceAssociation": {
+          "$ref": "#/definitions/NetworkInterfaceAssociation"
         },
-        "defaultSecurityRules" : {
-            "type": "array",
-            "items": {
-              "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
-            },
-            "description": "Collection of default security rules of the network security group."
+        "subnetAssociation": {
+          "$ref": "#/definitions/SubnetAssociation"
+        },
+        "defaultSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          },
+          "description": "Collection of default security rules of the network security group."
         },
         "effectiveSecurityRules": {
           "type": "array",
@@ -1126,22 +1142,39 @@
         }
       }
     },
-    "NetworkInterfaceAssociation" : {
+    "NetworkInterfaceAssociation": {
       "description": "Network interface and its custom security rules.",
-        "properties": {
-          "id": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Network interface ID."
-          },
-          "securityRules" : {
-            "type": "array",
-            "description": "Collection of custom security rules.",
-            "items": {
-              "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
-            }
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network interface ID."
+        },
+        "securityRules": {
+          "type": "array",
+          "description": "Collection of custom security rules.",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          }
         }
-      } 
+      }
+    },
+    "SubnetAssociation": {
+      "description": "Network interface and its custom security rules.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Subnet ID."
+        },
+        "securityRules": {
+          "type": "array",
+          "description": "Collection of custom security rules.",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          }
+        }
+      }
     },
     "PacketCapture": {
       "properties": {
@@ -1213,16 +1246,25 @@
       "properties": {
         "protocol": {
           "type": "string",
+          "enum": [
+            "TCP",
+            "UDP",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "ProtocolPC",
+            "modelAsString": true
+          },
           "default": "Any",
           "description": "Protocol to be filtered on."
         },
         "localIPAddress": {
           "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5\"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
+          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5\"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
         },
         "remoteIPAddress": {
           "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
+          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
         },
         "localPort": {
           "type": "string",
@@ -1311,7 +1353,7 @@
         },
         "packetCaptureStatus": {
           "type": "string",
-           "enum": [
+          "enum": [
             "NotStarted",
             "Running",
             "Stopped",
@@ -1319,7 +1361,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "PacketCaptureStatus",
+            "name": "PcStatus",
             "modelAsString": true
           },
           "description": "The status of the packet capture session."
@@ -1330,10 +1372,10 @@
         },
         "packetCaptureError": {
           "type": "array",
-            "description": "List of errors of packet capture session.",
-            "items": {
-              "$ref": "#/definitions/CaptureError"
-            }
+          "description": "List of errors of packet capture session.",
+          "items": {
+            "$ref": "#/definitions/CaptureError"
+          }
         }
       },
       "required": [
@@ -1358,101 +1400,111 @@
             "StorageFailed"
           ],
           "x-ms-enum": {
-            "name": "PacketCaptureError",
+            "name": "PcError",
             "modelAsString": true
           }
         }
       },
       "description": "Error of packet capture session."
     },
-        "TroubleshootParameters" : {
-      "description" : "Parameters supplied to get troubleshoot operation.",
-        "properties" : {
-          "targetResourceId" : {
-            "description" : "The target resource to call the troubleshoot service on.",
-            "type" : "string"
-          },
-          "properties" : {
-            "x-ms-client-flatten": true,
-            "$ref" : "#/definitions/TroubleshootRequestProperties"
-          }
-        }
-      },
-      "TroubleshootRequestProperties" : {
-        "description" : "Storage location provided for troubleshoot.",
-        "properties" : {
-        "storageId" : {
-          "description" : "The ID for the storage account to save the troubleshoot response.",
-          "type" : "string"
+    "TroubleshootParameters": {
+      "description": "Parameters supplied to get troubleshoot operation.",
+      "required": [
+        "targetResourceId",
+        "properties"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The target resource to call the troubleshoot service on.",
+          "type": "string"
         },
-        "storagePath" : {
-          "description" : "The path to the blob to save the troubleshoot response in.",
-          "type" : "string"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TroubleshootRequestProperties"
         }
       }
     },
-    "TroubleshootResult" : {
-      "description" : "Troubleshoot information gained from specified resource.",
-      "properties" : {
-        "startTime" : {
-          "type" : "string",
-          "description" : "The start time of the troubleshooting."
+    "TroubleshootRequestProperties": {
+      "description": "Storage location provided for troubleshoot.",
+      "required": [
+        "storageId",
+        "storagePath"
+      ],
+      "properties": {
+        "storageId": {
+          "description": "The ID for the storage account to save the troubleshoot response.",
+          "type": "string"
         },
-        "endTime" : {
-          "type" : "string",
-          "description" : "The end time of the troubleshooting."
+        "storagePath": {
+          "description": "The path to the blob to save the troubleshoot response in.",
+          "type": "string"
+        }
+      }
+    },
+    "TroubleshootResult": {
+      "description": "Troubleshoot information gained from specified resource.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the troubleshooting."
         },
-        "code" : {
-          "type" : "string",
-          "description" : "The response code of the troubleshooting."
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the troubleshooting."
         },
-        "results" : {
-          "type" : "array",
-          "description" : "Information from troubleshooting.",
-          "items" : {
-            "$ref" : "#/definitions/TroubleshootDetails"
+        "code": {
+          "type": "string",
+          "description": "The response code of the troubleshooting."
+        },
+        "results": {
+          "type": "array",
+          "description": "Information from troubleshooting.",
+          "items": {
+            "$ref": "#/definitions/TroubleshootDetails"
           }
         }
       }
     },
-    "TroubleshootDetails" : {
-      "description" : "Information gained from troubleshooting of specified resource.",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The id of the get troubleshoot operation."
+    "TroubleshootDetails": {
+      "description": "Information gained from troubleshooting of specified resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the get troubleshoot operation."
         },
-        "summary" : {
-          "type" : "string",
-          "description" : "A summary of troubleshooting."
+        "summary": {
+          "type": "string",
+          "description": "A summary of troubleshooting."
         },
-        "detail" : {
-          "type" : "string",
-          "description" : "Detailes on troublshooting results."
+        "detail": {
+          "type": "string",
+          "description": "Detailes on troublshooting results."
         },
-        "recommendedActions" : {
-          "type" : "array",
-          "description" : "List of recommended actions.",
-          "items" : {
-            "$ref" : "#/definitions/TroubleshootRecommendedActions"
+        "recommendedActions": {
+          "type": "array",
+          "description": "List of recommended actions.",
+          "items": {
+            "$ref": "#/definitions/TroubleshootRecommendedActions"
           }
         }
       }
-    },   
-    "TroubleshootRecommendedActions" : {
-      "description" : "Recommended actions based on discovered issues.",
-      "properties" : {
-        "actionText" : {
-          "description" : "Description of recommended actions.",
-          "type" : "string"
+    },
+    "TroubleshootRecommendedActions": {
+      "description": "Recommended actions based on discovered issues.",
+      "properties": {
+        "actionText": {
+          "description": "Description of recommended actions.",
+          "type": "string"
         },
-        "actionUri" : {
-          "description" : "The uri linking to a documentation for the recommended troubleshooting actions.",
-          "type" : "string"
+        "actionUri": {
+          "description": "The uri linking to a documentation for the recommended troubleshooting actions.",
+          "type": "string"
         },
-        "actionUriText" : {
-          "description" : "The infromatiom from the URI for the recommended troubleshooting actions.",
-          "type" : "string"
+        "actionUriText": {
+          "description": "The infromatiom from the URI for the recommended troubleshooting actions.",
+          "type": "string"
         }
       }
     }
