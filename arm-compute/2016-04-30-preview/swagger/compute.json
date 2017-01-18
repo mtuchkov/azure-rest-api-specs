@@ -4805,6 +4805,10 @@
         "overprovision": {
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+        },
+        "singlePlacementGroup": {
+          "type": "boolean",
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
