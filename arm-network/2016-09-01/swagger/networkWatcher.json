@@ -65,7 +65,7 @@
             "schema": {
               "$ref": "#/definitions/NetworkWatcherParameters"
             },
-            "description": "Parameters supplied to create or update network watcher operation."
+            "description": "Parameters that define the network watcher resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -76,13 +76,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting NetworkWacher resource.",
+            "description": "Update successful. The operation returns the resulting network watcher resource.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting NetworkWatcher resource.",
+            "description": "Create successful. The operation returns the resulting network watcher resource.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
             }
@@ -119,7 +119,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a NetworkWatcher resource.",
+            "description": "Request successful. The operation returns a network watcher resource.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
             }
@@ -132,7 +132,7 @@
         ],
         "operationId": "NetworkWatchers_Delete",
         "x-ms-long-running-operation": true,
-        "description": "Deletes the specified network watcherk gateway.",
+        "description": "Deletes the specified network watcher resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -189,7 +189,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of NetworkWatchers resources.",
+            "description": "Request successful. The operation returns a list of network watcher resources.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcherListResult"
             }
@@ -217,7 +217,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of NetworkWatchers resources.",
+            "description": "Request successful. The operation returns a list of network watcher resources.",
             "schema": {
               "$ref": "#/definitions/NetworkWatcherListResult"
             }
@@ -234,7 +234,6 @@
           "NetworkWatchers"
         ],
         "operationId": "NetworkWatchers_GetTopology",
-        "x-ms-long-running-operation": true,
         "description": "Gets the current network topology by resource group.",
         "parameters": [
           {
@@ -258,7 +257,7 @@
             "schema": {
               "$ref": "#/definitions/TopologyParameters"
             },
-            "description": "Parameters supplied to get topology operation."
+            "description": "Parameters that define the representation of topology."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -269,13 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a topology of resource group.",
-            "schema": {
-              "$ref": "#/definitions/Topology"
-            }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
+            "description": "Request successful. The operation returns the topology of resource group.",
             "schema": {
               "$ref": "#/definitions/Topology"
             }
@@ -313,7 +306,7 @@
             "schema": {
               "$ref": "#/definitions/VerificationIPFlowParameters"
             },
-            "description": "Parameters supplied to the verify IP flow operation."
+            "description": "Parameters that define the IP flow to be verified."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -324,7 +317,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a result of IP flow verification.",
+            "description": "Request successful. The operation returns the result of IP flow verification.",
             "schema": {
               "$ref": "#/definitions/VerificationIPFlowResult"
             }
@@ -368,7 +361,7 @@
             "schema": {
               "$ref": "#/definitions/NextHopParameters"
             },
-            "description": "Parameters supplied to get next hop operation."
+            "description": "Parameters that define the source and destination endpoint."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -379,7 +372,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a next hop from the VM.",
+            "description": "Request successful. The operation returns the next hop from the VM.",
             "schema": {
               "$ref": "#/definitions/NextHopResult"
             }
@@ -423,7 +416,7 @@
             "schema": {
               "$ref": "#/definitions/SecurityGroupViewParameters"
             },
-            "description": "Parameter supplied to get VM security rule operation."
+            "description": "Parameters that define the VM to check security groups for."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -485,7 +478,7 @@
             "schema": {
               "$ref": "#/definitions/PacketCapture"
             },
-            "description": "Parameters supplied to the create packet capture operation."
+            "description": "Parameters that define the create packet capture operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -508,7 +501,7 @@
           "PacketCaptures"
         ],
         "operationId": "PacketCaptures_Get",
-        "description": "Gets the specified packet capture session by resource group.",
+        "description": "Gets a packet capture session by name.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -540,7 +533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a PacketCapture session.",
+            "description": "Request successful. The operation returns a packet capture session.",
             "schema": {
               "$ref": "#/definitions/PacketCaptureResult"
             }
@@ -632,7 +625,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation stops the PacketCapture session."
+            "description": "Request successful. The operation stops the packet capture session."
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -724,7 +717,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful packet capture request.",
+            "description": "Successful packet capture enumeration request.",
             "schema": {
               "$ref": "#/definitions/PacketCaptureListResult"
             }
@@ -740,9 +733,9 @@
         "tags": [
           "NetworkWatchers"
         ],
-        "operationId": "NetworkWatchers_GetTroubleshoot",
+        "operationId": "NetworkWatchers_GetTroubleshooting",
         "x-ms-long-running-operation": true,
-        "description": "Initiate troubleshoot on a specified resource",
+        "description": "Initiate troubleshooting on a specified resource",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -763,9 +756,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TroubleshootParameters"
+              "$ref": "#/definitions/TroubleshootingParameters"
             },
-            "description": "Parameters supplied to get troubleshoot operation."
+            "description": "Parameters that define the resource to troubleshoot."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -776,15 +769,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful troubleshoot request",
+            "description": "Successful troubleshooting request",
             "schema": {
-              "$ref": "#/definitions/TroubleshootResult"
+              "$ref": "#/definitions/TroubleshootingResult"
             }
           },
           "202": {
-            "description": " Accepted get troubleshoot request.",
+            "description": "Accepted get troubleshooting request.",
             "schema": {
-              "$ref": "#/definitions/TroubleshootResult"
+              "$ref": "#/definitions/TroubleshootingResult"
             }
           }
         }
@@ -809,7 +802,7 @@
           "description": "The network watcher tags."
         }
       },
-      "description": "Parameters supplied to create or update network watcher operation."
+      "description": "Parameters that define the network watcher resource."
     },
     "NetworkWatcher": {
       "properties": {
@@ -827,7 +820,7 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Network wtacher in a resource group."
+      "description": "Network watcher in a resource group."
     },
     "NetworkWatcherPropertiesFormat": {
       "properties": {
@@ -847,7 +840,7 @@
           "description": "The provisioning state of the resource."
         }
       },
-      "description": "Th network watcher properties."
+      "description": "The network watcher properties."
     },
     "NetworkWatcherListResult": {
       "properties": {
@@ -870,7 +863,7 @@
           "description": "The name of the target resource group."
         }
       },
-      "description": "Parameters supplied to the get topology operation."
+      "description": "Parameters that define the representation of topology."
     },
     "Topology": {
       "properties": {
@@ -883,7 +876,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The datetime when the topology was initially created on the resource group."
+          "description": "The datetime when the topology was initially created for the resource group."
         },
         "lastModified": {
           "readOnly": true,
@@ -898,7 +891,7 @@
           }
         }
       },
-      "description": "Topology in the specified resource group."
+      "description": "Topology of the specified resource group."
     },
     "TopologyResource": {
       "properties": {
@@ -947,7 +940,7 @@
       "description": "Resources that have an association with the parent resource."
     },
     "VerificationIPFlowParameters": {
-      "description": "Parameters supplied to the verify IP flow operation.",
+      "description": "Parameters that define the IP flow to be verified.",
       "required": [
         "targetResourceId",
         "direction",
@@ -972,7 +965,7 @@
             "name": "Direction",
             "modelAsString": true
           },
-          "description": "The direction of the packet represented by the 5-tuple."
+          "description": "The direction of the packet represented as a 5-tuple."
         },
         "protocol": {
           "type": "string",
@@ -1004,7 +997,7 @@
         },
         "targetNicResourceId": {
           "type": "string",
-          "description": "The Nic id. (If VM has multiple nics and ipforwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
+          "description": "The NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of them, then this parameter must be specified. Otherwise optional)."
         }
       }
     },
@@ -1018,7 +1011,7 @@
             "name": "Access",
             "modelAsString": true
           },
-          "description": "Information about whether or not traffic is allowed or denied."
+          "description": "Indicates whether the traffic is allowed or denied."
         },
         "ruleName": {
           "type": "string",
@@ -1027,7 +1020,7 @@
       }
     },
     "NextHopParameters": {
-      "description": "Parameters supplied to the get next hop operation.",
+      "description": "Parameters that define the source and destination endpoint.",
       "required": [
         "targetResourceId",
         "sourceIPAddress",
@@ -1048,7 +1041,7 @@
         },
         "targetNicResourceId": {
           "type": "string",
-          "description": "The Nic ID. (If VM has multiple nics and ipforwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
+          "description": "TThe NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
         }
       }
     },
@@ -1069,7 +1062,7 @@
             "name": "NextHopType",
             "modelAsString": true
           },
-          "description": "Next hop type. Acceptable values are 'Internet', 'VirtualAppliance', 'VirtualNetworkGateway', 'VnetLocal', 'HyperNetGateway' and 'None'."
+          "description": "Next hop type."
         },
         "nextHopIpAddress": {
           "type": "string",
@@ -1082,7 +1075,7 @@
       }
     },
     "SecurityGroupViewParameters": {
-      "description": "Security Group View enables customer to view configured and effective network security groups rule applied on a VM.",
+      "description": "Parameters that define the VM to check security groups for.",
       "required": [
         "targetResourceId"
       ],
@@ -1186,13 +1179,13 @@
       "required": [
         "properties"
       ],
-      "description": "Parameters supplied to the create packet capture operation."
+      "description": "Parameters that define the create packet capture operation."
     },
     "PacketCaptureParameters": {
       "properties": {
         "target": {
           "type": "string",
-          "description": "The ID of the targeting resource, only VM is currently supported."
+          "description": "The ID of the targeted resource, only VM is currently supported."
         },
         "bytesToCapturePerPacket": {
           "type": "integer",
@@ -1202,7 +1195,7 @@
         "totalBytesPerSession": {
           "type": "integer",
           "default": 1073741824,
-          "description": "Maximum size of the capture session."
+          "description": "Maximum size of the capture output."
         },
         "timeLimitInSeconds": {
           "type": "integer",
@@ -1223,13 +1216,13 @@
         "target",
         "storageLocation"
       ],
-      "description": "Properties of packet capture session supplied to the create packet capture operation."
+      "description": "Parameters that define the create packet capture operation."
     },
     "PacketCaptureStorageLocation": {
       "properties": {
         "storageId": {
           "type": "string",
-          "description": "The id of the storage account to save the packet capture session. Required if no Local filePath is provided."
+          "description": "The ID of the storage account to save the packet capture session. Required if no local file path is provided."
         },
         "storagePath": {
           "type": "string",
@@ -1237,7 +1230,7 @@
         },
         "filePath": {
           "type": "string",
-          "description": "A valid local path on the targeting VM. Must include the name of the capture file to be saved ending in .cap . Required if no StorageId is provided, otherwise optional."
+          "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). Required if no storage ID is provided, otherwise optional."
         }
       },
       "description": "Describes the storage location for a packet capture session."
@@ -1252,7 +1245,7 @@
             "Any"
           ],
           "x-ms-enum": {
-            "name": "ProtocolPC",
+            "name": "PcProtocol",
             "modelAsString": true
           },
           "default": "Any",
@@ -1260,11 +1253,11 @@
         },
         "localIPAddress": {
           "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5\"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
+          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5\"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
         },
         "remoteIPAddress": {
           "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported Default = null."
+          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
         },
         "localPort": {
           "type": "string",
@@ -1275,7 +1268,7 @@
           "description": "Remote port to be filtered on. Notation: \"80\" for single port entry.\"80-85\" for range. \"80;443;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
         }
       },
-      "description": "Filter that applied to packet capture request. Multiple filters can be applied."
+      "description": "Filter that is applied to packet capture request. Multiple filters can be applied."
     },
     "PacketCaptureListResult": {
       "properties": {
@@ -1294,12 +1287,12 @@
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of the Packet Capture session."
+          "description": "Name of the packet capture session."
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Id of the packet capture operation."
+          "description": "ID of the packet capture operation."
         },
         "etag": {
           "type": "string",
@@ -1334,7 +1327,7 @@
           "$ref": "#/definitions/PacketCaptureParameters"
         }
       ],
-      "description": "Describes properties of packet capture session."
+      "description": "Describes the properties of a packet capture session."
     },
     "PacketCaptureQueryStatusResult": {
       "properties": {
@@ -1344,12 +1337,12 @@
         },
         "id": {
           "type": "string",
-          "description": "The id of the packet capture resouce."
+          "description": "The ID of the packet capture resource."
         },
         "captureStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the packert capture session."
+          "description": "The start time of the packet capture session."
         },
         "packetCaptureStatus": {
           "type": "string",
@@ -1378,13 +1371,6 @@
           }
         }
       },
-      "required": [
-        "name",
-        "id",
-        "captureStartTime",
-        "packetCaptureStatus",
-        "packetCaptureError"
-      ],
       "description": "Status of packet capture session."
     },
     "CaptureError": {
@@ -1407,24 +1393,24 @@
       },
       "description": "Error of packet capture session."
     },
-    "TroubleshootParameters": {
-      "description": "Parameters supplied to get troubleshoot operation.",
+    "TroubleshootingParameters": {
+      "description": "Parameters that define the resource to troubleshoot.",
       "required": [
         "targetResourceId",
         "properties"
       ],
       "properties": {
         "targetResourceId": {
-          "description": "The target resource to call the troubleshoot service on.",
+          "description": "The target resource to troubleshoot.",
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TroubleshootRequestProperties"
+          "$ref": "#/definitions/TroubleshootingProperties"
         }
       }
     },
-    "TroubleshootRequestProperties": {
+    "TroubleshootingProperties": {
       "description": "Storage location provided for troubleshoot.",
       "required": [
         "storageId",
@@ -1432,17 +1418,17 @@
       ],
       "properties": {
         "storageId": {
-          "description": "The ID for the storage account to save the troubleshoot response.",
+          "description": "The ID for the storage account to save the troubleshoot result.",
           "type": "string"
         },
         "storagePath": {
-          "description": "The path to the blob to save the troubleshoot response in.",
+          "description": "The path to the blob to save the troubleshoot result in.",
           "type": "string"
         }
       }
     },
-    "TroubleshootResult": {
-      "description": "Troubleshoot information gained from specified resource.",
+    "TroubleshootingResult": {
+      "description": "Troubleshooting information gained from specified resource.",
       "properties": {
         "startTime": {
           "type": "string",
@@ -1456,23 +1442,27 @@
         },
         "code": {
           "type": "string",
-          "description": "The response code of the troubleshooting."
+          "description": "The result code of the troubleshooting."
         },
         "results": {
           "type": "array",
           "description": "Information from troubleshooting.",
           "items": {
-            "$ref": "#/definitions/TroubleshootDetails"
+            "$ref": "#/definitions/TroubleshootingDetails"
           }
         }
       }
     },
-    "TroubleshootDetails": {
+    "TroubleshootingDetails": {
       "description": "Information gained from troubleshooting of specified resource.",
       "properties": {
         "id": {
           "type": "string",
           "description": "The id of the get troubleshoot operation."
+        },
+        "reasonType": {
+          "type": "string",
+          "description": "Reason type of failure."
         },
         "summary": {
           "type": "string",
@@ -1480,20 +1470,24 @@
         },
         "detail": {
           "type": "string",
-          "description": "Detailes on troublshooting results."
+          "description": "Details on troubleshooting results."
         },
         "recommendedActions": {
           "type": "array",
           "description": "List of recommended actions.",
           "items": {
-            "$ref": "#/definitions/TroubleshootRecommendedActions"
+            "$ref": "#/definitions/TroubleshootingRecommendedActions"
           }
         }
       }
     },
-    "TroubleshootRecommendedActions": {
+    "TroubleshootingRecommendedActions": {
       "description": "Recommended actions based on discovered issues.",
       "properties": {
+        "actionId": {
+          "description": "ID of the recommended action.",
+          "type": "string"
+        },
         "actionText": {
           "description": "Description of recommended actions.",
           "type": "string"
@@ -1503,7 +1497,7 @@
           "type": "string"
         },
         "actionUriText": {
-          "description": "The infromatiom from the URI for the recommended troubleshooting actions.",
+          "description": "The information from the URI for the recommended troubleshooting actions.",
           "type": "string"
         }
       }
