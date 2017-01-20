@@ -63,7 +63,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkWatcherParameters"
+              "$ref": "#/definitions/NetworkWatcher"
             },
             "description": "Parameters that define the network watcher resource."
           },
@@ -785,25 +785,6 @@
     }
   },
   "definitions": {
-    "NetworkWatcherParameters": {
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The network watcher location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The network watcher tags."
-        }
-      },
-      "description": "Parameters that define the network watcher resource."
-    },
     "NetworkWatcher": {
       "properties": {
         "etag": {
