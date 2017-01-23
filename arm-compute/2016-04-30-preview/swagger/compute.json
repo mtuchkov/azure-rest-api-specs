@@ -5180,6 +5180,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
+        },
+        "placementGroupId": {
+          "type": "string",
+          "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
         }
       },
       "description": "The instance view of a virtual machine scale set VM."

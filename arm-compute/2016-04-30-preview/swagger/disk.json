@@ -751,18 +751,6 @@
             "modelAsString": false
           }
         },
-        "osState": {
-          "type": "string",
-          "description": "The Operating System state.",
-          "enum": [
-            "Generalized",
-            "Specialized"
-          ],
-          "x-ms-enum": {
-            "name": "OperatingSystemStateTypes",
-            "modelAsString": false
-          }
-        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -875,18 +863,6 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": false
-          }
-        },
-        "osState": {
-          "type": "string",
-          "description": "the Operating System state.",
-          "enum": [
-            "Generalized",
-            "Specialized"
-          ],
-          "x-ms-enum": {
-            "name": "OperatingSystemStateTypes",
             "modelAsString": false
           }
         },
