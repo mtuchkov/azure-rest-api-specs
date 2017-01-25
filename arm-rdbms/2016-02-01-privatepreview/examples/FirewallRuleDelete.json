@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "firewallRuleName": "rule1",
+    "serverName": "testserver",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2016-02-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {},
+    "204": {}
+  }
+}
