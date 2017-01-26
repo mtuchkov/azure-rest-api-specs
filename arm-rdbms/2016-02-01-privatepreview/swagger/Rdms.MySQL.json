@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases and firewall rules.",
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure MySQL management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases and firewall rules.",
     "version": "2016-02-01-privatepreview"
   },
   "host": "management.azure.com",
@@ -16,16 +16,16 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
         ],
         "operationId": "Servers_CreateOrUpdate",
         "x-ms-examples": {
-          "ServerCreate": { "$ref": "examples/ServerCreate.json" }
+          "ServerCreate": { "$ref": "../examples/ServerCreate.json" }
         },
-        "description": "Creates a new PostgreSQL server or updates an existing PostgreSQL server. The update action will overwrite the existing server.",
+        "description": "Creates a new MySQL server or updates an existing MySQL server. The update action will overwrite the existing server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -46,7 +46,7 @@
             "schema": {
               "$ref": "#/definitions/Server"
             },
-            "description": "The required parameters for creating or updating a PostgreSQL server."
+            "description": "The required parameters for creating or updating a MySQL server."
           }
         ],
         "responses": {
@@ -77,9 +77,9 @@
         ],
         "operationId": "Servers_Update",
         "x-ms-examples": {
-          "ServerUpdate": { "$ref": "examples/ServerUpdate.json" }
+          "ServerUpdate": { "$ref": "../examples/ServerUpdate.json" }
         },
-        "description": "Updates an existing PostgreSQL server. The request body can contain one to many of the properties present in the normal server definition.",
+        "description": "Updates an existing MySQL server. The request body can contain one to many of the properties present in the normal server definition.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -100,7 +100,7 @@
             "schema": {
               "$ref": "#/definitions/ServerUpdateParameters"
             },
-            "description": "The required parameters for updating a PostgreSQL server."
+            "description": "The required parameters for updating a MySQL server."
           }
         ],
         "responses": {
@@ -125,9 +125,9 @@
         ],
         "operationId": "Servers_Delete",
         "x-ms-examples": {
-          "ServerDelete": { "$ref": "examples/ServerDelete.json" }
+          "ServerDelete": { "$ref": "../examples/ServerDelete.json" }
         },
-        "description": "Deletes a PostgreSQL server.",
+        "description": "Deletes a MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -161,9 +161,9 @@
         ],
         "operationId": "Servers_Get",
         "x-ms-examples": {
-          "ServerGet": { "$ref": "examples/ServerGet.json" }
+          "ServerGet": { "$ref": "../examples/ServerGet.json" }
         },
-        "description": "Gets information about a PostgreSQL server.",
+        "description": "Gets information about a MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -188,16 +188,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
         ],
         "operationId": "Servers_ListByResourceGroup",
         "x-ms-examples": {
-          "ServerListByResourceGroup": { "$ref": "examples/ServerListByResourceGroup.json" }
+          "ServerListByResourceGroup": { "$ref": "../examples/ServerListByResourceGroup.json" }
         },
-        "description": "List all the PostgreSQL servers in a given resource group.",
+        "description": "List all the MySQL servers in a given resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -222,16 +222,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
         ],
         "operationId": "Servers_List",
         "x-ms-examples": {
-          "ServerList": { "$ref": "examples/ServerList.json" }
+          "ServerList": { "$ref": "../examples/ServerList.json" }
         },
-        "description": "List all the PostgreSQL servers in a given subscription.",
+        "description": "List all the MySQL servers in a given subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -253,14 +253,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
         ],
         "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-examples": {
-          "FirewallRuleCreate": { "$ref": "examples/FirewallRuleCreate.json" }
+          "FirewallRuleCreate": { "$ref": "../examples/FirewallRuleCreate.json" }
         },
         "description": "Creates a new firewall rule or updates an existing firewall rule.",
         "parameters": [
@@ -281,7 +281,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL server firewall rule."
+            "description": "The name of the MySQL server firewall rule."
           },
           {
             "name": "parameters",
@@ -321,9 +321,9 @@
         ],
         "operationId": "FirewallRules_Delete",
         "x-ms-examples": {
-          "FirewallRuleDelete": { "$ref": "examples/FirewallRuleDelete.json" }
+          "FirewallRuleDelete": { "$ref": "../examples/FirewallRuleDelete.json" }
         },
-        "description": "Deletes a PostgreSQL server firewall rule.",
+        "description": "Deletes a MySQL server firewall rule.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -342,7 +342,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL server firewall rule."
+            "description": "The name of the MySQL server firewall rule."
           }
         ],
         "responses": {
@@ -364,9 +364,9 @@
         ],
         "operationId": "FirewallRules_Get",
         "x-ms-examples": {
-          "FirewallRuleGet": { "$ref": "examples/FirewallRuleGet.json" }
+          "FirewallRuleGet": { "$ref": "../examples/FirewallRuleGet.json" }
         },
-        "description": "Gets information about a PostgreSQL server firewall rule.",
+        "description": "Gets information about a MySQL server firewall rule.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -385,7 +385,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL server firewall rule."
+            "description": "The name of the MySQL server firewall rule."
           }
         ],
         "responses": {
@@ -398,16 +398,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
         ],
         "operationId": "FirewallRules_List",
         "x-ms-examples": {
-          "FirewallRuleList": { "$ref": "examples/FirewallRuleList.json" }
+          "FirewallRuleList": { "$ref": "../examples/FirewallRuleList.json" }
         },
-        "description": "List all the firewall rules in a given PostgreSQL server.",
+        "description": "List all the firewall rules in a given MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -435,16 +435,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
         ],
         "operationId": "Databases_CreateOrUpdate",
         "x-ms-examples": {
-          "DatabaseCreate": { "$ref": "examples/DatabaseCreate.json" }
+          "DatabaseCreate": { "$ref": "../examples/DatabaseCreate.json" }
         },
-        "description": "Creates a new PostgreSQL Database or updates an existing PostgreSQL Database.",
+        "description": "Creates a new MySQL Database or updates an existing MySQL Database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -463,7 +463,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL database."
+            "description": "The name of the MySQL database."
           },
           {
             "name": "parameters",
@@ -472,7 +472,7 @@
             "schema": {
               "$ref": "#/definitions/Database"
             },
-            "description": "The required parameters for creating or updating a PostgreSQL database."
+            "description": "The required parameters for creating or updating a MySQL database."
           }
         ],
         "responses": {
@@ -503,9 +503,9 @@
         ],
         "operationId": "Databases_Delete",
         "x-ms-examples": {
-          "DatabaseDelete": { "$ref": "examples/DatabaseDelete.json" }
+          "DatabaseDelete": { "$ref": "../examples/DatabaseDelete.json" }
         },
-        "description": "Deletes a PostgreSQL database.",
+        "description": "Deletes a MySQL database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -524,7 +524,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL database to be deleted."
+            "description": "The name of the MySQL database to be deleted."
           }
         ],
         "responses": {
@@ -546,9 +546,9 @@
         ],
         "operationId": "Databases_Get",
         "x-ms-examples": {
-          "DatabaseGet": { "$ref": "examples/DatabaseGet.json" }
+          "DatabaseGet": { "$ref": "../examples/DatabaseGet.json" }
         },
-        "description": "Gets information about a PostgreSQL database.",
+        "description": "Gets information about a MySQL database.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -567,7 +567,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the PostgreSQL database to be retrieved."
+            "description": "The name of the MySQL database to be retrieved."
           }
         ],
         "responses": {
@@ -580,16 +580,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
         ],
         "operationId": "Databases_List",
         "x-ms-examples": {
-          "DatabaseList": { "$ref": "examples/DatabaseList.json" }
+          "DatabaseList": { "$ref": "../examples/DatabaseList.json" }
         },
-        "description": "List all the databases in a given PostgreSQL server.",
+        "description": "List all the databases in a given MySQL server.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -625,21 +625,21 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1024,
-          "description": "The maximum storage allowed for a PostgreSQL server."
+          "description": "The maximum storage allowed for a MySQL server."
         },
         "userVisibleState" : {
           "readOnly": true,
           "type": "string",
-          "description": "A value representing state of a PostgreSQL server that is visible to user."
+          "description": "A value representing state of a MySQL server that is visible to user."
         },
         "fullyQualifiedDomainName" : {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified domain name of a PostgreSQL server."
+          "description": "The fully qualified domain name of a MySQL server."
         },
         "administratorLogin" : {
           "type": "string",
-          "description": "The administrator's login name of a PostgreSQL server. Can only be specified when the server is being created (and is required for creation)."
+          "description": "The administrator's login name of a MySQL server. Can only be specified when the server is being created (and is required for creation)."
         },
         "administratorLoginPassword" : {
           "type": "string",
@@ -648,15 +648,18 @@
         },
         "version" : {
           "type": "string",
-          "description": "The version of a PostgreSQL server.",
-          "enum": ["9.5"],
+          "description": "The version of a MySQL server.",
+          "enum": ["5.6"],
           "x-ms-enum": {
             "name": "ServerVersions",
             "modelAsString": true
           }
         }
       },
-      "description": "Represents the properties of a PostgreSQL server."
+      "required": [
+        "administratorLogin"
+      ],
+      "description": "Represents the properties of a MySQL server."
     },
     "Sku": {
       "properties": {
@@ -739,12 +742,12 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Represents the sku of the PostgreSQL server."
+          "description": "Represents the sku of the MySQL server."
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
-          "description": "Represents the properties of the PostgreSQL server."
+          "description": "Represents the properties of the MySQL server."
         }
       },
       "allOf": [
@@ -755,13 +758,13 @@
       "required": [
         "properties"
       ],
-     "description": "Represents a PostgreSQL server."
+     "description": "Represents a MySQL server."
     },
     "ServerUpdateParameters": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Represents the sku of the PostgreSQL server."
+          "description": "Represents the sku of the MySQL server."
         },
         "properties": {
           "properties": {
@@ -769,7 +772,7 @@
               "type": "integer",
               "format": "int32",
               "minimum": 1024,
-              "description": "The max storage allowed for a PostgreSQL server."
+              "description": "The max storage allowed for a MySQL server."
             },
             "administratorLoginPassword" : {
               "type": "string",
@@ -778,8 +781,8 @@
             },
             "version" : {
               "type": "string",
-              "description": "The version of a PostgreSQL server.",
-              "enum": ["9.5"],
+              "description": "The version of a MySQL server.",
+              "enum": ["5.6"],
               "x-ms-enum": {
                 "name": "ServerVersions",
                 "modelAsString": true
@@ -787,7 +790,7 @@
             }
           },
           "x-ms-client-flatten": true,
-          "description": "Represents the properties that can be updated for a PostgreSQL server."
+          "description": "Represents the properties that can be updated for a MySQL server."
         },
         "tags": {
           "type": "object",
@@ -806,29 +809,29 @@
           "items": {
             "$ref": "#/definitions/Server"
           },
-          "description": "The list of PostgreSQL servers"
+          "description": "The list of MySQL servers"
         }
       },
-      "description": "Represents the response to a List PostgreSQL servers request."
+      "description": "Represents the response to a List MySQL servers request."
     },
     "FirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
           "type": "string",
           "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
-          "description": "The start IP address of the PostgreSQL server firewall rule. Must be IPv4 format."
+          "description": "The start IP address of the MySQL server firewall rule. Must be IPv4 format."
         },
         "endIpAddress": {
           "type": "string",
           "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
-          "description": "The end IP address of the PostgreSQL server firewall rule. Must be IPv4 format."
+          "description": "The end IP address of the MySQL server firewall rule. Must be IPv4 format."
         }
       },
       "required": [
         "startIpAddress",
         "endIpAddress"
       ],
-      "description": "Represents the properties of a PostgreSQL server firewall rule."
+      "description": "Represents the properties of a MySQL server firewall rule."
     },
     "FirewallRule": {
       "properties": {
@@ -846,7 +849,7 @@
       "required": [
         "properties"
       ],
-      "description": "Represents a PostgreSQL server firewall rule."
+      "description": "Represents a MySQL server firewall rule."
     },
     "FirewallRuleListResult": {
       "properties": {
@@ -855,7 +858,7 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "The list of firewall rules for a PostgreSQL server."
+          "description": "The list of firewall rules for a MySQL server."
         }
       },
       "description": "Represents the response to a List Firewall Rules request."
@@ -864,14 +867,14 @@
       "properties": {
         "charset": {
           "type": "string",
-          "description": "The charset of PostgreSQL database."
+          "description": "The charset of MySQL database."
         },
         "collation": {
           "type": "string",
-          "description": "The collation of PostgreSQL database."
+          "description": "The collation of MySQL database."
         }
       },
-      "description": "Represents the properties of a PostgreSQL database."
+      "description": "Represents the properties of a MySQL database."
     },
     "Database": {
       "properties": {
@@ -886,7 +889,7 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Represents a PostgreSQL Database."
+      "description": "Represents a MySQL Database."
     },
     "DatabaseListResult": {
       "properties": {
@@ -895,7 +898,7 @@
           "items": {
             "$ref": "#/definitions/Database"
           },
-          "description": "The list of databases housed in a PostgreSQL server"
+          "description": "The list of databases housed in a MySQL server"
         }
       },
       "description": "Represents the response to a List Databases request."
@@ -929,7 +932,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the PostgreSQL server.",
+      "description": "The name of the MySQL server.",
       "x-ms-parameter-location": "method"
     }
   }
