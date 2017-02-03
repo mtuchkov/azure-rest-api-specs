@@ -782,6 +782,171 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_GetTroubleshootingResult",
+        "x-ms-long-running-operation": true,
+        "description": "Get the last completed troubleshooting result on a specified resource",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryTroubleshootingParameters"
+            },
+            "description": "Parameters that define the resource to query the troubleshooting result."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get troubleshooting result request",
+            "schema": {
+              "$ref": "#/definitions/TroubleshootingResult"
+            }
+          },
+          "202": {
+            "description": "Accepted get troubleshooting result request.",
+            "schema": {
+              "$ref": "#/definitions/TroubleshootingResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_SetFlowLogConfiguration",
+        "x-ms-long-running-operation": true,
+        "description": "Configures flow log on a specified resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FlowLogParameters"
+            },
+            "description": "Parameters that define the configuration of flow log."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for setting flow log configuration.",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
+      "post": {
+        "tags": [
+          "NetworkWatchers"
+        ],
+        "operationId": "NetworkWatchers_GetFlowLogStatus",
+        "x-ms-long-running-operation": true,
+        "description": "Queries status of flow log on a specified resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource group."
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FlowLogStatusParameters"
+            },
+            "description": "Parameters that define a resource to query flow log status."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for query flow log status.",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1391,6 +1556,18 @@
         }
       }
     },
+    "QueryTroubleshootingParameters": {
+      "description": "Parameters that define the resource to query the troubleshooting result.",
+      "required": [
+        "targetResourceId"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The target resource ID to query the troubleshooting result.",
+          "type": "string"
+        }
+      }
+    },
     "TroubleshootingProperties": {
       "description": "Storage location provided for troubleshoot.",
       "required": [
@@ -1482,6 +1659,72 @@
           "type": "string"
         }
       }
+    },
+    "FlowLogParameters": {
+      "description": "Parameters that define the configuration of flow log.",
+      "required": [
+        "targetResourceId",
+        "enabled",
+        "storageAccountId"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The ID of the resource to configure for flow logging.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Flag to enable/disable flow logging.",
+          "type": "boolean"
+        },
+        "storageAccountId": {
+          "description": "ID of the storage account which is used to store the flow log.",
+          "type": "string"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicyParameters"
+        }
+      }
+    },
+    "FlowLogStatusParameters": {
+      "description": "Parameters that define a resource to query flow log status.",
+      "required": [
+        "targetResourceId"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The target resource to capture flow log.",
+          "type": "string"
+        }
+      }
+    },
+    "RetentionPolicyParameters": {
+      "description": "Parameters that define the retention policy for flow log.",
+      "required": [
+        "enabled",
+        "days"
+      ],
+      "properties": {
+        "enabled": {
+          "description": "Flag to enable/disable retention.",
+          "type": "boolean"
+        },
+        "days": {
+          "description": "Number of days to retain flow log records.",
+          "type": "integer"
+        }
+      }
+    },
+    "FlowLog": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogParameters"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters that define the configuration and status of flow log."
     }
   },
   "parameters": {
