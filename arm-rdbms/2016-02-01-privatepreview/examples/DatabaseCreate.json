@@ -6,7 +6,7 @@
     "api-version": "2016-02-01-privatepreview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
-      "Properties":{
+      "properties":{
         "charset":"utf8",
         "collation":"utf8_general_ci"
       }
