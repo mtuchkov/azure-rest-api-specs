@@ -1139,7 +1139,7 @@
         },
         "remoteIPAddress": {
           "type": "string",
-          "description": "The remote IP address. Acceptable values are valid IPv4 addresses. "
+          "description": "The remote IP address. Acceptable values are valid IPv4 addresses."
         },
         "targetNicResourceId": {
           "type": "string",
@@ -1187,7 +1187,7 @@
         },
         "targetNicResourceId": {
           "type": "string",
-          "description": "TThe NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
+          "description": "The NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
         }
       }
     },
