@@ -23,7 +23,7 @@
         ],
         "operationId": "ContainerServices_List",
         "summary": "Gets a list of container services in the specified subscription.",
-        "description":"Gets a list of container services in the specified subscription. The operation returns properties of each container service including state, orchestrator, number of masters and agents, and FQDNs of masters and agents.",
+        "description": "Gets a list of container services in the specified subscription. The operation returns properties of each container service including state, orchestrator, number of masters and agents, and FQDNs of masters and agents.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -52,7 +52,7 @@
         ],
         "operationId": "ContainerServices_CreateOrUpdate",
         "summary": "Creates or updates a container service.",
-        "description":"Creates or updates a container service with the specified configuration of orchestrator, masters, and agents.",
+        "description": "Creates or updates a container service with the specified configuration of orchestrator, masters, and agents.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -291,8 +291,8 @@
           "enum": [
             "Swarm",
             "DCOS",
-        "Custom",
-        "Kubernetes"
+            "Custom",
+            "Kubernetes"
           ],
           "x-ms-enum": {
             "name": "ContainerServiceOchestratorTypes",
@@ -416,7 +416,7 @@
       "required": [
         "name",
         "dnsPrefix",
-    "count",
+        "count",
         "vmSize"
       ],
       "description": "Profile for the container service agent pool."
@@ -426,12 +426,12 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Windows VMs.",
-      "pattern": "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"
+          "pattern": "^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"
         },
         "adminPassword": {
           "type": "string",
           "description": "The administrator password to use for Windows VMs.",
-      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\\^&\\*\\(\\)])[a-zA-Z\\d!@#$%\\^&\\*\\(\\)]{12,123}$"
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%\\^&\\*\\(\\)])[a-zA-Z\\d!@#$%\\^&\\*\\(\\)]{12,123}$"
         }
       },
       "required": [
@@ -445,7 +445,7 @@
         "adminUsername": {
           "type": "string",
           "description": "The administrator username to use for Linux VMs.",
-      "pattern": "^[a-z][a-z0-9_-]*$"
+          "pattern": "^[a-z][a-z0-9_-]*$"
         },
         "ssh": {
           "$ref": "#/definitions/ContainerServiceSshConfiguration",
