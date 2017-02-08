@@ -881,13 +881,13 @@
           "200": {
             "description": "Successful request for setting flow log configuration.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           }
         }
@@ -936,13 +936,13 @@
           "200": {
             "description": "Successful request for query flow log status.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           }
         }
@@ -1664,21 +1664,32 @@
       "description": "Parameters that define the configuration of flow log.",
       "required": [
         "targetResourceId",
-        "enabled",
-        "storageAccountId"
+        "properties"
       ],
       "properties": {
         "targetResourceId": {
           "description": "The ID of the resource to configure for flow logging.",
           "type": "string"
         },
+        "properties": {
+          "$ref": "#/definitions/FlowLogProperties"
+        }
+      }
+    },
+    "FlowLogProperties": {
+      "description": "Parameters that define the configuration of flow log.",
+      "required": [
+        "storageId",
+        "enabled"
+      ],
+      "properties": {
+        "storageId": {
+          "description": "ID of the storage account which is used to store the flow log.",
+          "type": "string"
+        },
         "enabled": {
           "description": "Flag to enable/disable flow logging.",
           "type": "boolean"
-        },
-        "storageAccountId": {
-          "description": "ID of the storage account which is used to store the flow log.",
-          "type": "string"
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicyParameters"
@@ -1699,32 +1710,32 @@
     },
     "RetentionPolicyParameters": {
       "description": "Parameters that define the retention policy for flow log.",
-      "required": [
-        "enabled",
-        "days"
-      ],
       "properties": {
-        "enabled": {
-          "description": "Flag to enable/disable retention.",
-          "type": "boolean"
-        },
         "days": {
           "description": "Number of days to retain flow log records.",
           "type": "integer"
+        },
+        "enabled": {
+          "description": "Flag to enable/disable retention.",
+          "type": "boolean"
         }
       }
     },
-    "FlowLog": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FlowLogParameters"
-        }
-      },
+    "FlowLogInformation": {
+      "description": "Information on the configuration of flow log.",
       "required": [
+        "targetResourceId",
         "properties"
       ],
-      "description": "Parameters that define the configuration and status of flow log."
+      "properties": {
+        "targetResourceId": {
+          "description": "The ID of the resource to configure for flow logging.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/FlowLogProperties"
+        }
+      }
     }
   },
   "parameters": {
