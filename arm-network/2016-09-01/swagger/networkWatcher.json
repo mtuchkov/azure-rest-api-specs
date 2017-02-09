@@ -866,7 +866,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogParameters"
+              "$ref": "#/definitions/FlowLogInformation"
             },
             "description": "Parameters that define the configuration of flow log."
           },
@@ -1660,22 +1660,6 @@
         }
       }
     },
-    "FlowLogParameters": {
-      "description": "Parameters that define the configuration of flow log.",
-      "required": [
-        "targetResourceId",
-        "properties"
-      ],
-      "properties": {
-        "targetResourceId": {
-          "description": "The ID of the resource to configure for flow logging.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/FlowLogProperties"
-        }
-      }
-    },
     "FlowLogProperties": {
       "description": "Parameters that define the configuration of flow log.",
       "required": [
@@ -1713,11 +1697,13 @@
       "properties": {
         "days": {
           "description": "Number of days to retain flow log records.",
-          "type": "integer"
+          "type": "integer",
+          "default": 0
         },
         "enabled": {
           "description": "Flag to enable/disable retention.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -1733,6 +1719,7 @@
           "type": "string"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/FlowLogProperties"
         }
       }
