@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchServiceClient",
     "description": "Client that can be used to manage and query indexes and documents, as well as manage other resources, on an Azure Search service.",
-    "version": "2016-09-01",
+    "version": "2016-09-01-Preview",
     "x-ms-code-generation-settings": {  
       "useDateTimeOffset": true  
     }  

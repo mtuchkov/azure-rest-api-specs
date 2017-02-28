@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchIndexClient",
     "description": "Client that can be used to query an Azure Search index and upload, merge, or delete documents.",
-    "version": "2016-09-01",
+    "version": "2016-09-01-Preview",
     "x-ms-code-generation-settings": {  
       "useDateTimeOffset": true,
       "syncMethods": "None"  
