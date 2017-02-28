@@ -9,6 +9,21 @@
       "syncMethods": "None"  
     }  
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{searchServiceName}.{searchDnsSuffix}/indexes('{indexName}')",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/SearchServiceNameParameter"
+      },
+      {
+        "$ref": "#/parameters/SearchDnsSuffixParameter"
+      },
+      {
+        "$ref": "#/parameters/IndexNameParameter"
+      }
+    ]
+  },
   "consumes": [
     "application/json"
   ],
@@ -28,14 +43,7 @@
         },
         "parameters": [
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping":  { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -70,18 +78,19 @@
         "status": {
           "x-ms-client-name": "Succeeded",
           "type": "boolean",
+          "x-nullable": false,
           "readOnly": true,
           "description": "A value indicating whether the indexing operation succeeded for the document identified by the key."
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
         }
       },
-      "description": "Status of an indexing operation for a single document.",
-      "x-ms-external": true
+      "description": "Status of an indexing operation for a single document."
     },
     "DocumentIndexResult": {
       "properties": {
@@ -284,6 +293,42 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ClientRequestIdParameter": {
+      "name": "client-request-id",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "The tracking ID sent with the request to help with debugging.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": { "name": "search-request-options" },
+      "x-ms-parameter-location": "method"
+    },
+    "SearchServiceNameParameter": {
+      "name": "searchServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The name of the Azure Search service."
+    },
+    "SearchDnsSuffixParameter": {
+      "name": "searchDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "search.windows.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "The DNS suffix of the Azure Search service. The default is search.windows.net."
+    },
+    "IndexNameParameter": {
+      "name": "indexName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": false,
+      "description": "The name of the Azure Search index."
     }
   }
 }

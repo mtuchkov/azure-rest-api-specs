@@ -6,7 +6,19 @@
     "version": "2016-09-01-Preview",
     "x-ms-code-generation-settings": {  
       "useDateTimeOffset": true  
-    }  
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{searchServiceName}.{searchDnsSuffix}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/SearchServiceNameParameter"
+      },
+      {
+        "$ref": "#/parameters/SearchDnsSuffixParameter"
+      }
+    ]
   },
   "consumes": [
     "application/json"
@@ -43,30 +55,16 @@
             "description": "The definition of the datasource to create or update."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -106,30 +104,13 @@
             "description": "The name of the datasource to delete."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -163,14 +144,7 @@
             "description": "The name of the datasource to retrieve."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -199,14 +173,7 @@
         },
         "parameters": [
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -242,14 +209,7 @@
             "description": "The definition of the datasource to create."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -285,14 +245,7 @@
             "description": "The name of the indexer to reset."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -325,14 +278,7 @@
             "description": "The name of the indexer to run."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -374,30 +320,16 @@
             "description": "The definition of the indexer to create or update."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -437,30 +369,13 @@
             "description": "The name of the indexer to delete."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -494,14 +409,7 @@
             "description": "The name of the indexer to retrieve."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -530,14 +438,7 @@
         },
         "parameters": [
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -573,14 +474,7 @@
             "description": "The definition of the indexer to create."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,14 +510,7 @@
             "description": "The name of the indexer for which to retrieve status."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -661,14 +548,7 @@
             "description": "The definition of the index to create."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -702,14 +582,7 @@
             "description": "Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -761,30 +634,16 @@
             "description": "Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -824,30 +683,13 @@
             "description": "The name of the index to delete."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfMatchParameter"
           },
           {
-            "name": "If-None-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
-            "x-ms-parameter-grouping": { "name": "access-condition" }
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -881,14 +723,7 @@
             "description": "The name of the index to retrieve."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -924,14 +759,7 @@
             "description": "The name of the index for which to retrieve statistics."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -976,14 +804,7 @@
             "description": "The text and analyzer or analysis components to test."
           },
           {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": { "name": "search-request-options" }
+            "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1357,7 +1178,8 @@
         "tokenChars": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TokenCharacterKind"
+            "$ref": "#/definitions/TokenCharacterKind",
+            "x-nullable": false
           },
           "description": "Character classes to keep in the tokens."
         }
@@ -1365,8 +1187,7 @@
       "description": "Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html"
-      },
-      "x-ms-external": true
+      }
     },
     "KeywordTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizer",
@@ -1389,7 +1210,7 @@
       },
       "x-ms-external": true
     },
-   "KeywordTokenizerV2": {
+    "KeywordTokenizerV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2",
       "allOf": [
         {
@@ -1405,7 +1226,7 @@
           "description": "The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters."
         }
       },
-      "description": "Emits the entire input as a single token.",
+      "description": "Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
       }      
@@ -1596,7 +1417,8 @@
         "tokenChars": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TokenCharacterKind"
+            "$ref": "#/definitions/TokenCharacterKind",
+            "x-nullable": false
           },
           "description": "Character classes to keep in the tokens."
         }
@@ -1604,8 +1426,7 @@
       "description": "Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html"
-      },
-      "x-ms-external": true
+      }
     },
     "PathHierarchyTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizer",
@@ -1617,16 +1438,14 @@
       "properties": {
         "delimiter": {
           "type": "string",
+          "format": "char",
           "default": "/",
-          "maxLength": 1,
-          "minLength": 1,
           "description": "The delimiter character to use. Default is \"/\"."
         },
         "replacement": {
           "type": "string",
+          "format": "char",
           "default": "/",
-          "maxLength": 1,
-          "minLength": 1,
           "description": "A value that, if set, replaces the delimiter character. Default is \"/\"."
         },
         "bufferSize": {
@@ -1665,16 +1484,14 @@
       "properties": {
         "delimiter": {
           "type": "string",
+          "format": "char",
           "default": "/",
-          "maxLength": 1,
-          "minLength": 1,
           "description": "The delimiter character to use. Default is \"/\"."
         },
         "replacement": {
           "type": "string",
+          "format": "char",
           "default": "/",
-          "maxLength": 1,
-          "minLength": 1,
           "description": "A value that, if set, replaces the delimiter character. Default is \"/\"."
         },
         "maxTokenLength": {
@@ -1701,8 +1518,7 @@
       "description": "Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html"
-      },
-      "x-ms-external": true
+      }
     },
     "PatternTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternTokenizer",
@@ -1858,7 +1674,8 @@
         "ignoreScripts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CjkBigramTokenFilterScripts"
+            "$ref": "#/definitions/CjkBigramTokenFilterScripts",
+            "x-nullable": false
           },
           "description": "The scripts to ignore."
         },
@@ -1871,8 +1688,7 @@
       "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
-      },
-      "x-ms-external": true
+      }
     },
     "CommonGramTokenFilter": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter",
@@ -3211,6 +3027,7 @@
           "x-ms-client-name": "ItemCount",
           "type": "integer",
           "format": "int32",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
         },
@@ -3218,6 +3035,7 @@
           "x-ms-client-name": "FailedItemCount",
           "type": "integer",
           "format": "int32",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The number of items that failed to be indexed during this indexer execution."
         },
@@ -3232,8 +3050,7 @@
           "description": "Change tracking state with which an indexer execution finished."
         }
       },
-      "description": "Represents the result of an individual indexer execution.",
-      "x-ms-external": true
+      "description": "Represents the result of an individual indexer execution."
     },
     "IndexerExecutionStatus": {
       "type": "string",
@@ -3244,6 +3061,7 @@
         "reset"
       ],
       "x-ms-enum": { "name": "IndexerExecutionStatus" },
+      "x-nullable": false,
       "description": "Represents the status of an individual indexer execution."
     },
     "IndexerExecutionInfo": {
@@ -3267,8 +3085,7 @@
           "description": "History of the recent indexer executions, sorted in reverse chronological order."
         }
       },
-      "description": "Represents the current status and execution history of an indexer.",
-      "x-ms-external": true
+      "description": "Represents the current status and execution history of an indexer."
     },
     "IndexerStatus": {
       "type": "string",
@@ -3278,6 +3095,7 @@
         "running"
       ],
       "x-ms-enum": { "name": "IndexerStatus" },
+      "x-nullable": false,
       "description": "Represents the overall indexer status."
     },
     "Field": {
@@ -3317,31 +3135,38 @@
         "key": {
           "x-ms-client-name": "isKey",
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
         },
         "searchable": {
           "x-ms-client-name": "isSearchable",
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false."
         },
         "filterable": {
           "x-ms-client-name": "isFilterable",
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating whether the field can be used in filter expressions. Default is false."
         },
         "sortable": {
           "x-ms-client-name": "isSortable",
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
         },
         "facetable": {
           "x-ms-client-name": "isFacetable",
           "type": "boolean",
+          "x-nullable": false,
           "description": "A value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
         },
         "retrievable": {
           "x-ms-client-name": "isRetrievable",
           "type": "boolean",
+          "x-nullable": false,
+          "default": true,
           "description": "A value indicating whether the field can be returned in a search result. Default is true."
         }
       },
@@ -3360,7 +3185,8 @@
           "type": "object",
           "additionalProperties": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "x-nullable": false
           },
           "description": "The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field."
         }
@@ -3368,8 +3194,7 @@
       "required": [
         "weights"
       ],
-      "description": "Defines weights on index fields for which matches should boost scoring in search queries.",
-      "x-ms-external": true
+      "description": "Defines weights on index fields for which matches should boost scoring in search queries."
     },
     "ScoringFunction": {
       "discriminator": "type",
@@ -3639,7 +3464,10 @@
           "description": "The name of the suggester."
         },
         "searchMode": {
-          "$ref": "#/definitions/SuggesterSearchMode",
+          "type": "string",
+          "enum": [
+            "analyzingInfixMatching"
+          ],
           "description": "A value indicating the capabilities of the suggester."
         },
         "sourceFields": {
@@ -3654,14 +3482,6 @@
         "name", "searchMode", "sourceFields"
       ],
       "description": "Defines how the Suggest API should apply to a group of fields in the index."
-    },
-    "SuggesterSearchMode": {
-      "type": "string",
-      "enum": [
-        "analyzingInfixMatching"
-      ],
-      "x-ms-enum": { "name": "SuggesterSearchMode" },
-      "description": "Describes the type of suggester to use."
     },
     "Index": {
       "properties": {
@@ -3757,18 +3577,19 @@
         "documentCount": {
           "type": "integer",
           "format": "int64",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The number of documents in the index."
         },
         "storageSize": {
           "type": "integer",
           "format": "int64",
+          "x-nullable": false,
           "readOnly": true,
           "description": "The amount of storage in bytes consumed by the index."
         }
       },
-      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.",
-      "x-ms-external": true
+      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
     "IndexListResult": {
       "properties": {
@@ -3792,6 +3613,63 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ClientRequestIdParameter": {
+      "name": "client-request-id",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "The tracking ID sent with the request to help with debugging.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": { "name": "search-request-options" },
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
+      "x-ms-parameter-grouping": { "name": "access-condition" },
+      "x-ms-parameter-location": "method"
+    },
+    "IfNoneMatchParameter": {
+      "name": "If-None-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.",
+      "x-ms-parameter-grouping": { "name": "access-condition" },
+      "x-ms-parameter-location": "method"
+    },
+    "PreferHeaderParameter": {
+      "name": "Prefer",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "return=representation"
+      ],
+      "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchServiceNameParameter": {
+      "name": "searchServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The name of the Azure Search service."
+    },
+    "SearchDnsSuffixParameter": {
+      "name": "searchDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "search.windows.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "The DNS suffix of the Azure Search service. The default is search.windows.net."
     }
   }
 }
