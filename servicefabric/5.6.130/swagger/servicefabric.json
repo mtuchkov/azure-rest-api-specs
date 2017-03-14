@@ -1,0 +1,3259 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Service Fabric Client APIs",
+        "description": "Service Fabric Client APIs allows management of Service Fabric clusters, applications and services",
+        "version": "5.6.130"
+    },
+    "host": "localhost:19080",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/$/GetClusterHealth": {
+            "get": {
+                "operationId": "GetClusterHealth",
+                "summary": "Gets the health of a Service Fabric node.",
+                "description": "Gets the health of a Service Fabric node. Use EventsHealthStateFilter to filter the collection of health events reported on the node basedon the health state.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/NodesHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    }
+                ],
+                "tags": [
+                    "Cluster"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the requested node health information.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "GetClusterHealthUsingPolicy",
+                "summary": "Gets the health of a Service Fabric node using the specified policy.",
+                "description": "Gets the health of a Service Fabric node. Use EventsHealthStateFilter to filter the collection of health events reported on the node basedon the health state. Use ClusterHealthPolicies to override the health policies used to evaluate the health.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/NodesHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterHealthPolicies"
+                    }
+                ],
+                "tags": [
+                    "Cluster"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the requested node health information.",
+                        "schema": {
+                            "$ref": "#/definitions/ClusterHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/Deactivate": {
+            "post": {
+                "operationId": "DisableNode",
+                "summary": "Deactivate a Service Fabric cluster node with the specified deactivation intent.",
+                "description": "Deactivate a Service Fabric cluster node with the specified deactivation intent. Once the deactivation is in progress, the deactivation intent can be increased, but not decreased (for example, a node which is was deactivated with the Pause intent can be deactivated further with Restart, but not the other way around. Nodes may be reactivated using the Activate a node operation any time after they are deactivated. If the deactivation is not complete this will cancel the deactivation. A node which goes down and comes back up while deactivated will still need to be reactivated before services will be placed on that node.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "name": "deactivationIntentParam",
+                        "in": "body",
+                        "description": "Describes the intent or reason for deactivating the node.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "description": "Describes the intent or reason for deactivating the node.",
+                            "properties": {
+                                "DeactivationIntent": {
+                                    "type": "string",
+                                    "description": "Describes the intent or reason for deactivating the node. The possible values are following.\n\n- Pause - Indicates that the node should be paused. The value is 1.\n- Restart - Indicates that the intent is for the node to be restarted after a short period of time. The value is 2.\n- RemoveData - Indicates the intent is for the node to remove data. The value is 3.\n",
+                                    "enum": [
+                                        "Pause",
+                                        "Restart",
+                                        "RemoveData"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/Activate": {
+            "post": {
+                "operationId": "EnableNode",
+                "summary": "Activate a Service Fabric cluster node which is currently deactivated.",
+                "description": "Activates a Service Fabric cluster node which is currently deactivated. Once activated, the node will again become a viable target for placing new replicas, and any deactivated replicas remaining on the node will be reactivated.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetApplications/{applicationId}/$/GetHealth": {
+            "get": {
+                "operationId": "GetDeployedApplicationHealth",
+                "summary": "Gets the information about health of an application deployed on a Service Fabric node.",
+                "description": "Gets the information about health of an application deployed on a Service Fabric node. Use EventsHealthStateFilter to optionally filter for the collection of HealthEvent objects reported on the deployed application based on health state. Use DeployedServicePackagesHealthStateFilter to optionally filter for DeployedServicePackageHealth children based on health state.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationId"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/DeployedServicePackagesHealthStateFilter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the health information of the deployed application.",
+                        "schema": {
+                            "$ref": "#/definitions/DeployedApplicationHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "GetDeployedApplicationHealthUsingPolicy",
+                "summary": "Gets the information about health of an application deployed on a Service Fabric node. using the specified policy.",
+                "description": "Gets the information about health of an application deployed on a Service Fabric node. using the specified policy. Use EventsHealthStateFilter to optionally filter for the collection of HealthEvent objects reported on the deployed application based on health state. Use DeployedServicePackagesHealthStateFilter to optionally filter for DeployedServicePackageHealth children based on health state. Use ApplicationHealthPolicy to optionally override the health policies used to evaluate the health. This API only uses 'ConsiderWarningAsError' field of the ApplicationHealthPolicy. The rest of the fields are ignored while evaluating the health of the deployed application.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationId"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/DeployedServicePackagesHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationHealthPolicy"
+                    }
+                ],
+                "tags": [
+                    "Node",
+                    "Application"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the health information of the deployed application.",
+                        "schema": {
+                            "$ref": "#/definitions/DeployedApplicationHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetApplications/{applicationId}": {
+            "get": {
+                "operationId": "GetDeployedApplicationInfo",
+                "summary": "Gets the information about an application deployed on a Service Fabric node.",
+                "description": "Gets the information about an application deployed on a Service Fabric node.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the information about the deployed application.",
+                        "schema": {
+                            "$ref": "#/definitions/DeployedApplicationInfo"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetApplications": {
+            "get": {
+                "operationId": "GetDeployedApplicationInfoList",
+                "summary": "Gets the list of applications deployed on a Service Fabric node.",
+                "description": "Gets the list of applications deployed on a Service Fabric node.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the list of deployed application information.",
+                        "schema": {
+                            "$ref": "#/definitions/DeployedApplicationInfoList"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetHealth": {
+            "get": {
+                "operationId": "GetNodeHealth",
+                "summary": "Gets the health of a Service Fabric node.",
+                "description": "Gets the health of a Service Fabric node. Use EventsHealthStateFilter to filter the collection of health events reported on the node based on the health state.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the requested node health information.",
+                        "schema": {
+                            "$ref": "#/definitions/NodeHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "GetNodeHealthUsingPolicy",
+                "summary": "Gets the health of a Service Fabric node, by using the specified health policy.",
+                "description": "Gets the health of a Service Fabric node. Use EventsHealthStateFilter to filter the collection of health events reported on the node basedon the health state. Use ClusterHealthPolicy to override the health policies used to evaluate the health.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/EventsHealthStateFilter"
+                    },
+                    {
+                        "$ref": "#/parameters/ClusterHealthPolicy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the requested node health information.",
+                        "schema": {
+                            "$ref": "#/definitions/NodeHealth"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}": {
+            "get": {
+                "summary": "Gets the list of nodes in the Service Fabric cluster.",
+                "description": "Gets the information about a specific node in the Service Fabric Cluster.The respons include the name, status, id, health, uptime and other details about the node.",
+                "operationId": "GetNodeInfo",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    }
+                ],
+                "tags": [
+                    "Node"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information about the node.",
+                        "schema": {
+                            "$ref": "#/definitions/NodeInfo"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes": {
+            "get": {
+                "summary": "Gets the list of nodes in the Service Fabric cluster.",
+                "description": "The Nodes endpoint returns information about the nodes in the Service Fabric Cluster. The respons include the name, status, id, health, uptime and other details about the node.",
+                "operationId": "GetNodeInfoList",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/ContinuationToken"
+                    },
+                    {
+                        "$ref": "#/parameters/NodeStatusFilter"
+                    }
+                ],
+                "tags": [
+                    "Node"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of nodes in the cluster.",
+                        "schema": {
+                            "$ref": "#/definitions/PagedNodeInfoList"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetLoadInformation": {
+            "get": {
+                "operationId": "GetNodeLoadInfo",
+                "summary": "Gets the load information of a Service Fabric node.",
+                "description": "Gets the load information of a Service Fabric node.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code and the requested node load information.",
+                        "schema": {
+                            "$ref": "#/definitions/NodeLoadInfo"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/RemoveNodeState": {
+            "post": {
+                "operationId": "RemoveNodeState",
+                "summary": "Removes state and information about of a Service Fabric cluster node that has been lost and unrecoverable.",
+                "description": "Removes state and information about of a Service Fabric cluster node that has been lost and unrecoverable. Any services or state on that node is also lost and unrecoverable. For persistent services, Service Fabric will wait for state and services on a down node to be recovered, particularly persistent services. In some cases, the administrator knows that a node (and its state) has been permanently lost. In these cases this operation should be called in order to get Service Fabric to stop waiting for that node to recover.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/GetApplications/{applicationId}/$/ReportHealth": {
+            "post": {
+                "operationId": "ReportDeployedApplicationHealth",
+                "summary": "Reports health state of the application deployed on a Service Fabric node.",
+                "description": "Reports health state of the application deployed on a Service Fabric node. The report must contain the information about the source of the health report and property on which it is reported.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationId"
+                    },
+                    {
+                        "$ref": "#/parameters/HealthInformation"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/ReportHealth": {
+            "post": {
+                "operationId": "ReportNodeHealth",
+                "summary": "Reports health state of the specified Service Fabric node.",
+                "description": "Reports health state of the specified Service Fabric node. The report must contain the information about the source of the health report and property on which it is reported.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "$ref": "#/parameters/HealthInformation"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/Restart": {
+            "post": {
+                "operationId": "RestartNode",
+                "summary": "Restarts a Service Fabric cluster node.",
+                "description": "Restarts a Service Fabric cluster node that is already started.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "name": "restartNodeDescriptionParam",
+                        "in": "body",
+                        "description": "The instance of the node to be restarted and a flag indicating the need to take dump of the fabric process.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "description": "The instance of the node to be restarted and a flag indicating the need to take dump of the fabric process.",
+                            "properties": {
+                                "NodeInstanceId": {
+                                    "type": "string",
+                                    "description": "The instance id of the target node. If instance id is specified the node is restarted only if it matches with the current instance of the node. A default value of \"0\" would match any instance id. The instance id can be obtained using get node query.",
+                                    "default": "0"
+                                },
+                                "CreateFabricDump": {
+                                    "type": "string",
+                                    "description": "Specify True to create a dump of the fabric node process. This is case sensitive.",
+                                    "enum": [
+                                        "False",
+                                        "True"
+                                    ],
+                                    "default": "False"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code. A successful operation means that the restart command was received by the node and it is in the process of restarting. Check the status of the node by calling GetNode operation."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/Start": {
+            "post": {
+                "operationId": "StartNode",
+                "summary": "Starts a Service Fabric cluster node.",
+                "description": "Starts a Service Fabric cluster node that is already stopped.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "name": "startNodeDescriptionParam",
+                        "in": "body",
+                        "description": "The instance id of the stopped node that needs to be started.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "description": "The instance id of the stopped node that needs to be started.",
+                            "properties": {
+                                "NodeInstanceId": {
+                                    "type": "string",
+                                    "description": "The instance id of the node that is stopped. If instance id is specified the node is started only if it matches with the current instance of the stopped node. A default value of \"0\" would match any instance id. The instance id can be obtained using get node query.",
+                                    "default": "0"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code. A successful operation means that the start command was received by the node and it is in the process of starting. Check the status of the node by calling GetNode operation."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Nodes/{nodeName}/$/Stop": {
+            "post": {
+                "operationId": "StopNode",
+                "summary": "Stops a Service Fabric cluster node.",
+                "description": "Stops a Service Fabric cluster node that is in a started state. The node will stay down until start node is called.",
+                "tags": [
+                    "Node"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/nodeName"
+                    },
+                    {
+                        "name": "stopNodeDescriptionParam",
+                        "in": "body",
+                        "description": "The instance id of the node to stop.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "description": "The instance id of the node to stop.",
+                            "properties": {
+                                "NodeInstanceId": {
+                                    "type": "string",
+                                    "description": "The instance id of the target node. If instance id is specified the node is stopped only if it matches with the current instance of the node. A default value of \"0\" would match any instance id. The instance id can be obtained using get node query.",
+                                    "default": "0"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A successful operation will return 200 status code. A successful operation means that the stop command was received by the node and it is in the process of stopping. Check the status of the node by calling GetNode operation."
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/Partitions/{partitionId}": {
+            "get": {
+                "summary": "Gets the information about a Service Fabric partition.",
+                "description": "The Partitions endpoint returns information about the specified partition. The response include the partition id, partitioning scheme information, keys supported by the partition, status, health and other details about the partition.",
+                "operationId": "GetPartitionInfo",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/partitionId"
+                    }
+                ],
+                "tags": [
+                    "Partition"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information about the specified partition.",
+                        "schema": {
+                            "$ref": "#/definitions/ServicePartitionInfo"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ApplicationTypes": {
+            "get": {
+                "summary": "Gets the list of application types in the Service Fabric cluster.",
+                "description": "The ApplicationTypes endpoint returns information about the application types that are provisioned or in the process of being provisioned in the Service Fabric Cluster. The response include the name, version, status and other details about the application type.",
+                "operationId": "GetApplicationTypeInfoList",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    }
+                ],
+                "tags": [
+                    "ApplicationType"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of application types in the cluster.",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationTypeInfoList"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ApplicationTypes/{applicationTypeName}": {
+            "get": {
+                "summary": "Gets the list of application types in the Service Fabric cluster matching the specified name.",
+                "description": "Returns the information about the application types that are provisioned or in the process of being provisioned in the Service Fabric Cluster and whose name match the one specified as the parameter. The response include the name, version, status and other details about the application type.",
+                "operationId": "GetApplicationTypeInfoListByName",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationTypeName"
+                    }
+                ],
+                "tags": [
+                    "ApplicationType"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of application types in the cluster.",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationTypeInfoList"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ApplicationTypes/{applicationTypeName}/$/GetApplicationManifest": {
+            "get": {
+                "summary": "Gets the manifest describing an application type.",
+                "description": "Gets the manifest describing an application type. The respons contains the application manifest XML as a string.",
+                "operationId": "GetApplicationTypeManifest",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationTypeName"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationTypeVersion"
+                    }
+                ],
+                "tags": [
+                    "Node"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Information about the node.",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationTypeManifest"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        },
+        "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes": {
+            "get": {
+                "summary": "Gets the list containing the information about service types that are supported by a provisioned application type in a Service Fabric cluster.",
+                "description": "Gets the list containing the information about service types that are supported by a provisioned application type in a Service Fabric cluster. The response includes the name of the service type, the name and version of the service manifest the type is defined in, kind (stateless or stateless) of the service type and other information about it.",
+                "operationId": "GetServiceTypeInfoList",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/api-version"
+                    },
+                    {
+                        "$ref": "#/parameters/applicationTypeName"
+                    },
+                    {
+                        "$ref": "#/parameters/ApplicationTypeVersion"
+                    }
+                ],
+                "tags": [
+                    "ApplicationType"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of service types that are supported by a provisioned application type.",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceTypeInfoList"
+                        }
+                    },
+                    "default": {
+                        "description": "The detailed error response.",
+                        "schema": {
+                            "$ref": "#/definitions/FabricError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ApplicationHealthEvaluation": {
+            "x-ms-discriminator-value": "Application",
+            "description": "Represents health evaluation for an application, containing information about the data and the algorithm used by health store to evaluate health.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ApplicationHealthEvaluation",
+                    "properties": {
+                        "ApplicationName": {
+                            "description": "Full name of the application.",
+                            "type": "string"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the application. The types of the unhealthy evaluations can be DeployedApplicationsHealthEvaluation, ServicesHealthEvaluation or EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "ApplicationHealthPolicy": {
+            "type": "object",
+            "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
+            "properties": {
+                "ConsiderWarningAsError": {
+                    "type": "boolean",
+                    "description": "Indicates whether warnings are treated with the same severity as errors.",
+                    "default": false
+                },
+                "MaxPercentUnhealthyDeployedApplications": {
+                    "type": "integer",
+                    "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100. \n\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error. This is calculated by dividing the number of unhealthy deployed applications over the number of nodes that the applications are currently deployed on in the cluster. The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
+                    "default": 0
+                },
+                "DefaultServiceTypeHealthPolicy": {
+                    "$ref": "#/definitions/ServiceTypeHealthPolicy",
+                    "description": "The health policy used by default to evaluate the health of a service type."
+                },
+                "ServiceTypeHealthPolicyMap": {
+                    "$ref": "#/definitions/ServiceTypeHealthPolicyMap",
+                    "description": "The map with service type health policy per service type name."
+                }
+            }
+        },
+        "ApplicationHealthPolicyMap": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ApplicationHealthPolicyMapItem"
+            },
+            "description": "Defines a map that contains specific application health policies for different applications. Each entry specifies as key the application name and as value an ApplicationHealthPolicy used to evaluate the application health. If an application is not specified in the map, the ApplicationHealthPolicy found in its application manifest will be used for evaluation. The map is empty by default.\n"
+        },
+        "ApplicationHealthPolicyMapItem": {
+            "type": "object",
+            "description": "Defines an item in ApplicationHealthPolicyMap.\n",
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The key of the application health policy map item. This is the name of the application."
+                },
+                "Value": {
+                    "$ref": "#/definitions/ApplicationHealthPolicy",
+                    "description": "The value of the application health policy map item. This is the ApplicationHealthPolicy for this application."
+                }
+            }
+        },
+        "ApplicationHealthState": {
+            "description": "Represents the health state of an application, which contains the application identifier and the aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "ApplicationHealthState",
+                    "properties": {
+                        "Name": {
+                            "type": "string",
+                            "description": "Full name of the application."
+                        }
+                    }
+                }
+            ]
+        },
+        "ApplicationId": {
+            "type": "string",
+            "description": "The identity of the application. This is same as application name without the 'fabric:' URI scheme. This is used in the REST APIs to identify the application resource."
+        },
+        "ApplicationsHealthEvaluation": {
+            "x-ms-discriminator-value": "Applications",
+            "description": "Represents health evaluation for applications, containing health evaluations for each unhealthy application that impacted current aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ApplicationsHealthEvaluation",
+                    "properties": {
+                        "MaxPercentUnhealthyApplications": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy applications from the ClusterHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of applications from the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy ApplicationHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "ApplicationTypeApplicationsHealthEvaluation": {
+            "x-ms-discriminator-value": "ApplicationTypeApplications",
+            "description": "Represents health evaluation for applications of a particular application type. The application type applications evaluation can be returned when cluster health evaluation returns unhealthy aggregated health state, either Error or Warning. It contains health evaluations for each unhealthy application of the included application type that impacted current aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ApplicationTypeApplicationsHealthEvaluation",
+                    "properties": {
+                        "ApplicationTypeName": {
+                            "description": "Name of the application type.",
+                            "type": "string"
+                        },
+                        "MaxPercentUnhealthyApplications": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy applications for the application type, specified as an entry in ApplicationTypeHealthPolicyMap."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of applications of the application type found in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy ApplicationHealthEvaluation of this application type that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "ApplicationTypeHealthPolicyMap": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ApplicationTypeHealthPolicyMapItem"
+            },
+            "description": "Defines a map with max percentages unhealthy applications for specific application types. \n\nThe application type health policy map can be used during cluster health evaluation to describe special application types. The application types included in the map are evaluated against the percentage included in the map, and not with the global MaxPercentUnhealthyApplications. The applications of application types specified in the map are not counted against the global pool of applications. For example, if some applications of a type are critical, the cluster administrator can add an entry to the map for that application type and assign it a value of 0% (that is, do not tolerate any failures). All other applications can be evaluated with MaxPercentUnhealthyApplications set to 20% to tolerate some failures out of the thousands of application instances.The application type health policy map is used only if the cluster manifest enables application type health evaluation using the configuration entry for HealthManager/EnableApplicationTypeHealthEvaluation.\n"
+        },
+        "ApplicationTypeHealthPolicyMapItem": {
+            "type": "object",
+            "description": "Defines an item in ApplicationTypeHealthPolicyMap.\n",
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The key of the application type health policy map item. This is the name of the application type."
+                },
+                "Value": {
+                    "type": "number",
+                    "description": "The value of the application type health policy map item. The max percent unhealthy applications allowed for the application type. Must be between 0 and 100."
+                }
+            }
+        },
+        "ClusterHealth": {
+            "description": "Represents the health of the cluster. Contains the cluster aggregated health state and the cluster application and node health states.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealth"
+                },
+                {
+                    "type": "object",
+                    "description": "ClusterHealth",
+                    "properties": {
+                        "NodeHealthStates": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NodeHealthState"
+                            },
+                            "description": "Cluster node health states as found in the health store."
+                        },
+                        "ApplicationHealthStates": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApplicationHealthState"
+                            },
+                            "description": "Cluster application health states as found in the health store."
+                        }
+                    }
+                }
+            ]
+        },
+        "ClusterHealthPolicy": {
+            "type": "object",
+            "description": "Defines a health policy used to evaluate the health of the cluster or of a cluster node.\n",
+            "properties": {
+                "ConsiderWarningAsError": {
+                    "type": "boolean",
+                    "description": "Indicates whether warnings are treated with the same severity as errors.",
+                    "default": false
+                },
+                "MaxPercentUnhealthyNodes": {
+                    "type": "integer",
+                    "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10. \n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error. If the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning. This is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster. The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero. \n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.\n",
+                    "default": 0
+                },
+                "MaxPercentUnhealthyApplications": {
+                    "type": "integer",
+                    "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10. \n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error. If the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning. This is calculated by dividing the number of unhealthy applications over the total number of applications deployed in the cluster, excluding all applications of application types that are included in the ApplicationTypeHealthPolicyMap. The computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.\n",
+                    "default": 0
+                },
+                "ApplicationTypeHealthPolicyMap": {
+                    "$ref": "#/definitions/ApplicationTypeHealthPolicyMap"
+                }
+            }
+        },
+        "ContinuationToken": {
+            "type": "string",
+            "description": "The continuation token parameter is used to obtain next set of results. The continuation token is included in the response of the API when the results from the system do not fit in a single response. When this value is passed to the next API call, the API returns next set of results. If there are no further results then the continuation token is not included in the response."
+        },
+        "DeltaNodesCheckHealthEvaluation": {
+            "x-ms-discriminator-value": "DeltaNodesCheck",
+            "description": "Represents health evaluation for delta nodes, containing health evaluations for each unhealthy node that impacted current aggregated health state. Can be returned during cluster upgrade when the aggregated health state of the cluster is Error.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "DeltaNodesCheckHealthEvaluation",
+                    "properties": {
+                        "BaselineErrorCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Number of nodes with aggregated heath state Error in the health store at the beginning of the cluster upgrade."
+                        },
+                        "BaselineTotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of nodes in the health store at the beginning of the cluster upgrade."
+                        },
+                        "MaxPercentDeltaUnhealthyNodes": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of delta unhealthy nodes from the ClusterUpgradeHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of nodes in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy NodeHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedApplicationHealth": {
+            "description": "Information about the health of an application deployed on a Service Fabric node.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealth"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedApplicationHealth",
+                    "properties": {
+                        "Name": {
+                            "type": "string",
+                            "description": "Name of the application deployed on the node whose health information is described by this object."
+                        },
+                        "NodeName": {
+                            "type": "string",
+                            "description": "Name of the node where this application is deployed."
+                        },
+                        "DeployedServicePackageHealthStates": {
+                            "$ref": "#/definitions/DeployedServicePackageHealthStateList",
+                            "description": "Deployed service package health states for the current deployed application as found in the health store."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedApplicationHealthEvaluation": {
+            "x-ms-discriminator-value": "DeployedApplication",
+            "description": "Represents health evaluation for a deployed application, containing information about the data and the algorithm used by health store to evaluate health.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedApplicationHealthEvaluation",
+                    "properties": {
+                        "NodeName": {
+                            "description": "Name of the node.",
+                            "type": "string"
+                        },
+                        "ApplicationName": {
+                            "description": "Full name of the application.",
+                            "type": "string"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of  unhealthy evaluations that led to the current aggregated health state of the deployed application. The types of the unhealthy evaluations can be DeployedServicePackagesHealthEvaluation or EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedApplicationHealthState": {
+            "description": "Represents the health state of a deployed application, which contains the entity identifier and the aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedApplicationHealthState",
+                    "properties": {
+                        "NodeName": {
+                            "type": "string",
+                            "description": "Name of the node on which the service package is deployed."
+                        },
+                        "ApplicationName": {
+                            "type": "string",
+                            "description": "Full name of the application."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedApplicationInfo": {
+            "type": "object",
+            "description": "Information about application deployed on the node.",
+            "properties": {
+                "Id": {
+                    "$ref": "#/definitions/ApplicationId"
+                },
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the application."
+                },
+                "TypeName": {
+                    "type": "string",
+                    "description": "The name of the application type."
+                },
+                "Status": {
+                    "$ref": "#/definitions/DeployedApplicationStatus"
+                },
+                "WorkDirectory": {
+                    "type": "string",
+                    "description": "The work directory of the application on the node. The work directory can be used to store application data."
+                },
+                "LogDirectory": {
+                    "type": "string",
+                    "description": "The log directory of the application on the node. The log directory can be used to store application logs."
+                },
+                "TempDirectory": {
+                    "type": "string",
+                    "description": "The temp directory of the application on the node. The code packages belonging to the application are forked with this directory set as their temporary directory."
+                }
+            }
+        },
+        "DeployedApplicationInfoList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/DeployedApplicationInfo"
+            },
+            "description": "List of deployed application information."
+        },
+        "DeployedApplicationsHealthEvaluation": {
+            "x-ms-discriminator-value": "DeployedApplications",
+            "description": "Represents health evaluation for deployed applications, containing health evaluations for each unhealthy deployed application that impacted current aggregated health state. Can be returned when evaluating application health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedApplicationsHealthEvaluation",
+                    "properties": {
+                        "MaxPercentUnhealthyDeployedApplications": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy deployed applications from the ApplicationHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of deployed applications of the application in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy DeployedApplicationHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedApplicationStatus": {
+            "type": "string",
+            "description": "The status of the application deployed on the node. Following are the possible values.\n\n- Invalid - Indicates that deployment status is not valid. All Service Fabric enumerations have the invalid type. The value is zero.\n- Downloading - Indicates that the package is downloading from the ImageStore. The value is 1.\n- Activating - Indicates that the package is activating. The value is 2.\n- Active - Indicates that the package is active. The value is 3.\n- Upgrading - Indicates that the package is upgrading. The value is 4.\n- Deactivating - Indicates that the package is deactivating. The value is 5.\n",
+            "enum": [
+                "Invalid",
+                "Downloading",
+                "Activating",
+                "Active",
+                "Upgrading",
+                "Deactivating"
+            ]
+        },
+        "DeployedServicePackageHealthEvaluation": {
+            "x-ms-discriminator-value": "DeployedServicePackage",
+            "description": "Represents health evaluation for a deployed service package, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedServicePackageHealthEvaluation",
+                    "properties": {
+                        "NodeName": {
+                            "description": "Name of the node.",
+                            "type": "string"
+                        },
+                        "ApplicationName": {
+                            "description": "Full name of the application.",
+                            "type": "string"
+                        },
+                        "ServiceManifestName": {
+                            "description": "Name of the service manifest.",
+                            "type": "string"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state. The type of the unhealthy evaluations can be EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedServicePackageHealthState": {
+            "description": "Represents the health state of a deployed service package, containing the entity identifier and the aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedServicePackageHealthState",
+                    "properties": {
+                        "NodeName": {
+                            "type": "string",
+                            "description": "Name of the node on which the service package is deployed."
+                        },
+                        "ApplicationName": {
+                            "type": "string",
+                            "description": "Full name of the application."
+                        },
+                        "ServiceManifestName": {
+                            "type": "string",
+                            "description": "Name of the manifest describing the service package."
+                        }
+                    }
+                }
+            ]
+        },
+        "DeployedServicePackageHealthStateList": {
+            "description": "List of health states for a service package deployed on a Service Fabric node.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/DeployedServicePackageHealthState"
+            }
+        },
+        "DeployedServicePackagesHealthEvaluation": {
+            "x-ms-discriminator-value": "DeployedServicePackages",
+            "description": "Represents health evaluation for deployed service packages, containing health evaluations for each unhealthy deployed service package that impacted current aggregated health state. Can be returned when evaluating deployed application health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "DeployedServicePackagesHealthEvaluation",
+                    "properties": {
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of deployed service packages of the deployed application in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy DeployedServicePackageHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "EntityHealth": {
+            "type": "object",
+            "description": "The REST API operations for Service Fabric return standard HTTP status codes. This type defines the additional information returned from the Service Fabric API operations that are not successful.\n",
+            "properties": {
+                "AggregatedHealthState": {
+                    "$ref": "#/definitions/HealthState",
+                    "description": "The HealthState representing the aggregated health state computed by Health Manager based on reported events on entity and its children (if any) and desired health policy."
+                },
+                "HealthEvents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HealthEvent"
+                    },
+                    "description": "The list of health events reported on the entity."
+                },
+                "UnhealthyEvaluations": {
+                    "$ref": "#/definitions/UnhealthyEvaluations",
+                    "description": "The unhealthy evaluations that show why the current aggregated health state was returned by Health Manager."
+                }
+            }
+        },
+        "EntityHealthState": {
+            "type": "object",
+            "description": "An base type for the health state of various entities in the cluster. It contains the aggregated health state.",
+            "properties": {
+                "AggregatedHealthState": {
+                    "$ref": "#/definitions/HealthState"
+                }
+            }
+        },
+        "EventHealthEvaluation": {
+            "x-ms-discriminator-value": "Event",
+            "description": "Represents health evaluation of a HealthEvent that was reported on the entity. This is returned when evaluating health of an entity results in Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "EventHealthEvaluation",
+                    "properties": {
+                        "ConsiderWarningAsError": {
+                            "type": "boolean",
+                            "description": "Indicates whether warnings are treated with the same severity as errors. The field is specified in the health policy used to evaluate the entity."
+                        },
+                        "UnhealthyEvent": {
+                            "$ref": "#/definitions/HealthEvent"
+                        }
+                    }
+                }
+            ]
+        },
+        "FabricError": {
+            "type": "object",
+            "description": "The REST API operations for Service Fabric return standard HTTP status codes. This type defines the additional information returned from the Service Fabric API operations that are not successful.\n",
+            "properties": {
+                "Error": {
+                    "type": "object",
+                    "description": "Error object containing error code and error message.",
+                    "properties": {
+                        "Code": {
+                            "$ref": "#/definitions/FabricErrorCodes"
+                        },
+                        "Message": {
+                            "type": "string",
+                            "description": "Error message."
+                        }
+                    }
+                }
+            }
+        },
+        "FabricErrorCodes": {
+            "type": "string",
+            "description": "Defines the fabric error codes that be returned as part of the error object in response to Service Fabric API operations that are not successful. Following are the error code values that can be returned for a specific HTTP status code.\n\n  - Possible values of the error code for HTTP status code 400 (Bad Request)\n    - \"FABRIC_E_INVALID_PARTITION_KEY\"\n    - \"FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_ADDRESS\"\n    - \"FABRIC_E_APPLICATION_NOT_UPGRADING\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_FABRIC_NOT_UPGRADING\"\n    - \"FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR\"\n    - \"FABRIC_E_INVALID_CONFIGURATION\"\n    - \"FABRIC_E_INVALID_NAME_URI\"\n    - \"FABRIC_E_PATH_TOO_LONG\"\n    - \"FABRIC_E_KEY_TOO_LARGE\"\n    - \"FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED\"\n    - \"FABRIC_E_INVALID_ATOMIC_GROUP\"\n    - \"FABRIC_E_VALUE_EMPTY\" \n  \n  - Possible values of the error code for HTTP status code 404 (Not Found)\n    - \"FABRIC_E_NODE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_APPLICATION_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_TYPE_NOT_FOUND\"\n    - \"FABRIC_E_SERVICE_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND\"\n    - \"FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND\"\n    - \"FABRIC_E_PARTITION_NOT_FOUND\"\n    - \"FABRIC_E_REPLICA_DOES_NOT_EXIST\"\n    - \"FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST\"\n    - \"FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND\"\n    - \"FABRIC_E_DIRECTORY_NOT_FOUND\"\n    - \"FABRIC_E_FABRIC_VERSION_NOT_FOUND\"\n    - \"FABRIC_E_FILE_NOT_FOUND\"\n    - \"FABRIC_E_NAME_DOES_NOT_EXIST\"\n    - \"FABRIC_E_PROPERTY_DOES_NOT_EXIST\"\n    - \"FABRIC_E_ENUMERATION_COMPLETED\"\n    - \"FABRIC_E_SERVICE_MANIFEST_NOT_FOUND\"\n    - \"FABRIC_E_KEY_NOT_FOUND\"\n    - \"FABRIC_E_HEALTH_ENTITY_NOT_FOUND\"\n    \n  - Possible values of the error code for HTTP status code 409 (Conflict)\n    - \"FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS\"\n    - \"FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_SERVICE_ALREADY_EXISTS\"\n    - \"FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS\"\n    - \"FABRIC_E_APPLICATION_TYPE_IN_USE\"\n    - \"FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION\"\n    - \"FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS\"\n    - \"FABRIC_E_FABRIC_VERSION_IN_USE\"\n    - \"FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS\"\n    - \"FABRIC_E_NAME_ALREADY_EXISTS\"\n    - \"FABRIC_E_NAME_NOT_EMPTY\"\n    - \"FABRIC_E_PROPERTY_CHECK_FAILED\"\n    - \"FABRIC_E_SERVICE_METADATA_MISMATCH\"\n    - \"FABRIC_E_SERVICE_TYPE_MISMATCH\"\n    - \"FABRIC_E_HEALTH_STALE_REPORT\"\n    - \"FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED\"\n    - \"FABRIC_E_NODE_HAS_NOT_STOPPED_YET\"\n    - \"FABRIC_E_INSTANCE_ID_MISMATCH\"\n    \n  - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n    \n  - Possible values of the error code for HTTP status code 500 (Internal Server Error)\n    - \"FABRIC_E_NODE_IS_UP\"\n\n  - Possible values of the error code for HTTP status code 503 (Service Unavailable)\n    - \"FABRIC_E_NO_WRITE_QUORUM\"\n    - \"FABRIC_E_NOT_PRIMARY\"\n    - \"FABRIC_E_NOT_READY\"\n    - \"FABRIC_E_RECONFIGURATION_PENDING\"\n    - \"FABRIC_E_SERVICE_OFFLINE\"\n    - \"E_ABORT\"\n    - \"FABRIC_E_VALUE_TOO_LARGE\"\n      \n  - Possible values of the error code for HTTP status code 504 (Gateway Timeout)\n    - \"FABRIC_E_COMMUNICATION_ERROR\"\n    - \"FABRIC_E_OPERATION_NOT_COMPLETE\"\n    - \"FABRIC_E_TIMEOUT\"\n      \n",
+            "enum": [
+                "FABRIC_E_INVALID_PARTITION_KEY",
+                "FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR",
+                "FABRIC_E_INVALID_ADDRESS",
+                "FABRIC_E_APPLICATION_NOT_UPGRADING",
+                "FABRIC_E_APPLICATION_UPGRADE_VALIDATION_ERROR",
+                "FABRIC_E_FABRIC_NOT_UPGRADING",
+                "FABRIC_E_FABRIC_UPGRADE_VALIDATION_ERROR",
+                "FABRIC_E_INVALID_CONFIGURATION",
+                "FABRIC_E_INVALID_NAME_URI",
+                "FABRIC_E_PATH_TOO_LONG",
+                "FABRIC_E_KEY_TOO_LARGE",
+                "FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED",
+                "FABRIC_E_INVALID_ATOMIC_GROUP",
+                "FABRIC_E_VALUE_EMPTY",
+                "FABRIC_E_NODE_NOT_FOUND",
+                "FABRIC_E_APPLICATION_TYPE_NOT_FOUND",
+                "FABRIC_E_APPLICATION_NOT_FOUND",
+                "FABRIC_E_SERVICE_TYPE_NOT_FOUND",
+                "FABRIC_E_SERVICE_DOES_NOT_EXIST",
+                "FABRIC_E_SERVICE_TYPE_TEMPLATE_NOT_FOUND",
+                "FABRIC_E_CONFIGURATION_SECTION_NOT_FOUND",
+                "FABRIC_E_PARTITION_NOT_FOUND",
+                "FABRIC_E_REPLICA_DOES_NOT_EXIST",
+                "FABRIC_E_SERVICE_GROUP_DOES_NOT_EXIST",
+                "FABRIC_E_CONFIGURATION_PARAMETER_NOT_FOUND",
+                "FABRIC_E_DIRECTORY_NOT_FOUND",
+                "FABRIC_E_FABRIC_VERSION_NOT_FOUND",
+                "FABRIC_E_FILE_NOT_FOUND",
+                "FABRIC_E_NAME_DOES_NOT_EXIST",
+                "FABRIC_E_PROPERTY_DOES_NOT_EXIST",
+                "FABRIC_E_ENUMERATION_COMPLETED",
+                "FABRIC_E_SERVICE_MANIFEST_NOT_FOUND",
+                "FABRIC_E_KEY_NOT_FOUND",
+                "FABRIC_E_HEALTH_ENTITY_NOT_FOUND",
+                "FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS",
+                "FABRIC_E_APPLICATION_ALREADY_EXISTS",
+                "FABRIC_E_APPLICATION_ALREADY_IN_TARGET_VERSION",
+                "FABRIC_E_APPLICATION_TYPE_PROVISION_IN_PROGRESS",
+                "FABRIC_E_APPLICATION_UPGRADE_IN_PROGRESS",
+                "FABRIC_E_SERVICE_ALREADY_EXISTS",
+                "FABRIC_E_SERVICE_GROUP_ALREADY_EXISTS",
+                "FABRIC_E_APPLICATION_TYPE_IN_USE",
+                "FABRIC_E_FABRIC_ALREADY_IN_TARGET_VERSION",
+                "FABRIC_E_FABRIC_VERSION_ALREADY_EXISTS",
+                "FABRIC_E_FABRIC_VERSION_IN_USE",
+                "FABRIC_E_FABRIC_UPGRADE_IN_PROGRESS",
+                "FABRIC_E_NAME_ALREADY_EXISTS",
+                "FABRIC_E_NAME_NOT_EMPTY",
+                "FABRIC_E_PROPERTY_CHECK_FAILED",
+                "FABRIC_E_SERVICE_METADATA_MISMATCH",
+                "FABRIC_E_SERVICE_TYPE_MISMATCH",
+                "FABRIC_E_HEALTH_STALE_REPORT",
+                "FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED",
+                "FABRIC_E_NODE_HAS_NOT_STOPPED_YET",
+                "FABRIC_E_INSTANCE_ID_MISMATCH",
+                "FABRIC_E_VALUE_TOO_LARGE",
+                "FABRIC_E_NO_WRITE_QUORUM",
+                "FABRIC_E_NOT_PRIMARY",
+                "FABRIC_E_NOT_READY",
+                "FABRIC_E_RECONFIGURATION_PENDING",
+                "FABRIC_E_SERVICE_OFFLINE",
+                "E_ABORT",
+                "FABRIC_E_COMMUNICATION_ERROR",
+                "FABRIC_E_OPERATION_NOT_COMPLETE",
+                "FABRIC_E_TIMEOUT",
+                "FABRIC_E_NODE_IS_UP"
+            ]
+        },
+        "HealthEvaluation": {
+            "type": "object",
+            "discriminator": "Kind",
+            "description": "Represents a health evaluation which describes the data and the algorithm used by health manager to evaluate the health of an entity.",
+            "properties": {
+                "Kind": {
+                    "$ref": "#/definitions/HealthEvaluationKind"
+                },
+                "AggregatedHealthState": {
+                    "$ref": "#/definitions/HealthState"
+                },
+                "Description": {
+                    "type": "string",
+                    "description": "Description of the health evaluation, which represents a summary of the evaluation process."
+                }
+            },
+            "required": [
+                "Kind"
+            ]
+        },
+        "HealthEvaluationKind": {
+            "type": "string",
+            "description": "The health manager in the cluster performs health evalautions in determining the aggregated health state of an entity. This enumeration provides information on the kind of evaluation that was performed. Following are the possible values.\n\n  - Invalid - Indicates that the health evaluation is invalid. The value is zero.\n  - Event - Indicates that the health evaluation is for a health event. The value is 1.\n  - Replicas - Indicates that the health evaluation is for the replicas of a partition. The value is 2.\n  - Partitions - Indicates that the health evaluation is for the partitions of a service. The value is 3.\n  - DeployedServicePackages - Indicates that the health evaluation is for the deployed service packages of a deployed application. The value is 4.\n  - DeployedApplications - Indicates that the health evaluation is for the deployed applications of an application. The value is 5.\n  - Services - Indicates that the health evaluation is for services of an application. The value is 6.\n  - Nodes - Indicates that the health evaluation is for the cluster nodes. The value is 7.\n  - Applications - Indicates that the health evaluation is for the cluster applications. The value is 8.\n  - SystemApplication - Indicates that the health evaluation is for the system application. The value is 9.\n  - UpgradeDomainDeployedApplications - Indicates that the health evaluation is for the deployed applications of an application in an upgrade domain. The value is 10.\n  - UpgradeDomainNodes - Indicates that the health evaluation is for the cluster nodes in an upgrade domain. The value is 11.\n  - Node - Indicates that the health evaluation is for a node. The value is 12.\n  - Replica - Indicates that the health evaluation is for a replica. The value is 13.\n  - Partition - Indicates that the health evaluation is for a partition. The value is 14.\n  - Service - Indicates that the health evaluation is for a service. The value is 15.\n  - DeployedServicePackage - Indicates that the health evaluation is for a deployed service package. The value is 16.\n  - DeployedApplication - Indicates that the health evaluation is for a deployed application. The value is 17.\n  - Application - Indicates that the health evaluation is for an application. The value is 18.\n  - DeltaNodesCheck - Indicates that the health evaluation is for the delta of unhealthy cluster nodes. The value is 19.\n  - UpgradeDomainDeltaNodesCheck - Indicates that the health evaluation is for the delta of unhealthy upgrade domain cluster nodes. The value is 20.\n  - ApplicationTypeApplications â€“ Indicates that the health evaluation is for applications of an application type. The value is 21.\n",
+            "enum": [
+                "Invalid",
+                "Event",
+                "Replicas",
+                "Partitions",
+                "DeployedServicePackages",
+                "DeployedApplications",
+                "Services",
+                "Nodes",
+                "Applications",
+                "SystemApplication",
+                "UpgradeDomainDeployedApplications",
+                "UpgradeDomainNodes",
+                "Replica",
+                "Partition",
+                "DeployedServicePackage",
+                "DeployedApplication",
+                "Service",
+                "Node",
+                "Application",
+                "DeltaNodesCheck",
+                "UpgradeDomainDeltaNodesCheck",
+                "ApplicationTypeApplications"
+            ]
+        },
+        "HealthEvaluationWrapper": {
+            "type": "object",
+            "description": "Wrapper object for health evaluation.",
+            "properties": {
+                "HealthEvaluation": {
+                    "$ref": "#/definitions/HealthEvaluation"
+                }
+            }
+        },
+        "HealthEvent": {
+            "description": "Represents health information reported on a health entity, such as cluster, application or node, with additional metadata added by the Health Manager.\n",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthInformation"
+                },
+                {
+                    "type": "object",
+                    "description": "HealthEvent",
+                    "properties": {
+                        "AggregatedHealthState": {
+                            "$ref": "#/definitions/HealthState"
+                        },
+                        "IsExpired": {
+                            "type": "boolean",
+                            "description": "Returns true if the health event is expired, otherwise false."
+                        },
+                        "SourceUtcTimestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date and time when the health report was sent by the source."
+                        },
+                        "LastModifiedUtcTimestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date and time when the health report was last modified by the health store."
+                        },
+                        "LastOkTransitionAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "If the current health state is 'Ok', this property returns the time at which the health report was first reported with 'Ok'. For periodic reporting, many reports with the same state may have been generated however, this property returns only the date and time at the first 'Ok' health report was received.\n\nIf the current health state is 'Error' or 'Warning', returns the date and time at which the health state was last in 'Ok', before transitioning to a different state.\n\nIf the health state was never 'Ok', the value will be zero date-time.\n"
+                        },
+                        "LastWarningTransitionAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "If the current health state is 'Warning', this property returns the time at which the health report was first reported with 'Warning'. For periodic reporting, many reports with the same state may have been generated however, this property returns only the date and time at the first 'Warning' health report was received.\n\nIf the current health state is 'Ok' or 'Error', returns the date and time at which the health state was last in 'Warning', before transitioning to a different state.\n\nIf the health state was never 'Warning', the value will be zero date-time.\n"
+                        },
+                        "LastErrorTransitionAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "If the current health state is 'Error', this property returns the time at which the health report was first reported with 'Error'. For periodic reporting, many reports with the same state may have been generated however, this property returns only the date and time at the first 'Error' health report was received.\n\nIf the current health state is 'Ok' or 'Warning', returns the date and time at which the health state was last in 'Error', before transitioning to a different state.\n\nIf the health state was never 'Error', the value will be zero date-time.\n"
+                        }
+                    }
+                }
+            ]
+        },
+        "HealthInformation": {
+            "type": "object",
+            "description": "Represents common health report information. It is included in all health reports sent to health store and in all health events returned by health queries. The maximum string length for the description is 4096 characters. If it is more than that it will be truncated.\n",
+            "required": [
+                "SourceId",
+                "Property",
+                "HealthState"
+            ],
+            "properties": {
+                "SourceId": {
+                    "type": "string",
+                    "description": "The identifier which identifies the client/watchdog/system component which generated the health information."
+                },
+                "Property": {
+                    "type": "string",
+                    "description": "The property for the health is reported. An entity can have health reports for different properties."
+                },
+                "HealthState": {
+                    "$ref": "#/definitions/HealthState"
+                },
+                "TimeToLiveInMilliSeconds": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "The duration for which this health report is valid. This field is using ISO8601 format for specifying the duration. If not specified, time to live defaults to infinite value."
+                },
+                "Description": {
+                    "type": "string",
+                    "description": "The description of the health information. It represents free text used to add human readable information about the report."
+                },
+                "SequenceNumber": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The sequence number for this health report as a numeric string. If not specified, a sequence number is auto-generated by the health client."
+                },
+                "RemoveWhenExpired": {
+                    "type": "boolean",
+                    "description": "Value that indicates whether the report is removed from health store when it expires. If set to true, the report is remopved from the health store after it expires. If set to false, the report is treated as an error when expired. The value of this property is false by default."
+                }
+            }
+        },
+        "HealthState": {
+            "type": "string",
+            "description": "The health state of a Service Fabric entity such as Cluster, Node, Application, Service, Partition, Replica etc.\n\n  - Invalid - Indicates an invalid health state. All Service Fabric enumerations have the invalid type. The value is zero\n  - Ok - Indicates the health state is okay. The value is 1.\n  - Warning - Indicates the health status is at a warning level. The value is 2.\n  - Error - Indicates the health status is at an error level. The value is 3.\n  - Unknown - Indicates an unknown health status. The value is 65535.\n",
+            "enum": [
+                "Invalid",
+                "Ok",
+                "Warning",
+                "Error",
+                "Unknown"
+            ]
+        },
+        "NodeDeactivationInfo": {
+            "type": "object",
+            "description": "Information about the node deactivation. This information is valid for a node that is undergoing deactivation or has already been deactivated.",
+            "properties": {
+                "NodeDeactivationIntent": {
+                    "$ref": "#/definitions/NodeDeactivationIntent"
+                },
+                "NodeDeactivationStatus": {
+                    "$ref": "#/definitions/NodeDeactivationStatus"
+                },
+                "NodeDeactivationTask": {
+                    "$ref": "#/definitions/NodeDeactivationTaskList"
+                },
+                "PendingSafetyChecks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SafetyCheckWrapper"
+                    }
+                }
+            }
+        },
+        "NodeDeactivationIntent": {
+            "type": "string",
+            "description": "The intent or the reason for deactivating the node. Following are the possible values for it.\n\n  - Invalid - Indicates the node deactivation intent is invalid. All Service Fabric enumerations have the invalid type. The value is zero. This value is not used.\n  - Pause - Indicates that the node should be paused. The value is 1.\n  - Restart - Indicates that the intent is for the node to be restarted after a short period of time. Service Fabric does not restart the node, this action is done outside of Service Fabric. The value is 2.\n  - RemoveData - Indicates that the intent is to reimage the node. Service Fabric does not reimage the node, this action is done outside of Service Fabric. The value is 3.\n  - RemoveNode - Indicates that the node is being decommissioned and is not expected to return. Service Fabric does not decommission the node, this action is done outside of Service Fabric. The value is 4.\n",
+            "enum": [
+                "Invalid",
+                "Pause",
+                "Restart",
+                "RemoveData",
+                "RemoveNode"
+            ]
+        },
+        "NodeDeactivationStatus": {
+            "type": "string",
+            "description": "The status of node deactivation operation. Following are the possible values.\n\n  - None - No status is associated with the task. The value is zero.\n  - SafetyCheckInProgress - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that one or more safety checks are in progress. The value is 1.\n  - SafetyCheckComplete - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that all safety checks have been completed. The value is 2.\n  - Completed - The task is completed. The value is 3.\n  \n",
+            "enum": [
+                "None",
+                "SafetyCheckInProgress",
+                "SafetyCheckComplete",
+                "Completed"
+            ]
+        },
+        "NodeDeactivationTask": {
+            "type": "object",
+            "description": "The task representing the deactivation operation on the node.",
+            "properties": {
+                "NodeDeactivationTaskId": {
+                    "$ref": "#/definitions/NodeDeactivationTaskId"
+                },
+                "NodeDeactivationIntent": {
+                    "$ref": "#/definitions/NodeDeactivationIntent"
+                }
+            }
+        },
+        "NodeDeactivationTaskId": {
+            "type": "object",
+            "description": "Identity of the task related to deactivation operation on the node.",
+            "properties": {
+                "Id": {
+                    "type": "string",
+                    "description": "Value of the task id."
+                },
+                "NodeDeactivationTaskType": {
+                    "$ref": "#/definitions/NodeDeactivationTaskType"
+                }
+            }
+        },
+        "NodeDeactivationTaskList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/NodeDeactivationTask"
+            },
+            "description": "List of tasks representing the deactivation operation on the node."
+        },
+        "NodeDeactivationTaskType": {
+            "type": "string",
+            "description": "The type of the task that performed the node deactivation. Following are the possible values.\n\n  - Invalid - Indicates the node deactivation task type is invalid. All Service Fabric enumerations have the invalid type. The value is zero. This value is not used.\n  - Infrastructure - Specifies the task created by Infrastructure hosting the nodes. The value is 1.\n  - Repair - Specifies the task that was created by the Repair Manager service. The value is 2.\n  - Client - Specifies that the task was created by using the public API. The value is 3.\n",
+            "enum": [
+                "Invalid",
+                "Infrastructure",
+                "Repair",
+                "Client"
+            ]
+        },
+        "NodeHealth": {
+            "description": "Information about the health of a Service Fabric node.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealth"
+                },
+                {
+                    "type": "object",
+                    "description": "NodeHealth",
+                    "properties": {
+                        "Name": {
+                            "type": "string",
+                            "description": "Name of the node whose health information is described by this object."
+                        }
+                    }
+                }
+            ]
+        },
+        "NodeHealthEvaluation": {
+            "x-ms-discriminator-value": "Node",
+            "description": "Represents health evaluation for a node, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "NodeHealthEvaluation",
+                    "properties": {
+                        "NodeName": {
+                            "description": "Name of the node.",
+                            "type": "string"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the node. The types of the unhealthy evaluations can be EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "NodeHealthState": {
+            "description": "Represents the health state of a node, which contains the node identifier and its aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "NodeHealthState",
+                    "properties": {
+                        "Name": {
+                            "type": "string",
+                            "description": "Name of the node."
+                        },
+                        "Id": {
+                            "$ref": "#/definitions/NodeId"
+                        }
+                    }
+                }
+            ]
+        },
+        "NodeId": {
+            "type": "object",
+            "description": "An internal ID used by Service Fabric to uniquely identify a node. Node Id is deterministically generated from node name.",
+            "properties": {
+                "Id": {
+                    "type": "string",
+                    "description": "Value of the node Id. This is a 128 bit integer."
+                }
+            }
+        },
+        "NodeInfo": {
+            "type": "object",
+            "description": "Information about a node in Service Fabric cluster.",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the node."
+                },
+                "IpAddressOrFQDN": {
+                    "type": "string",
+                    "description": "The IP address or fully qualified domain name of the node."
+                },
+                "Type": {
+                    "type": "string",
+                    "description": "The type of the node."
+                },
+                "CodeVersion": {
+                    "type": "string",
+                    "description": "The version of Service Fabric binaries that the node is running."
+                },
+                "ConfigVersion": {
+                    "type": "string",
+                    "description": "The version of Service Fabric cluster manifest that the node is using."
+                },
+                "NodeStatus": {
+                    "$ref": "#/definitions/NodeStatus"
+                },
+                "NodeUpTimeInSeconds": {
+                    "type": "string",
+                    "description": "Time in seconds since the node has been in NodeStatus Up. Value ero indicates that the node is not Up."
+                },
+                "HealthState": {
+                    "$ref": "#/definitions/HealthState"
+                },
+                "IsSeedNode": {
+                    "type": "boolean",
+                    "description": "Indicates if the node is a seed node or not. Returns true if the node is a seed node, otherwise false. A quorum of seed nodes are required for proper operation of Service Fabric cluster."
+                },
+                "UpgradeDomain": {
+                    "type": "string",
+                    "description": "The upgrade domain of the node."
+                },
+                "FaultDomain": {
+                    "type": "string",
+                    "description": "The fault domain of the node."
+                },
+                "Id": {
+                    "$ref": "#/definitions/NodeId"
+                },
+                "InstanceId": {
+                    "type": "string",
+                    "description": "The id representing the node instance. While the Id of the node is deterministically generated from the node name and remains same across restarts, the InstanceId changes every time node restarts."
+                },
+                "NodeDeactivationInfo": {
+                    "$ref": "#/definitions/NodeDeactivationInfo"
+                },
+                "IsStopped": {
+                    "type": "boolean",
+                    "description": "Indicates if the node is stopped by calling stop node API or not. Returns true if the node is stopped, otherwise false."
+                },
+                "NodeDownTimeInSeconds": {
+                    "type": "string",
+                    "description": "Time in seconds since the node has been in NodeStatus Down. Value zero indicates node is not NodeStatus Down."
+                }
+            }
+        },
+        "NodeLoadInfo": {
+            "type": "object",
+            "description": "Information about load on a Service Fabric node. It holds a summary of all metrics and their load on a node.",
+            "properties": {
+                "NodeName": {
+                    "type": "string",
+                    "description": "Name of the node for which the load information is provided by this object."
+                },
+                "NodeLoadMetricInformation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NodeLoadMetricInformation"
+                    },
+                    "description": "List that contains metrics and their load information on this node."
+                }
+            }
+        },
+        "NodeLoadMetricInformation": {
+            "type": "object",
+            "description": "Represents data structure that contains load information for a certain metric on a node.",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "Name of the metric for which this load information is provided."
+                },
+                "NodeCapacity": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "Total capacity on the node for this metric."
+                },
+                "NodeLoad": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "Current load on the node for this metric."
+                },
+                "NodeRemainingCapacity": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The remaining capacity on the node for this metric."
+                },
+                "IsCapacityViolation": {
+                    "type": "boolean",
+                    "description": "Indicates if there is a capacity violation for this metric on the node."
+                },
+                "NodeBufferedCapacity": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The value that indicates the reserved capacity for this metric on the node."
+                },
+                "NodeRemainingBufferedCapacity": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The remaining reserved capacity for this metric on the node."
+                }
+            }
+        },
+        "NodesHealthEvaluation": {
+            "x-ms-discriminator-value": "Nodes",
+            "description": "Represents health evaluation for nodes, containing health evaluations for each unhealthy node that impacted current aggregated health state. Can be returned when evaluating cluster health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "NodesHealthEvaluation",
+                    "properties": {
+                        "MaxPercentUnhealthyNodes": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy nodes from the ClusterHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of nodes found in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy NodeHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "NodeStatus": {
+            "type": "string",
+            "description": "The status of the node. Possible values are following.\n\n  - Invalid - Indicates the node status is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n  - Up - Indicates the node is up. The value is 1.\n  - Down - Indicates the node is down. The value is 2.\n  - Enabling - Indicates the node is in process of being enabled. The value is 3.\n  - Disabling - Indicates the node is in the process of being disabled. The value is 4.\n  - Disabled - Indicates the node is disabled. The value is 5.\n  - Unknown - Indicates the node is unknown. A node would be in Unknown state if Service Fabric does not have authoritative information about that node. This can happen if the system learns about a node at runtime.The value is 6.\n  - Removed - Indicates the node is removed. A node would be in Removed state if NodeStateRemoved API has been called for this node. In other words, Service Fabric has been informed that the persisted state on the node has been permanently lost. The value is 7.\n",
+            "enum": [
+                "Invalid",
+                "Up",
+                "Down",
+                "Enabling",
+                "Disabling",
+                "Disabled",
+                "Unknown",
+                "Removed"
+            ]
+        },
+        "PagedNodeInfoList": {
+            "type": "object",
+            "description": "The list of nodes in the cluster. The list is paged when all of the results cannot fit in a single message. The next set of results can be obtained by executing the same query with the continuation token provided in this list.",
+            "properties": {
+                "ContinuationToken": {
+                    "$ref": "#/definitions/ContinuationToken"
+                },
+                "Items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NodeInfo"
+                    }
+                }
+            }
+        },
+        "PartitionHealthEvaluation": {
+            "x-ms-discriminator-value": "Partition",
+            "description": "Represents health evaluation for a partition, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "PartitionHealthEvaluation",
+                    "properties": {
+                        "PartitionId": {
+                            "description": "Id of the partition.",
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the partition. The types of the unhealthy evaluations can be ReplicasHealthEvaluation or EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "PartitionHealthState": {
+            "description": "Represents the health state of a partition, which contains the partition identifier and its aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "PartitionHealthState",
+                    "properties": {
+                        "PartitionId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "Id of the partition."
+                        }
+                    }
+                }
+            ]
+        },
+        "PartitionsHealthEvaluation": {
+            "x-ms-discriminator-value": "Partitions",
+            "description": "Represents health evaluation for the partitions of a service, containing health evaluations for each unhealthy partition that impacts current aggregated health state. Can be returned when evaluating service health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "PartitionsHealthEvaluation",
+                    "properties": {
+                        "MaxPercentUnhealthyPartitionsPerService": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy partitions per service from the ServiceTypeHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of partitions of the service from the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy PartitionHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "ReplicaHealthEvaluation": {
+            "x-ms-discriminator-value": "Replica",
+            "description": "Represents health evaluation for a replica, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ReplicaHealthEvaluation",
+                    "properties": {
+                        "PartitionId": {
+                            "description": "Id of the partition to which the replica belongs.",
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "ReplicaOrInstanceId": {
+                            "description": "Id of the stateful service replica or the stateless service instance.",
+                            "type": "string",
+                            "format": "int64"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the replica. The types of the unhealthy evaluations can be EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "ReplicaHealthState": {
+            "description": "Represents a base class for stateful service replica or stateless service instance health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "ReplicaHealthState",
+                    "discriminator": "Kind",
+                    "required": [
+                        "ServiceKind"
+                    ],
+                    "properties": {
+                        "ServiceKind": {
+                            "$ref": "#/definitions/ServiceKind"
+                        },
+                        "PartitionId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "Id of the partition to which this replica belongs."
+                        }
+                    }
+                }
+            ]
+        },
+        "ReplicasHealthEvaluation": {
+            "x-ms-discriminator-value": "Replicas",
+            "description": "Represents health evaluation for replicas, containing health evaluations for each unhealthy replica that impacted current aggregated health state. Can be returned when evaluating partition health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ReplicasHealthEvaluation",
+                    "properties": {
+                        "MaxPercentUnhealthyReplicasPerPartition": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy replicas per partition from the ApplicationHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of replicas in the partition from the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy ReplicaHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "SafetyCheck": {
+            "type": "object",
+            "discriminator": "Kind",
+            "description": "Represents a safety check performed by service fabric before continuing with the operations. These checks ensure the avaiability of the service and the reliability of the state.",
+            "properties": {
+                "Kind": {
+                    "$ref": "#/definitions/SafetyCheckKind"
+                }
+            },
+            "required": [
+                "Kind"
+            ]
+        },
+        "SafetyCheckKind": {
+            "type": "string",
+            "description": "The kind of safety check performed by service fabric before continuing with the operations. These checks ensure the avaiability of the service and the reliability of the state. Following are the kinds of safety checks.\n\n- Invalid - Indicates that the upgrade safety check kind is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n- EnsureSeedNodeQuorum - Indicates that if we bring down the node then this will result in global seed node quorum loss. The value is 1.\n- EnsurePartitionQuorum - Indicates that there is some partition for which if we bring down the replica on the node, it will result in quorum loss for that partition. The value is 2.\n- WaitForPrimaryPlacement - Indicates that there is some replica on the node that was moved out of this node due to upgrade. Service Fabric is now waiting for the primary to be moved back to this node. The value is 3.\n- WaitForPrimarySwap - Indicates that Service Fabric is waiting for a primary replica to be moved out of the node before starting upgrade on that node. The value is 4.\n- WaitForReconfiguration - Indicates that there is some replica on the node that is involved in a reconfiguration. Service Fabric is waiting for the reconfiguration to be complete before staring upgrade on that node. The value is 5.\n- WaitForInbuildReplica - Indicates that there is either a replica on the node that is going through copy, or there is a primary replica on the node that is copying data to some other replica. In both cases, bringing down the replica on the node due to upgrade will abort the copy. The value is 6.\n- EnsureAvailability - Indicates that there is either a stateless service partition on the node having exactly one instance, or there is a primary replica on the node for which the partition is quorum loss. In both cases, bringing down the replicas due to upgrade will result in loss of availability. The value is 7.\n",
+            "enum": [
+                "Invalid",
+                "EnsureSeedNodeQuorum",
+                "EnsurePartitionQuorum",
+                "WaitForPrimaryPlacement",
+                "WaitForPrimarySwap",
+                "WaitForReconfiguration",
+                "WaitForInbuildReplica",
+                "EnsureAvailability"
+            ]
+        },
+        "PartitionSafetyCheck": {
+            "description": "Represents a safety check for the service partition being performed by service fabric before continuing with operations.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "PartitionSafetyCheck",
+                    "properties": {
+                        "PartitionId": {
+                            "description": "Id of the partition which is undergoing the safety check.",
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                }
+            ]
+        },
+        "EnsureAvailabilitySafetyCheck": {
+            "description": "Safety check that waits for ensures the avaiability of the partition. It waits until there are replicas avaiabile such that bring down this replica will not cause avaiability loss for the partition.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "EnsureAvailabilitySafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "EnsureAvailability"
+        },
+        "EnsurePartitionQurumSafetyCheck": {
+            "description": "Safety check that ensures that a quorum of replicas are not lost for a partition.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "EnsurePartitionQurumSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "EnsurePartitionQuorum"
+        },
+        "SeedNodeSafetyCheck": {
+            "description": "Represents a safety check for the seed nodes being performed by service fabric before continuing with node level operations.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "SeedNodeSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "EnsureSeedNodeQuorum"
+        },
+        "WaitForInbuildReplicaSafetyCheck": {
+            "description": "Safety check that waits for the replica build operation to finish. This indiciates that there is a replica that is going through the copy or is providing data for building another replica. Bring the node down will abort this copy operation which are typoically expensive involving data movements.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "WaitForInbuildReplicaSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "WaitForInbuildReplica"
+        },
+        "WaitForPrimaryPlacementSafetyCheck": {
+            "description": "Safety check that waits for the primary replica that was moved out of the node due to upgrade to be placed back again on that node.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "WaitForPrimaryPlacementSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "WaitForPrimaryPlacement"
+        },
+        "WaitForPrimarySwapSafetyCheck": {
+            "description": "Safety check that waits for the primary replica to be moved out of the node before starting an upgrade to ensure the avaiability of the primary replica for the partition.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "WaitForPrimarySwapSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "WaitForPrimarySwap"
+        },
+        "WaitForReconfigurationSafetyCheck": {
+            "description": "Safety check that waits for the current reconfiguration of the partition to be completed before starting an upgrade.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionSafetyCheck"
+                },
+                {
+                    "type": "object",
+                    "description": "WaitForReconfigurationSafetyCheck"
+                }
+            ],
+            "x-ms-discriminator-value": "WaitForReconfiguration"
+        },
+        "SafetyCheckWrapper": {
+            "type": "object",
+            "description": "A wrapper for the safety check object. Safety checks are performed by service fabric before continuing with the operations. These checks ensure the avaiability of the service and the reliability of the state.",
+            "properties": {
+                "SafetyCheck": {
+                    "$ref": "#/definitions/SafetyCheck"
+                }
+            }
+        },
+        "ServiceHealthEvaluation": {
+            "x-ms-discriminator-value": "Service",
+            "description": "Represents health evaluation for a service, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ServiceHealthEvaluation",
+                    "properties": {
+                        "ServiceName": {
+                            "description": "Full name of the service.",
+                            "type": "string"
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the service. The types of the unhealthy evaluations can be PartitionsHealthEvaluation or EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServiceHealthState": {
+            "description": "Represents the health state of a service, which contains the service identifier and its aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EntityHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "ServiceHealthState",
+                    "properties": {
+                        "ServiceName": {
+                            "type": "string",
+                            "description": "Full name of the service."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServiceKind": {
+            "type": "string",
+            "description": "The kind of service (Stateless or Stateful). Following are the possible values.\n\n    - Invalid - Indicates the service kind is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n    - Stateless - Does not use Service Fabric to make its state highly available or reliable. The value is 1\n    - Stateful - Uses Service Fabric to make its state or part of its state highly available and reliable. The value is 2.\n",
+            "enum": [
+                "Invalid",
+                "Stateless",
+                "Stateful"
+            ]
+        },
+        "ServicesHealthEvaluation": {
+            "x-ms-discriminator-value": "Services",
+            "description": "Represents health evaluation for services of a certain service type belonging to an application, containing health evaluations for each unhealthy service that impacted current aggregated health state. Can be returned when evaluating application health and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicesHealthEvaluation",
+                    "properties": {
+                        "ServiceTypeName": {
+                            "type": "string",
+                            "description": "Name of the service type of the services."
+                        },
+                        "MaxPercentUnhealthyServices": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy services from the ServiceTypeHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of services of the current service type in the application from the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy ServiceHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServiceTypeHealthPolicy": {
+            "type": "object",
+            "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
+            "properties": {
+                "MaxPercentUnhealthyPartitionsPerService": {
+                    "type": "integer",
+                    "description": "The maximum allowed percentage of unhealthy partitions per service. Allowed values are Byte values from zero to 100\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error. If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning. This is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service. The computation rounds up to tolerate one failure on small numbers of partitions. Default percentage is zero.\n",
+                    "default": 0
+                },
+                "MaxPercentUnhealthyReplicasPerPartition": {
+                    "type": "integer",
+                    "description": "The maximum allowed percentage of unhealthy replicas per partition. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error. If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning. This is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition. The computation rounds up to tolerate one failure on small numbers of replicas. Default percentage is zero.\n",
+                    "default": 0
+                },
+                "MaxPercentUnhealthyServices": {
+                    "type": "integer",
+                    "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error. If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning. This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type. The computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
+                    "default": 0
+                }
+            }
+        },
+        "ServiceTypeHealthPolicyMap": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServiceTypeHealthPolicyMapItem"
+            },
+            "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type. For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently. With policy per service type, there's more granular control of the health of the service. \n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n"
+        },
+        "ServiceTypeHealthPolicyMapItem": {
+            "type": "object",
+            "description": "Defines an item in ServiceTypeHealthPolicyMap.\n",
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The key of the service type health policy map item. This is the name of the service type."
+                },
+                "Value": {
+                    "$ref": "#/definitions/ServiceTypeHealthPolicy",
+                    "description": "The value of the service type health policy map item. This is the ServiceTypeHealthPolicy for this service type."
+                }
+            }
+        },
+        "StatefulServiceReplicaHealthState": {
+            "x-ms-discriminator-value": "Stateful",
+            "description": "Represents the health state of the stateful service replica, which contains the replica id and the aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReplicaHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "StatefulServiceReplicaHealthState",
+                    "properties": {
+                        "ReplicaId": {
+                            "type": "string",
+                            "format": "int64",
+                            "description": "Id of the stateful service replica."
+                        }
+                    }
+                }
+            ]
+        },
+        "StatelessServiceInstanceHealthState": {
+            "x-ms-discriminator-value": "Stateless",
+            "description": "Represents the health state of the stateless service instance, which contains the instance id and the aggregated health state.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ReplicaHealthState"
+                },
+                {
+                    "type": "object",
+                    "description": "StatelessServiceInstanceHealthState",
+                    "properties": {
+                        "ReplicaId": {
+                            "type": "string",
+                            "format": "int64",
+                            "description": "Id of the stateless service instance on the wire this field is called ReplicaId."
+                        }
+                    }
+                }
+            ]
+        },
+        "SystemApplicationHealthEvaluation": {
+            "x-ms-discriminator-value": "SystemApplication",
+            "description": "Represents health evaluation for the fabric:/System application, containing information about the data and the algorithm used by health store to evaluate health. The evaluation is returned only when the aggregated health state of the cluster is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "SystemApplicationHealthEvaluation",
+                    "properties": {
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the current aggregated health state of the system application. The types of the unhealthy evaluations can be DeployedApplicationsHealthEvaluation, ServicesHealthEvaluation or EventHealthEvaluation."
+                        }
+                    }
+                }
+            ]
+        },
+        "UnhealthyEvaluations": {
+            "description": "List of health evaluations that resulted in the current aggregated health state.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/HealthEvaluationWrapper"
+            }
+        },
+        "UpgradeDomainDeltaNodesCheckHealthEvaluation": {
+            "x-ms-discriminator-value": "UpgradeDomainDeltaNodesCheck",
+            "description": "Represents health evaluation for delta unhealthy cluster nodes in an upgrade domain, containing health evaluations for each unhealthy node that impacted current aggregated health state. Can be returned during cluster upgrade when cluster aggregated health state is Error.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "UpgradeDomainDeltaNodesCheckHealthEvaluation",
+                    "properties": {
+                        "UpgradeDomainName": {
+                            "type": "string",
+                            "description": "Name of the upgrade domain where nodes health is currently evaluated."
+                        },
+                        "BaselineErrorCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Number of upgrade domain nodes with aggregated heath state Error in the health store at the beginning of the cluster upgrade."
+                        },
+                        "BaselineTotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of upgrade domain nodes in the health store at the beginning of the cluster upgrade."
+                        },
+                        "MaxPercentDeltaUnhealthyNodes": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of upgrade domain delta unhealthy nodes from the ClusterUpgradeHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of upgrade domain nodes in the health store."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy NodeHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "UpgradeDomainNodesHealthEvaluation": {
+            "x-ms-discriminator-value": "UpgradeDomainNodes",
+            "description": "Represents health evaluation for cluster nodes in an upgrade domain, containing health evaluations for each unhealthy node that impacted current aggregated health state. Can be returned when evaluating cluster health during cluster upgrade and the aggregated health state is either Error or Warning.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HealthEvaluation"
+                },
+                {
+                    "type": "object",
+                    "description": "UpgradeDomainNodesHealthEvaluation",
+                    "properties": {
+                        "UpgradeDomainName": {
+                            "type": "string",
+                            "description": "Name of the upgrade domain where nodes health is currently evaluated."
+                        },
+                        "MaxPercentUnhealthyNodes": {
+                            "type": "integer",
+                            "description": "Maximum allowed percentage of unhealthy nodes from the ClusterHealthPolicy."
+                        },
+                        "TotalCount": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total number of nodes in the current upgrade domain."
+                        },
+                        "UnhealthyEvaluations": {
+                            "$ref": "#/definitions/UnhealthyEvaluations",
+                            "description": "List of unhealthy evaluations that led to the aggregated health state. Includes all the unhealthy NodeHealthEvaluation that impacted the aggregated health."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServicePartitionStatus": {
+            "type": "string",
+            "description": "The status of the service fabric service partition. Possible values are following.\n\n  - Invalid - Indicates the partition status is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n  - Ready - Indicates that the partition is ready. This means that for a stateless service partition there is atleast one instance that is up and for a stateful service partition the number of ready replicas is greater than or equal to the MinReplicaSetSize. The value is 1.\n  - NotReady - Indicates that the partition is not ready. This status is returned when none of the other states apply. The value is 2.\n  - InQuorumLoss  - Indicates that the partition is in quorum loss. This means that number of replicas that are up and participating in a replica set is less than MinReplicaSetSize for this partition. The value is 3.\n  - Reconfiguring - Indicates that the partition is undergoing reconfiguration of its replica sets. This can happen due to failover, upgrade, load balancing or addition or removal of replicas from the replica set. The value is 4.\n  - Deleting - Indicates that the partition is being deleted. The value is 5.\n",
+            "enum": [
+                "Invalid",
+                "Ready",
+                "NotReady",
+                "InQuorumLoss",
+                "Reconfiguring",
+                "Deleting"
+            ]
+        },
+        "ServicePartitionInfo": {
+            "type": "object",
+            "discriminator": "ServiceKind",
+            "description": "Information about a partition of a Service Fabric service.",
+            "required": [
+                "ServiceKind"
+            ],
+            "properties": {
+                "ServiceKind": {
+                    "$ref": "#/definitions/ServiceKind"
+                },
+                "HealthState": {
+                    "$ref": "#/definitions/HealthState"
+                },
+                "PartitionStatus": {
+                    "$ref": "#/definitions/ServicePartitionStatus"
+                },
+                "PartitionInformation": {
+                    "$ref": "#/definitions/PartitionInformation"
+                }
+            }
+        },
+        "StatelessServicePartitionInfo": {
+            "description": "Information about a partition of a stateless Service Fabric service.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePartitionInfo"
+                },
+                {
+                    "type": "object",
+                    "description": "StatelessServicePartitionInfo"
+                }
+            ],
+            "x-ms-discriminator-value": "Stateless",
+            "properties": {
+                "InstanceCount": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Number of instances of this partition."
+                }
+            }
+        },
+        "StatefulServicePartitionInfo": {
+            "description": "Information about a partition of a stateful Service Fabric service..",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePartitionInfo"
+                },
+                {
+                    "type": "object",
+                    "description": "StatefulServicePartitionInfo"
+                }
+            ],
+            "x-ms-discriminator-value": "Stateful",
+            "properties": {
+                "TargetReplicaSetSize": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The target replica set size as a number."
+                },
+                "MinReplicaSetSize": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The minimum replica set size as a number."
+                },
+                "LastQuorumLossDuration": {
+                    "type": "string",
+                    "format": "duration",
+                    "description": "The duration for which this partition was in quorum loss. If the partition is currently in quorum loss, it returns the duration since it has been in that state. This field is using ISO8601 format for specifying the duration."
+                },
+                "CurrentConfigurationEpoch": {
+                    "$ref": "#/definitions/Epoch"
+                }
+            }
+        },
+        "ServicePartitionKind": {
+            "type": "string",
+            "description": "The kind of partitioning scheme used to partition the service. Possible values are following.\n\n    -\tInvalid - Indicates the partition kind is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n    -\tSingleton - Indicates that there is only one partition, and SingletonPartitionSchemeDescription was specified while creating the service. The value is 1.\n    -\tInt64Range - Indicates that the partition is based on Int64 key ranges, and UniformInt64RangePartitionSchemeDescription was specified while creating the service. The value is 2.\n    -\tNamed - Indicates that the partition is based on string names, and NamedPartitionInformation  was specified while creating the service. The value is 3.\n",
+            "enum": [
+                "Invalid",
+                "Singleton",
+                "Int64Range",
+                "Named"
+            ]
+        },
+        "PartitionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "An internal ID used by Service Fabric to uniquely identify a partition. This is a randomly generated GUID when the service was created. The partition id is unique and does not change for the lifetime of the service. If the same service was deleted and recreated the ids of its partitions would be different."
+        },
+        "PartitionInformation": {
+            "type": "object",
+            "discriminator": "ServicePartitionKind",
+            "description": "Information about the partition identity, partitioning scheme and keys supported by it.",
+            "required": [
+                "ServicePartitionKind"
+            ],
+            "properties": {
+                "ServicePartitionKind": {
+                    "$ref": "#/definitions/ServicePartitionKind"
+                },
+                "Id": {
+                    "$ref": "#/definitions/PartitionId"
+                }
+            }
+        },
+        "SingletonPartitionInformation": {
+            "description": "Information about a partition that is singleton. The services with singletone partitioning scheme are effectively non-partitioned. They only have one partition.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionInformation"
+                },
+                {
+                    "type": "object",
+                    "description": "StatelessServicePartitionInfo"
+                }
+            ],
+            "x-ms-discriminator-value": "Singleton"
+        },
+        "NamedPartitionInformation": {
+            "description": "Describes the partition information for the name as a string that is based on partition schemes.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionInformation"
+                },
+                {
+                    "type": "object",
+                    "description": "StatelessServicePartitionInfo"
+                }
+            ],
+            "x-ms-discriminator-value": "Named",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "Name of the partition."
+                }
+            }
+        },
+        "Int64RangePartitionInformation": {
+            "description": "Describes the partition information for the integer range that is based on partition schemes.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PartitionInformation"
+                },
+                {
+                    "type": "object",
+                    "description": "StatelessServicePartitionInfo"
+                }
+            ],
+            "x-ms-discriminator-value": "Int64Range",
+            "properties": {
+                "LowKey": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "Specifies the minimum key value handled by this partition."
+                },
+                "HighKey": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "Specifies the maximum key value handled by this partition."
+                }
+            }
+        },
+        "Epoch": {
+            "type": "object",
+            "description": "An Epoch is a configuration number for the partition as a whole. When the configuration of the replica set changes, for example when the Primary replica changes, the operations that are replicated from the new Primary replica are said to be a new Epoch from the ones which were sent by the old Primary replica.\n",
+            "properties": {
+                "ConfigurationVersion": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The current configuration number of this Epoch. The configuration number is an increasing value that is updated whenever the configuration of this replica set changes."
+                },
+                "DataLossVersion": {
+                    "type": "string",
+                    "format": "int64",
+                    "description": "The current dataloss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica."
+                }
+            }
+        },
+        "ApplicationTypeInfo": {
+            "type": "object",
+            "description": "Information about an application type.",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the application type."
+                },
+                "Version": {
+                    "type": "string",
+                    "description": "The version of the application type."
+                },
+                "Status": {
+                    "$ref": "#/definitions/ApplicationTypeStatus"
+                },
+                "DefaultParameterList": {
+                    "$ref": "#/definitions/ApplicationParameterList"
+                }
+            }
+        },
+        "ApplicationTypeInfoList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ApplicationTypeInfo"
+            },
+            "description": "List of application type information."
+        },
+        "ApplicationTypeStatus": {
+            "type": "integer",
+            "description": "The status of the application type. Possible values are following.\n\n  - Invalid - Indicates the application type status is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n  - Provisioning - Indicates that the application type is being provisioned in the cluster. The value is 1.\n  - Available - Indicates that the application type is fully provisioned and is avaiable for use. An application of this type and version can be created. The value is 2.\n  - Unprovisioning - Indicates that the application type is in process of being unprovisioned from the cluster. The value is 3.\n  - Failed - Indicates that the application type provisioning failed and it is unavaiable for use. The failure details can be obtained from the application type information query. The failed application type information remains in the cluster until it is unprovisioned or reprovisioned successfully. The value is 4.\n"
+        },
+        "ApplicationParameter": {
+            "type": "object",
+            "description": "Describe a parameter that can be overridden when creating or updating the application.",
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The name of the parameter."
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "The value of the parameter."
+                }
+            }
+        },
+        "ApplicationParameterList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ApplicationParameter"
+            },
+            "description": "List of application parameters."
+        },
+        "ApplicationTypeManifest": {
+            "type": "object",
+            "description": "Contains the manifest describing an application type registered in a Service Fabric cluster.",
+            "properties": {
+                "Manifest": {
+                    "type": "string",
+                    "description": "The XML manifest as a string."
+                }
+            }
+        },
+        "ServicePlacementPolicyType": {
+            "type": "string",
+            "description": "The type of placement policy for a service fabric service. Following are the possible values.\n\n  - Invalid - Indicates the type of the placement policy is invalid. All Service Fabric enumerations have the invalid type. The value is zero.\n  - InvalidDomain - Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementInvalidDomainPolicyDescription, which indicates that a particular fault or upgrade domain cannot be used for placement of this service. The value is 1.\n  - RequiredDomain - Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription indicating that the replicas of the service must be placed in a specific domain. The value is 2.\n  - PreferredPrimaryDomain - Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementPreferPrimaryDomainPolicyDescription, which indicates that if possible the Primary replica for the partitions of the service should be located in a particular domain as an optimization. The value is 3.\n  - RequiredDomainDistribution - Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription, indicating that the system will disallow placement of any two replicas from the same partition in the same domain at any time. The value is 4.\n  - NonPartiallyPlaceService - Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementNonPartiallyPlaceServicePolicyDescription, which indicates that if possible all replicas of a particular partition of the service should be placed atomically. The value is 5.\n",
+            "enum": [
+                "Invalid",
+                "InvalidDomain",
+                "RequiredDomain",
+                "PreferredPrimaryDomain",
+                "RequiredDomainDistribution",
+                "NonPartiallyPlaceService"
+            ]
+        },
+        "ServicePlacementPolicyDescription": {
+            "type": "object",
+            "discriminator": "Type",
+            "description": "Describes the policy to be used for placement of a Service Fabric service.",
+            "required": [
+                "Type"
+            ],
+            "properties": {
+                "Type": {
+                    "$ref": "#/definitions/ServicePlacementPolicyType"
+                }
+            }
+        },
+        "ServicePlacementPolicyDescriptionList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServicePlacementPolicyDescription"
+            },
+            "description": "List of service placement policy descriptions."
+        },
+        "ServicePlacementPreferPrimaryDomainPolicyDescription": {
+            "x-ms-discriminator-value": "PreferPrimaryDomain",
+            "description": "Describes the policy to be used for placement of a Service Fabric service where the service's Primary replicas should optimally be placed in a particular domain.\n\nThis placement policy is usually used with fault domains in scenarios where the Service Fabric cluster is geographically distributed in order to indicate that a serviceï¿½s primary replica should be located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional or datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica may not end up located in this domain due to failures, capacity limits, or other constraints.\n",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicePlacementPreferPrimaryDomainPolicyDescription",
+                    "properties": {
+                        "DomainName": {
+                            "type": "string",
+                            "description": "The name of the domain that should used for placement as per this policy."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServicePlacementRequiredDomainPolicyDescription": {
+            "x-ms-discriminator-value": "RequireDomain",
+            "description": "Describes the policy to be used for placement of a Service Fabric service where the instances or replicas of that service must be placed in a particular domain",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicePlacementRequiredDomainPolicyDescription",
+                    "properties": {
+                        "DomainName": {
+                            "type": "string",
+                            "description": "The name of the domain that should used for placement as per this policy."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServicePlacementRequireDomainDistributionPolicyDescription": {
+            "x-ms-discriminator-value": "RequireDomainDistribution",
+            "description": "Describes the policy to be used for placement of a Service Fabric service where two replicas from the same partition should never be placed in the same fault or upgrade domain.\n\nWhile this is not common it can expose the service to an increased risk of concurrent failures due to unplanned outages or other cases of subsequent/concurrent failures. As an example, consider a case where replicas are deployed across different data center, with one replica per location. In the event that one of the datacenters goes offline, normally the replica that was placed in that datacenter will be packed into one of the remaining datacenters. If this is not desirable then this policy should be set.\n",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicePlacementRequireDomainDistributionPolicyDescription",
+                    "properties": {
+                        "DomainName": {
+                            "type": "string",
+                            "description": "The name of the domain that should used for placement as per this policy."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServicePlacementInvalidDomainPolicyDescription": {
+            "x-ms-discriminator-value": "InvalidDomain",
+            "description": "Describes the policy to be used for placement of a Service Fabric service where a particular fault or upgrade domain should not be used for placement of the instances or replicas of that service.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicePlacementInvalidDomainPolicyDescription",
+                    "properties": {
+                        "DomainName": {
+                            "type": "string",
+                            "description": "The name of the domain that should not be used for placement."
+                        }
+                    }
+                }
+            ]
+        },
+        "ServicePlacementNonPartiallyPlaceServicePolicyDescription": {
+            "x-ms-discriminator-value": "NonPartiallyPlaceService",
+            "description": "Describes the policy to be used for placement of a Service Fabric service where all replicas must be able to be placed in order for any replicas to be created.\n",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "ServicePlacementNonPartiallyPlaceServicePolicyDescription"
+                }
+            ]
+        },
+        "ServiceTypeInfoList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServiceTypeInfo"
+            },
+            "description": "List of service type information."
+        },
+        "ServiceTypeInfo": {
+            "type": "object",
+            "description": "Information about a service type that is defined in a service manifest of a provisioned application type.",
+            "properties": {
+                "ServiceTypeDescription": {
+                    "$ref": "#/definitions/ServiceTypeDescription"
+                },
+                "ServiceManifestName": {
+                    "type": "string",
+                    "description": "The name of the service manifest in which this service type is defined."
+                },
+                "ServiceManifestVersion": {
+                    "type": "string",
+                    "description": "The version of the service manifest in which this service type is defined."
+                },
+                "IsServiceGroup": {
+                    "type": "boolean",
+                    "description": "Indicates whether the service is a service group. If it is, the property value is true otherwise false."
+                }
+            }
+        },
+        "ServiceTypeDescription": {
+            "type": "object",
+            "description": "Describes a service type defined in the service manifest of a provisioned application type. The properties the the ones defined in the service manifest.",
+            "properties": {
+                "IsStateful": {
+                    "type": "boolean",
+                    "description": "Indicates whether the service type is a stateful service type or a stateless service type. This property is true if the service type is a stateful service type, false otherwise."
+                },
+                "ServiceTypeName": {
+                    "type": "string",
+                    "description": "Name of the service type."
+                },
+                "PlacementConstraints": {
+                    "type": "string",
+                    "description": "The placement constraint to be used when instantiating this service in a Service Fabric cluster."
+                },
+                "ServicePlacementPolicies": {
+                    "$ref": "#/definitions/ServicePlacementPolicyDescriptionList"
+                },
+                "UseImplicitHost": {
+                    "type": "boolean",
+                    "description": "A flag indicating if this type is not implemented and hosted by a user service process, but is implicitly hosted by a system created process. This value is true for services using the guest executable services, false otherwise."
+                },
+                "HasPersistedState": {
+                    "type": "boolean",
+                    "description": "A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false."
+                },
+                "Extensions": {
+                    "$ref": "#/definitions/ServiceTypeExtensionDescriptionList"
+                }
+            }
+        },
+        "ServiceTypeExtensionDescription": {
+            "type": "object",
+            "description": "Describes extension of a service type defined in the service manifest.",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The name of the extension."
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "The extension value."
+                }
+            }
+        },
+        "ServiceTypeExtensionDescriptionList": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ServiceTypeExtensionDescription"
+            },
+            "description": "List of service type extensions."
+        }
+    },
+    "parameters": {
+        "api-version": {
+            "name": "api-version",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "enum": [
+                "3.0"
+            ],
+            "required": true,
+            "default": "3.0",
+            "description": "The version of the API. This is a required parameter and it's value must be \"3.0\"."
+        },
+        "ApplicationHealthPolicy": {
+            "name": "ApplicationHealthPolicy",
+            "in": "body",
+            "description": "Describes the health policies used to evaluate the health of an application. If not present, the health evaluation uses the health policy from application manifest or the default health policy.",
+            "required": false,
+            "x-ms-parameter-location": "method",
+            "schema": {
+                "$ref": "#/definitions/ApplicationHealthPolicy",
+                "description": "Health policies to evaluate application health."
+            }
+        },
+        "applicationId": {
+            "name": "applicationId",
+            "in": "path",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true,
+            "type": "string",
+            "required": true,
+            "description": "The identity of the application. This is typically the full name of the application without the 'fabric:' URI scheme."
+        },
+        "ApplicationsHealthStateFilter": {
+            "name": "ApplicationsHealthStateFilter",
+            "description": "Allows filtering of the application health state objects returned in the result of cluster health query based on their health state. The possible values for this parameter include integer value of one of the following health states. Only events that match the filter will be returned. All events will be used to evaluate the aggregated health state. If not specified, all entries will be returned. The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of applications with HealthState value of OK (2) and Warning (4) will be returned.\n  \n    - Default - Default value. Matches any HealthState. The value is zero. \n    - None - Filter that doesnâ€™t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. \n    - Ok - Filter that matches input with HealthState value Ok. The value is 2. \n    - Warning - Filter that matches input with HealthState value Warning. The value is 4. \n    - Error - Filter that matches input with HealthState value Error. The value is 8. \n    - All - Filter that matches input with any HealthState value. The value is 65535. \n    \n",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "integer",
+            "required": false,
+            "default": 0
+        },
+        "ClusterHealthPolicies": {
+            "name": "ClusterHealthPolicies",
+            "in": "body",
+            "description": "Describes the health policies used to evaluate the cluster health. If not present, the health evaluation uses the health policy from cluster manifest or the default health policy.",
+            "required": false,
+            "x-ms-parameter-location": "method",
+            "schema": {
+                "type": "object",
+                "description": "Health policies to evaluate cluster health.",
+                "properties": {
+                    "ApplicationHealthPolicyMap": {
+                        "$ref": "#/definitions/ApplicationHealthPolicyMap"
+                    },
+                    "ClusterHealthPolicy": {
+                        "$ref": "#/definitions/ClusterHealthPolicy"
+                    }
+                }
+            }
+        },
+        "ClusterHealthPolicy": {
+            "name": "ClusterHealthPolicy",
+            "in": "body",
+            "description": "Describes the health policies used to evaluate the health of a cluster or node. If not present, the health evaluation uses the health policy from cluster manifest or the default health policy.",
+            "required": false,
+            "x-ms-parameter-location": "method",
+            "schema": {
+                "$ref": "#/definitions/ClusterHealthPolicy",
+                "description": "Health policies to evaluate cluster or node health."
+            }
+        },
+        "ContinuationToken": {
+            "name": "ContinuationToken",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "required": false,
+            "description": "The continuation token parameter is used to obtain next set of results. The continuation token is included in the response of the API when the results from the system do not fit in a single response. When this value is passed to the next API call, the API returns next set of results. If there are no further results then the continuation token is not included in the response."
+        },
+        "DeployedServicePackagesHealthStateFilter": {
+            "name": "DeployedServicePackagesHealthStateFilter",
+            "description": "Allows filtering of the deployed service package health state objects returned in the result of deployed application health query based on their health state. The possible values for this parameter include integer value of one of the following health states. Only events that match the filter will be returned. All events will be used to evaluate the aggregated health state. If not specified, all entries will be returned. The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. The value can be a combination of these values obtained using the bitwise 'OR' operator. For example, If the provided value is 6 then health state of service packages with HealthState value of OK (2) and Warning (4) will be returned. \n  \n    - Default - Default value. Matches any HealthState. The value is zero. \n    - None - Filter that doesnâ€™t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. \n    - Ok - Filter that matches input with HealthState value Ok. The value is 2. \n    - Warning - Filter that matches input with HealthState value Warning. The value is 4. \n    - Error - Filter that matches input with HealthState value Error. The value is 8. \n    - All - Filter that matches input with any HealthState value. The value is 65535. \n    \n",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "integer",
+            "required": false,
+            "default": 0
+        },
+        "EventsHealthStateFilter": {
+            "name": "EventsHealthStateFilter",
+            "description": "Allows filtering the collection of HealthEvent objects returned based on health state. The possible values for this parameter include integer value of one of the following health states. Only events that match the filter will be returned. All events will be used to evaluate the aggregated health state. If not specified, all entries will be returned. The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, If the provided value is 6 then all of the events with HealthState value of OK (2) and Warning (4) will be returned.\n  \n    - Default - Default value. Matches any HealthState. The value is zero. \n    - None - Filter that doesnâ€™t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. \n    - Ok - Filter that matches input with HealthState value Ok. The value is 2. \n    - Warning - Filter that matches input with HealthState value Warning. The value is 4. \n    - Error - Filter that matches input with HealthState value Error. The value is 8. \n    - All - Filter that matches input with any HealthState value. The value is 65535. \n    \n",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "integer",
+            "required": false,
+            "default": 0
+        },
+        "nodeName": {
+            "name": "nodeName",
+            "in": "path",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "required": true,
+            "description": "The name of the node."
+        },
+        "NodesHealthStateFilter": {
+            "name": "NodesHealthStateFilter",
+            "description": "Allows filtering of the node health state objects returned in the result of cluster health query based on their health state. The possible values for this parameter include integer value of one of the following health states. Only events that match the filter will be returned. All events will be used to evaluate the aggregated health state. If not specified, all entries will be returned. The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of nodes with HealthState value of OK (2) and Warning (4) will be returned.\n  \n    - Default - Default value. Matches any HealthState. The value is zero. \n    - None - Filter that doesnâ€™t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. \n    - Ok - Filter that matches input with HealthState value Ok. The value is 2. \n    - Warning - Filter that matches input with HealthState value Warning. The value is 4. \n    - Error - Filter that matches input with HealthState value Error. The value is 8. \n    - All - Filter that matches input with any HealthState value. The value is 65535. \n    \n",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "integer",
+            "required": false,
+            "default": 0
+        },
+        "NodeStatusFilter": {
+            "name": "NodeStatusFilter",
+            "description": "Allows filtering the nodes based on the NodeStatus. Only the nodes that are matching the specified filter value will be returned. The filter value can be one of the following.\n  \n  - default - This filter value will match all of the nodes excepts the ones with with status as Unknown or Removed.\n  - all - This filter value will match all of the nodes.\n  - up - This filter value will match nodes that are Up.\n  - down - This filter value will match nodes that are Down.\n  - enabling - This filter value will match nodes that are in the process of being enabled with status as Enabling.\n  - disabling - This filter value will match nodes that are in the process of being disabled with status as Disabling.\n  - disabled - This filter value will match nodes that are Disabled.\n  - unknown - This filter value will match nodes whose status is Unknown. A node would be in Unknown state if Service Fabric does not have authoritative information about that node. This can happen if the system learns about a node at runtime.\n  - removed - This filter value will match nodes whose status is Removed. These are the nodes that are removed from the cluster using the RemoveNodeState API.\n",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "enum": [
+                "default",
+                "all",
+                "up",
+                "down",
+                "enabling",
+                "disabling",
+                "disabled",
+                "unknown",
+                "removed"
+            ],
+            "required": false,
+            "default": "default"
+        },
+        "HealthInformation": {
+            "name": "HealthInformation",
+            "in": "body",
+            "description": "Describes the health information for the health report. This information needs to be present in all of the health reports sent to the health manager.",
+            "required": true,
+            "x-ms-parameter-location": "method",
+            "schema": {
+                "$ref": "#/definitions/HealthInformation",
+                "description": "Health information for the health report."
+            }
+        },
+        "partitionId": {
+            "name": "partitionId",
+            "in": "path",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true,
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "The identity of the partition."
+        },
+        "serviceId": {
+            "name": "serviceId",
+            "in": "path",
+            "x-ms-parameter-location": "method",
+            "x-ms-skip-url-encoding": true,
+            "type": "string",
+            "required": true,
+            "description": "The identity of the service. This is typically the full name of the service without the 'fabric:' URI scheme."
+        },
+        "applicationTypeName": {
+            "name": "applicationTypeName",
+            "in": "path",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "required": true,
+            "description": "The name of the application type. When included the operation will return information about all versions of this application type."
+        },
+        "ApplicationTypeVersion": {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "x-ms-parameter-location": "method",
+            "type": "string",
+            "required": true,
+            "description": "The version of the application type."
+        }
+    }
+}
