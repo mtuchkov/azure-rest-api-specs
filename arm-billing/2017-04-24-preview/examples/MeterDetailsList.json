@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2017-04-24-preview",
+    "subscriptionId": "subid",
+    "billingPeriodName": "201703-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+			"id": "/subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201703-1/meterDetails/d92b8278-b72c-4b6a-8b57-606806ec1d23",
+			"name": "d92b8278-b72c-4b6a-8b57-606806ec1d23",
+			"type": "Microsoft.Billing/meterDetails",
+			"properties": {
+			  "meterName": "Premium Storage - Page Blob/P10 (Units)",
+			  "meterCategory": "Storage",
+			  "meterSubCategory": "Locally Redundant",
+			  "unit": "Units",
+			  "meterLocation": "BR South",
+			  "currency": "USD",
+			  "pretaxStandardRate": 34.05
+			}
+          }
+        ]
+      }
+    }
+  }
+}
