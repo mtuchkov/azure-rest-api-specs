@@ -27,8 +27,8 @@ matrix:
     - env: MODE=semantic PR_ONLY=true
     - env: MODE=model PR_ONLY=true
 before_install:
-#  - docker pull lmazuel/swagger-to-sdk
-#  - python -c "import os; print('\n'.join(v for v in os.environ.keys() if v.startswith('TRAVIS')))" > /tmp/env_file
+  - docker pull lmazuel/swagger-to-sdk
+  - python -c "import os; print('\n'.join(v for v in os.environ.keys() if v.startswith('TRAVIS')))" > /tmp/env_file
   - sudo apt-get update
   - sudo apt-get install libunwind8 libicu52 -y
 install:
