@@ -1518,11 +1518,7 @@
         "secondaryKey": {
           "type": "string",
           "readOnly": true,
-<<<<<<< HEAD
-          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
-=======
           "description": "A base64-encoded 256-bit secondary key for signing and validating the SAS token."
->>>>>>> cd32a50003b5f95307f849cb770ed3b2f66a85a4
         },
         "keyName": {
           "type": "string",
