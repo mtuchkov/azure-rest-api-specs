@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "pipelineName": "examplePipeline",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:31:09 GMT",
+        "x-ms-request-id": "cff0ba86-f13b-461e-b6ca-478c3101b279",
+        "x-ms-ratelimit-remaining-subscription-reads": "14932",
+        "x-ms-correlation-request-id": "22b7ed63-ecd9-4884-8025-c08a518d0d02"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
+        "name": "examplePipeline",
+        "properties": {
+          "description": "Example description",
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "BlobSource"
+                },
+                "sink": {
+                  "type": "BlobSink"
+                }
+              },
+              "name": "ExampleCopyActivity",
+              "inputs": [
+                {
+                  "referenceName": "exampleDataset",
+                  "type": "DatasetReference"
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "exampleInlineDataset",
+                  "type": "DatasetReference"
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "name": "exampleInlineDataset",
+              "properties": {
+                "type": "AzureBlob",
+                "typeProperties": {
+                  "folderPath": "examplecontainer",
+                  "fileName": {
+                    "value": "@parameters('OutputBlobName')",
+                    "type": "Expression"
+                  },
+                  "format": {
+                    "type": "TextFormat"
+                  }
+                },
+                "linkedServiceName": {
+                  "referenceName": "exampleLinkedService",
+                  "type": "LinkedServiceReference"
+                }
+              }
+            }
+          ],
+          "parameters": {
+            "OutputBlobName": {
+              "type": "String"
+            }
+          }
+        }
+      }
+    }
+  }
+}

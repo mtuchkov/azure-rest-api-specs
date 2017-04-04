@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "pipelineName": "examplePipeline",
+    "ifMatch": null,
+    "pipeline": {
+      "properties": {
+        "activities": [
+          {
+            "type": "Copy",
+            "typeProperties": {
+              "source": {
+                "type": "BlobSource"
+              },
+              "sink": {
+                "type": "BlobSink"
+              }
+            },
+            "name": "ExampleCopyActivity",
+            "inputs": [
+              {
+                "referenceName": "exampleDataset",
+                "type": "DatasetReference"
+              }
+            ],
+            "outputs": [
+              {
+                "referenceName": "exampleInlineDataset",
+                "type": "DatasetReference"
+              }
+            ]
+          }
+        ],
+        "datasets": [
+          {
+            "name": "exampleInlineDataset",
+            "properties": {
+              "type": "AzureBlob",
+              "typeProperties": {
+                "folderPath": "examplecontainer",
+                "fileName": {
+                  "value": "@parameters('OutputBlobName')",
+                  "type": "Expression"
+                },
+                "format": {
+                  "type": "TextFormat"
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "exampleLinkedService",
+                "type": "LinkedServiceReference"
+              }
+            }
+          }
+        ],
+        "parameters": {
+          "OutputBlobName": {
+            "type": "String"
+          }
+        }
+      }
+    },
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:31:09 GMT",
+        "x-ms-request-id": "21dab9e7-2256-4dda-a6a6-a75cbc29d92f",
+        "x-ms-ratelimit-remaining-subscription-writes": "1179",
+        "x-ms-correlation-request-id": "ae92714c-08dd-43cb-ac47-6cab5306f2d3"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/pipelines/examplePipeline",
+        "name": "examplePipeline",
+        "properties": {
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "BlobSource"
+                },
+                "sink": {
+                  "type": "BlobSink"
+                }
+              },
+              "name": "ExampleCopyActivity",
+              "inputs": [
+                {
+                  "referenceName": "exampleDataset",
+                  "type": "DatasetReference"
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "exampleInlineDataset",
+                  "type": "DatasetReference"
+                }
+              ]
+            }
+          ],
+          "datasets": [
+            {
+              "name": "exampleInlineDataset",
+              "properties": {
+                "type": "AzureBlob",
+                "typeProperties": {
+                  "folderPath": "examplecontainer",
+                  "fileName": {
+                    "value": "@parameters('OutputBlobName')",
+                    "type": "Expression"
+                  },
+                  "format": {
+                    "type": "TextFormat"
+                  }
+                },
+                "linkedServiceName": {
+                  "referenceName": "exampleLinkedService",
+                  "type": "LinkedServiceReference"
+                }
+              }
+            }
+          ],
+          "parameters": {
+            "OutputBlobName": {
+              "type": "String"
+            }
+          }
+        }
+      }
+    }
+  }
+}

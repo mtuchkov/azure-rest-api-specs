@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "datasetName": "exampleDataset",
+    "ifMatch": null,
+    "dataset": {
+      "properties": {
+        "type": "AzureBlob",
+        "typeProperties": {
+          "folderPath": "examplecontainer/examplecontainer.csv",
+          "format": {
+            "type": "TextFormat"
+          }
+        },
+        "linkedServiceName": {
+          "referenceName": "exampleLinkedService",
+          "type": "LinkedServiceReference"
+        }
+      }
+    },
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:31:08 GMT",
+        "x-ms-request-id": "4a019f71-ba65-46d4-9808-6e2166a06efa",
+        "x-ms-ratelimit-remaining-subscription-writes": "1181",
+        "x-ms-correlation-request-id": "2b7d511a-d766-4f21-b758-3efa731d67ff"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset",
+        "name": "exampleDataset",
+        "properties": {
+          "type": "AzureBlob",
+          "typeProperties": {
+            "folderPath": "examplecontainer/examplecontainer.csv",
+            "format": {
+              "type": "TextFormat"
+            }
+          },
+          "linkedServiceName": {
+            "referenceName": "exampleLinkedService",
+            "type": "LinkedServiceReference"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "runId": "0348d473f88bc582cbf1a313f3e4ff58",
+    "startTime": "2017-03-26T03:30:09.4534017Z",
+    "endTime": "2017-03-26T03:43:09.8449128Z",
+    "pipelineName": "examplePipeline",
+    "status": null,
+    "activityName": null,
+    "linkedServiceName": null,
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:33:51 GMT",
+        "x-ms-request-id": "361c64ab-e485-4a13-b166-f7f55380a932",
+        "x-ms-ratelimit-remaining-subscription-reads": "14955",
+        "x-ms-correlation-request-id": "e51b0b23-f4b2-4221-90ad-e711d21b4b67"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "24a903ec-5768-484c-bce1-96cca7dae186",
+            "timestamp": "2017-03-26T03:31:13.7451664Z",
+            "pipelineRunId": "0348d473f88bc582cbf1a313f3e4ff58",
+            "pipelineName": "examplePipeline",
+            "status": "Succeeded",
+            "linkedServiceName": "ADFService",
+            "activityName": "ExampleCopyActivity",
+            "activityStart": "2017-03-26T03:31:16.6596758Z",
+            "activityEnd": "2017-03-26T03:31:43.0090688Z",
+            "duration": "00:00:26.3493930",
+            "output": {
+              "progress": 100,
+              "loguri": null,
+              "rows": "1000",
+              "dataRead": "138.67 KB",
+              "dataWritten": "138.67 KB",
+              "regionOrGateway": "East US",
+              "details": "Data Read: 138.67 KB, Written: 138.67 KB, Rows: 1000",
+              "dataVolume": "138.67 KB",
+              "throughput": "18.12 KB/s",
+              "totalDuration": "00:00:07"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

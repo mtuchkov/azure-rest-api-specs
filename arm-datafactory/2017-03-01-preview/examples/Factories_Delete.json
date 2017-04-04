@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:33:55 GMT",
+        "x-ms-request-id": "323e8972-8884-4882-b412-4854667301a1",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-correlation-request-id": "6fbf6603-1674-48f4-8686-dc7eea1a3bbf"
+      },
+      "body": null
+    },
+    "204": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:33:55 GMT",
+        "x-ms-ratelimit-remaining-subscription-writes": "1191",
+        "x-ms-request-id": "fa611815-1f53-45e6-886e-41e9d5e77ea2",
+        "x-ms-correlation-request-id": "fa611815-1f53-45e6-886e-41e9d5e77ea2"
+      },
+      "body": null
+    }
+  }
+}

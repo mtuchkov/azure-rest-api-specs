@@ -1,0 +1,1323 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "LinkedService": {
+      "description": "The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "../datafactory.json#/definitions/ParameterSetSpecification"
+        },
+        "description": {
+          "description": "Linked service description.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureStorageLinkedService": {
+      "x-ms-discriminator-value": "AzureStorage",
+      "description": "The storage account linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureStorageLinkedServiceTypeProperties": {
+      "description": "Azure Storage linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "AzureSqlDWLinkedService": {
+      "x-ms-discriminator-value": "AzureSqlDW",
+      "description": "Azure SQL Data Warehouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure SQL Data Warehouse linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSqlDWLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSqlDWLinkedServiceTypeProperties": {
+      "description": "Azure SQL Data Warehouse linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "OnPremisesSqlServerLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesSqlServer",
+      "description": "On-premises SQL Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises SQL Server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesSqlServerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesSqlServerLinkedServiceTypeProperties": {
+      "description": "On-premises SQL Server linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "Name of the data movement gateway. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString",
+        "gatewayName"
+      ]
+    },
+    "AzureSqlDatabaseLinkedService": {
+      "x-ms-discriminator-value": "AzureSqlDatabase",
+      "description": "Microsoft Azure SQL Database linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure SQL Database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSqlDatabaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSqlDatabaseLinkedServiceTypeProperties": {
+      "description": "Azure SQL Database linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "AzureStorageSasLinkedService": {
+      "x-ms-discriminator-value": "AzureStorageSas",
+      "description": "Azure Storage SAS URI linked service. This linked service type can be used to provide restricted access to an Azure Storage resource using SAS URI.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Storage SAS URI linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureStorageSasLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureStorageSasLinkedServiceTypeProperties": {
+      "description": "Azure Storage SAS URI linked service properties.",
+      "properties": {
+        "sasUri": {
+          "description": "SAS URI of the Azure Storage resource.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    },
+    "AzureBatchLinkedService": {
+      "x-ms-discriminator-value": "AzureBatch",
+      "description": "Azure Batch linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Batch linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBatchLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureBatchLinkedServiceTypeProperties": {
+      "description": "Azure Batch linked service properties.",
+      "properties": {
+        "accountName": {
+          "type": "object",
+          "description": "The Azure Batch account name. Type: string (or Expression with resultType string)."
+        },
+        "accessKey": {
+          "description": "The Azure Batch account access key.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "batchUri": {
+          "type": "object",
+          "description": "The Azure Batch URI. Type: string (or Expression with resultType string)."
+        },
+        "poolName": {
+          "type": "object",
+          "description": "The Azure Batch pool name. Type: string (or Expression with resultType string)."
+        },
+        "linkedServiceName": {
+          "description": "The Azure Storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        }
+      },
+      "required": [
+        "accountName",
+        "accessKey",
+        "batchUri",
+        "poolName",
+        "linkedServiceName"
+      ]
+    },
+    "DocumentDbLinkedService": {
+      "x-ms-discriminator-value": "DocumentDb",
+      "description": "Microsoft Azure Document Database (DocumentDB) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "DocumentDB linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DocumentDbLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DocumentDbLinkedServiceTypeProperties": {
+      "description": "DocumentDB linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "HDInsightLinkedService": {
+      "x-ms-discriminator-value": "HDInsight",
+      "description": "HDInsight linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDInsight linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HDInsightLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "HDInsightLinkedServiceTypeProperties": {
+      "description": "HDInsight linked service properties.",
+      "properties": {
+        "clusterUri": {
+          "type": "object",
+          "description": "HDInsight cluster URI. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "HDInsight cluster user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "HDInsight cluster password.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "linkedServiceName": {
+          "description": "The Azure Storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "hcatalogLinkedServiceName": {
+          "description": "A reference to the Azure SQL linked service that points to the HCatalog database.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        }
+      },
+      "required": [
+        "clusterUri",
+        "userName",
+        "password"
+      ]
+    },
+    "OnPremisesFileServerLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesFileServer",
+      "description": "An on-premises file system linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises file system linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesFileServerLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesFileServerLinkedServiceTypeProperties": {
+      "description": "On-premises file system linked service properties.",
+      "properties": {
+        "host": {
+          "type": "object",
+          "description": "Host name of the server. Type: string (or Expression with resultType string)."
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "userId": {
+          "type": "object",
+          "description": "User ID to logon the server. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to logon the server.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "host",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesOracleLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesOracle",
+      "description": "An on-premises Oracle database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises Oracle database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesOracleLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesOracleLinkedServiceTypeProperties": {
+      "description": "On-premises Oracle database linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises HDIS gateway name. Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesMySqlLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesMySql",
+      "description": "Linked service for MySQL data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises MySQL linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesMySqlLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesMySqlLinkedServiceTypeProperties": {
+      "description": "On-premises MySQL linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "database",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesPostgreSqlLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesPostgreSql",
+      "description": "Linked service for PostgreSQL data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises PostgreSQL linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesPostgreSqlLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesPostgreSqlLinkedServiceTypeProperties": {
+      "description": "On-premises PostgreSQL linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "database",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesSybaseLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesSybase",
+      "description": "Linked service for Sybase data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises Sybase linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesSybaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesSybaseLinkedServiceTypeProperties": {
+      "description": "On-premises Sybase linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "database",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesDb2LinkedService": {
+      "x-ms-discriminator-value": "OnPremisesDb2",
+      "description": "Linked service for DB2 data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises DB2 linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesDb2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesDb2LinkedServiceTypeProperties": {
+      "description": "On-premises DB2 linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "database",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesTeradataLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesTeradata",
+      "description": "Linked service for Teradata data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises Teradata linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesTeradataLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesTeradataLinkedServiceTypeProperties": {
+      "description": "On-premises Teradata linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "AzureMLLinkedService": {
+      "x-ms-discriminator-value": "AzureML",
+      "description": "Azure ML Web Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure ML Web Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMLLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMLLinkedServiceTypeProperties": {
+      "description": "Azure ML Web Service linked service properties.",
+      "properties": {
+        "mlEndpoint": {
+          "type": "object",
+          "description": "The Batch Execution REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
+        },
+        "apiKey": {
+          "description": "The API key for accessing the Azure ML model endpoint.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "updateResourceEndpoint": {
+          "type": "object",
+          "description": "The Update Resource REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "mlEndpoint",
+        "apiKey"
+      ]
+    },
+    "OnPremisesOdbcLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesOdbc",
+      "description": "On-premises Open Database Connectivity (ODBC) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises ODBC linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesOdbcLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesOdbcLinkedServiceTypeProperties": {
+      "description": "On-premises ODBC linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The non-access credential portion of the connection string as well as an optional encrypted credential.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "Type of authentication used to connect to the ODBC data store. Possible values are: Anonymous and Basic. Type: string (or Expression with resultType string)."
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The access credential portion of the connection string specified in driver-specific property-value format.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "userName": {
+          "type": "object",
+          "description": "User name for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "connectionString",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "HdfsLinkedService": {
+      "x-ms-discriminator-value": "Hdfs",
+      "description": "Hadoop Distributed File System (HDFS) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HDFS linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HdfsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "HdfsLinkedServiceTypeProperties": {
+      "description": "HDFS linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of the HDFS service endpoint, e.g. http://myhostname:50070/webhdfs/v1 . Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "Type of authentication used to connect to the HDFS. Possible values are: Anonymous and Windows. Type: string (or Expression with resultType string)."
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 . Type: string (or Expression with resultType string)."
+        },
+        "userName": {
+          "type": "object",
+          "description": "User name for Windows authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for Windows authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "ODataLinkedService": {
+      "x-ms-discriminator-value": "OData",
+      "description": "Open Data Protocol (OData) linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "OData linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ODataLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ODataLinkedServiceTypeProperties": {
+      "description": "OData linked service properties.",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of the OData service endpoint. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the OData service.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Anonymous"
+          ],
+          "x-ms-enum": {
+            "name": "ODataAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "type": "object",
+          "description": "User name of the OData service. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password of the OData service.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ]
+    },
+    "WebLinkedService": {
+      "x-ms-discriminator-value": "Web",
+      "description": "Web linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Web linked service properties.",
+          "$ref": "#/definitions/WebLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WebLinkedServiceTypeProperties": {
+      "description": "Base definition of WebLinkedServiceTypeProperties, this typeProperties is polymorphic based on authenticationType, so not flattened in SDK models.",
+      "discriminator": "authenticationType",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "object",
+          "description": "The URL of the web service endpoint, e.g. http://www.microsoft.com . Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the web table source.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Anonymous",
+            "ClientCertificate"
+          ],
+          "x-ms-enum": {
+            "name": "WebAuthenticationType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "authenticationType",
+        "url"
+      ]
+    },
+    "WebAnonymousAuthentication": {
+      "description": "A WebLinkedService that uses anonymous authentication to communicate with an HTTP endpoint.",
+      "x-ms-discriminator-value": "Anonymous",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebLinkedServiceTypeProperties"
+        }
+      ]
+    },
+    "WebBasicAuthentication": {
+      "description": "A WebLinkedService that uses basic authentication to communicate with an HTTP endpoint.",
+      "x-ms-discriminator-value": "Basic",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebLinkedServiceTypeProperties"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "object",
+          "description": "User name for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "WebClientCertificateAuthentication": {
+      "description": "A WebLinkedService that uses client certificate based authentication to communicate with an HTTP endpoint. This scheme follows mutual authentication; the server must also provide valid credentials to the client.",
+      "x-ms-discriminator-value": "ClientCertificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebLinkedServiceTypeProperties"
+        }
+      ],
+      "properties": {
+        "pfx": {
+          "description": "Base64-encoded contents of a PFX file.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "password": {
+          "description": "Password for the PFX file.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "pfx",
+        "password"
+      ]
+    },
+    "OnPremisesCassandraLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesCassandra",
+      "description": "Linked service for Cassandra data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises Cassandra linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesCassandraLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesCassandraLinkedServiceTypeProperties": {
+      "description": "On-premises Cassandra linked service properties.",
+      "properties": {
+        "host": {
+          "type": "object",
+          "description": "Host name for connection. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "AuthenticationType to be used for connection. Type: string (or Expression with resultType string)."
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer (or Expression with resultType integer)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 . Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "host",
+        "authenticationType",
+        "gatewayName"
+      ]
+    },
+    "OnPremisesMongoDbLinkedService": {
+      "x-ms-discriminator-value": "OnPremisesMongoDb",
+      "description": "Linked service for MongoDb data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises MongoDB linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremisesMongoDbLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "OnPremisesMongoDbLinkedServiceTypeProperties": {
+      "description": "On-premises MongoDB linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "The IP address or server name of the MongoDB server. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "description": "The authentication type to be used to connect to the MongoDB database.",
+          "type": "string",
+          "enum": [
+            "Basic",
+            "Anonymous"
+          ],
+          "x-ms-enum": {
+            "name": "OnPremisesMongoDbAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "databaseName": {
+          "type": "object",
+          "description": "The name of the MongoDB database that you want to access. Type: string (or Expression with resultType string)."
+        },
+        "gatewayName": {
+          "type": "object",
+          "description": "The on-premises gateway name. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for authentication.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "authSource": {
+          "type": "object",
+          "description": "Database to verify the username and password. Type: string (or Expression with resultType string)."
+        },
+        "port": {
+          "type": "object",
+          "description": "The TCP port number that the MongoDB server uses to listen for client connections. The default value is 27017. Type: integer (or Expression with resultType integer), minimum: 0."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication; credentials are encrypted using the Gateway Credential Manager. Reference: https://go.microsoft.com/fwlink/?linkid=837399 . Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "server",
+        "authenticationType",
+        "databaseName",
+        "gatewayName"
+      ]
+    },
+    "SalesforceLinkedService": {
+      "x-ms-discriminator-value": "Salesforce",
+      "description": "Linked service for Salesforce.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceLinkedServiceTypeProperties": {
+      "description": "Salesforce linked service properties.",
+      "properties": {
+        "username": {
+          "type": "object",
+          "description": "The username for Basic authentication of the Salesforce source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication of the Salesforce source.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "securityToken": {
+          "description": "The security token is required to remotely access Salesforce source.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "username",
+        "password",
+        "securityToken"
+      ]
+    },
+    "AwsAccessKeyLinkedService": {
+      "x-ms-discriminator-value": "AwsAccessKey",
+      "description": "Linked service for Amazon Web Services (AWS).",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "AWS linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AwsAccessKeyLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AwsAccessKeyLinkedServiceTypeProperties": {
+      "description": "AWS linked service properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "object",
+          "description": "The access key identifier of the AWS Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
+        },
+        "secretAccessKey": {
+          "description": "The secret access key of the AWS Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "accessKeyId",
+        "secretAccessKey"
+      ]
+    },
+    "AmazonRedshiftLinkedService": {
+      "x-ms-discriminator-value": "AmazonRedshift",
+      "description": "Linked service for Amazon Redshift.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon Redshift linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRedshiftLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonRedshiftLinkedServiceTypeProperties": {
+      "description": "Amazon Redshift linked service properties.",
+      "properties": {
+        "server": {
+          "type": "object",
+          "description": "The name of the Amazon Redshift server. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "The username of the Amazon Redshift source. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password of the Amazon Redshift source.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "database": {
+          "type": "object",
+          "description": "The database name of the Amazon Redshift source. Type: string (or Expression with resultType string)."
+        },
+        "port": {
+          "type": "object",
+          "description": "The TCP port number that the Amazon Redshift server uses to listen for client connections. The default value is 5439. Type: integer (or Expression with resultType integer)."
+        }
+      },
+      "required": [
+        "server",
+        "username",
+        "password",
+        "database"
+      ]
+    },
+    "CustomDataSourceLinkedService": {
+      "x-ms-discriminator-value": "CustomDataSource",
+      "description": "Custom linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Custom linked service properties.",
+          "x-ms-client-flatten": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "gatewayName": "exampleGateway",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:30:36 GMT",
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/gateways/exampleGateway/operationresults/Dcc2922f6-2ee3-4766-8a69-c714e8349f04?api-version=2017-03-01-preview",
+        "Retry-After": "15",
+        "x-ms-request-id": "c09ceb0b-34df-4aac-ab1d-c9fbab31a1cc",
+        "x-ms-ratelimit-remaining-subscription-writes": "1184",
+        "x-ms-correlation-request-id": "530e9307-9bfd-4d1b-8976-e29a97b55c80"
+      },
+      "body": null
+    },
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:31:06 GMT",
+        "x-ms-request-id": "e0649061-78e5-4a86-a7b8-b740227b58c3",
+        "x-ms-ratelimit-remaining-subscription-reads": "14937",
+        "x-ms-correlation-request-id": "ed85a818-224b-4f27-95ce-798bc5a5a18a"
+      },
+      "body": null
+    }
+  }
+}

@@ -1,0 +1,2664 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2017-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories": {
+      "get": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_List",
+        "x-ms-examples": {
+          "Factories_List": {
+            "$ref": "../examples/Factories_List.json"
+          }
+        },
+        "description": "Lists factories under the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
+      "get": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_ListByResourceGroup",
+        "x-ms-examples": {
+          "Factories_ListByResourceGroup": {
+            "$ref": "../examples/Factories_ListByResourceGroup.json"
+          }
+        },
+        "description": "Lists factories.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}": {
+      "put": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_CreateOrUpdate",
+        "x-ms-examples": {
+          "Factories_CreateOrUpdate": {
+            "$ref": "../examples/Factories_CreateOrUpdate.json"
+          }
+        },
+        "description": "Creates or updates a factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "factory",
+            "description": "Factory resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FactoryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_Update",
+        "x-ms-examples": {
+          "Factories_Update": {
+            "$ref": "../examples/Factories_Update.json"
+          }
+        },
+        "description": "Updates a factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "factoryUpdateParameters",
+            "description": "The parameters for updating a factory.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FactoryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_Get",
+        "x-ms-examples": {
+          "Factories_Get": {
+            "$ref": "../examples/Factories_Get.json"
+          }
+        },
+        "description": "Gets a factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "factories"
+        ],
+        "operationId": "Factories_Delete",
+        "x-ms-examples": {
+          "Factories_Delete": {
+            "$ref": "../examples/Factories_Delete.json"
+          }
+        },
+        "description": "Deletes a factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/gateways": {
+      "get": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_ListByFactory",
+        "x-ms-examples": {
+          "Gateways_ListByFactory": {
+            "$ref": "../examples/Gateways_ListByFactory.json"
+          }
+        },
+        "description": "Lists gateways.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/gateways/{gatewayName}": {
+      "put": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Create",
+        "x-ms-examples": {
+          "Gateways_Create": {
+            "$ref": "../examples/Gateways_Create.json"
+          }
+        },
+        "description": "Creates a gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "gateway",
+            "description": "Gateway resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Update",
+        "x-ms-examples": {
+          "Gateways_Update": {
+            "$ref": "../examples/Gateways_Update.json"
+          }
+        },
+        "description": "Updates a gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "description": "Gateway resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Get",
+        "x-ms-examples": {
+          "Gateways_Get": {
+            "$ref": "../examples/Gateways_Get.json"
+          }
+        },
+        "description": "Gets a gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_Delete",
+        "x-ms-examples": {
+          "Gateways_Delete": {
+            "$ref": "../examples/Gateways_Delete.json"
+          }
+        },
+        "description": "Deletes a gateway.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/gateways/{gatewayName}/regeneratekey": {
+      "post": {
+        "tags": [
+          "gateways"
+        ],
+        "operationId": "Gateways_RegenerateKey",
+        "x-ms-examples": {
+          "Gateways_RegenerateKey": {
+            "$ref": "../examples/Gateways_RegenerateKey.json"
+          }
+        },
+        "description": "Regenerates a gateway key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/gatewayName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayRegenerateKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices": {
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_ListByFactory",
+        "x-ms-examples": {
+          "LinkedServices_ListByFactory": {
+            "$ref": "../examples/LinkedServices_ListByFactory.json"
+          }
+        },
+        "description": "Lists linked services.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}": {
+      "put": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "x-ms-examples": {
+          "LinkedServices_Create": {
+            "$ref": "../examples/LinkedServices_Create.json"
+          },
+          "LinkedServices_Update": {
+            "$ref": "../examples/LinkedServices_Update.json"
+          }
+        },
+        "description": "Creates or updates a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the linkedService entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "linkedService",
+            "description": "Linked service resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_Get",
+        "x-ms-examples": {
+          "LinkedServices_Get": {
+            "$ref": "../examples/LinkedServices_Get.json"
+          }
+        },
+        "description": "Gets a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedServices_Delete",
+        "x-ms-examples": {
+          "LinkedServices_Delete": {
+            "$ref": "../examples/LinkedServices_Delete.json"
+          }
+        },
+        "description": "Deletes a linked service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets": {
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_ListByFactory",
+        "x-ms-examples": {
+          "Datasets_ListByFactory": {
+            "$ref": "../examples/Datasets_ListByFactory.json"
+          }
+        },
+        "description": "Lists datasets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}": {
+      "put": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_CreateOrUpdate",
+        "x-ms-examples": {
+          "Datasets_Create": {
+            "$ref": "../examples/Datasets_Create.json"
+          },
+          "Datasets_Update": {
+            "$ref": "../examples/Datasets_Update.json"
+          }
+        },
+        "description": "Creates or updates a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the dataset entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "dataset",
+            "description": "Dataset resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_Get",
+        "x-ms-examples": {
+          "Datasets_Get": {
+            "$ref": "../examples/Datasets_Get.json"
+          }
+        },
+        "description": "Gets a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Datasets_Delete",
+        "x-ms-examples": {
+          "Datasets_Delete": {
+            "$ref": "../examples/Datasets_Delete.json"
+          }
+        },
+        "description": "Deletes a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines": {
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_ListByFactory",
+        "x-ms-examples": {
+          "Pipelines_ListByFactory": {
+            "$ref": "../examples/Pipelines_ListByFactory.json"
+          }
+        },
+        "description": "Lists pipelines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}": {
+      "put": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_CreateOrUpdate",
+        "x-ms-examples": {
+          "Pipelines_Create": {
+            "$ref": "../examples/Pipelines_Create.json"
+          },
+          "Pipelines_Update": {
+            "$ref": "../examples/Pipelines_Update.json"
+          }
+        },
+        "description": "Creates or updates a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the datapipeline entity.  Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "pipeline",
+            "description": "Pipeline resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_Get",
+        "x-ms-examples": {
+          "Pipelines_Get": {
+            "$ref": "../examples/Pipelines_Get.json"
+          }
+        },
+        "description": "Gets a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_Delete",
+        "x-ms-examples": {
+          "Pipelines_Delete": {
+            "$ref": "../examples/Pipelines_Delete.json"
+          }
+        },
+        "description": "Deletes a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}/createRun": {
+      "post": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipelines_CreateRun",
+        "x-ms-examples": {
+          "Pipelines_CreateRun": {
+            "$ref": "../examples/Pipelines_CreateRun.json"
+          }
+        },
+        "description": "Creates a run of a pipeline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "arguments",
+            "description": "Arguments of the pipeline run.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArgumentSetSpecification"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/CreateRunResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns": {
+      "get": {
+        "operationId": "PipelineRuns_ListByFactory",
+        "x-ms-examples": {
+          "PipelineRuns_ListByFactory": {
+            "$ref": "../examples/PipelineRuns_ListByFactory.json"
+          }
+        },
+        "description": "List pipeline runs in the factory based on input filter conditions.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "runStartedAfter",
+            "description": "The time at or after which the pipeline run started to execute in ISO8601 format.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "runStartedBefore",
+            "description": "The time at or before which the pipeline run started to execute in ISO8601 format.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "status",
+            "description": "The status of the pipeline run.",
+            "type": "string",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}": {
+      "get": {
+        "operationId": "PipelineRuns_Get",
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "../examples/PipelineRuns_Get.json"
+          }
+        },
+        "description": "Get pipeline run with runId.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}/pipelineruns": {
+      "get": {
+        "operationId": "PipelineRuns_ListByPipeline",
+        "x-ms-examples": {
+          "PipelineRuns_ListByPipeline": {
+            "$ref": "../examples/PipelineRuns_ListByPipeline.json"
+          }
+        },
+        "description": "List pipeline runs for a pipeline based on input filter conditions.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "runStartedAfter",
+            "description": "The time at or after which the pipeline run started to execute in ISO8601 format.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "runStartedBefore",
+            "description": "The time at or before which the pipeline run started to execute in ISO8601 format.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "status",
+            "description": "The status of the pipeline run.",
+            "type": "string",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querypipelineruns": {
+      "post": {
+        "operationId": "PipelineRuns_ListWithQueryByFactory",
+        "x-ms-examples": {
+          "PipelineRuns_ListWithQueryByFactory": {
+            "$ref": "../examples/PipelineRuns_ListWithQueryByFactory.json"
+          }
+        },
+        "description": "Query pipeline runs.",
+        "tags": [
+          "pipelineruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "queryParameters",
+            "in": "body",
+            "required": true,
+            "description": "Query parameters to list pipeline runs.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunQueryParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/activityruns": {
+      "get": {
+        "operationId": "ActivityRuns_ListByPipelineRun",
+        "x-ms-examples": {
+          "ActivityRuns_ListByPipelineRun": {
+            "$ref": "../examples/ActivityRuns_ListByPipelineRun.json"
+          }
+        },
+        "description": "List activity runs based on input filter conditions.",
+        "tags": [
+          "activityruns"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "startTime",
+            "description": "The start time of activity runs in ISO8601 format.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endTime",
+            "description": "The end time of activity runs in ISO8601 format.",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "pipelineName",
+            "description": "The pipeline name.",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+            "minLength": 1,
+            "maxLength": 260
+          },
+          {
+            "name": "status",
+            "description": "The status of the pipeline run.",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "activityName",
+            "description": "The name of the activity.",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "linkedServiceName",
+            "description": "The linked service name.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+            "minLength": 1,
+            "maxLength": 260
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ActivityRunsListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Azure Data Factory top-level resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "description": "Azure Data Factory nested resource, which belongs to a factory.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Expression": {
+      "description": "Azure Data Factory expression definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Expression"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "resultType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SecureString": {
+      "description": "Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SecureString"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "FactoryListResponse": {
+      "description": "A list of factory resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FactoryResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayListResponse": {
+      "description": "A list of gateway resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayRegenerateKeyResponse": {
+      "description": "Information about the new gateway key.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The new gateway key."
+        }
+      }
+    },
+    "LinkedServiceListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetListResponse": {
+      "description": "A list of dataset resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineListResponse": {
+      "description": "A list of pipeline resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateRunResponse": {
+      "description": "Response body with a run identifier.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "The object that defines the structure of an Azure Data Factory response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        },
+        "error": {
+          "description": "Nested error information.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ParameterSetSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterSpecification"
+      }
+    },
+    "ParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "String",
+            "Int",
+            "Float",
+            "Bool"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ArgumentSetSpecification": {
+      "description": "An object mapping parameter names to argument values.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "FactoryProperties": {
+      "description": "Factory resource properties.",
+      "properties": {
+        "loggingStorageAccountName": {
+          "description": "Storage account to use for logging.",
+          "type": "string"
+        },
+        "loggingStorageAccountKey": {
+          "description": "Access key for logging storage account.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Factory provisioning state, example Succeeded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "Time the factory was created in ISO8601 format.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "error": {
+          "description": "Factory provisioning error code, or null.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Factory error message, or null.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "loggingStorageAccountName",
+        "loggingStorageAccountKey"
+      ]
+    },
+    "GatewayNodeProperties": {
+      "description": "Properties of a gateway node, which may be part of a multi-node gateway.",
+      "properties": {
+        "nodeName": {
+          "description": "Name of the gateway node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isActiveDispatcher": {
+          "description": "Indicates whether this node is the active dispatcher for gateway requests.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the gateway node.",
+          "type": "string",
+          "enum": [
+            "Online",
+            "Offline",
+            "NeedRegistration"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayNodeStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "versionStatus": {
+          "description": "Status of the gateway node version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "Time the gateway node was created in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastUpgradeResult": {
+          "description": "The result of the last gateway node upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayProperties": {
+      "description": "Gateway resource properties.",
+      "properties": {
+        "description": {
+          "description": "Gateway description.",
+          "type": "string"
+        },
+        "key": {
+          "description": "The key of the gateway used for registration. The key is returned only in the response from create requests.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryName": {
+          "description": "Name of the factory to which the gateway belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the gateway.",
+          "type": "string",
+          "enum": [
+            "Online",
+            "Offline",
+            "NeedRegistration"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "capabilityStatus": {
+          "description": "Object with additional information about gateway capabilities.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "copyAuthoringAvailable": {
+              "description": "Indicates whether or not the gateway supports the Azure Data Factory Copy Wizard by this field.",
+              "type": "boolean",
+              "readOnly": true
+            }
+          }
+        },
+        "versionStatus": {
+          "description": "Status of the gateway version.",
+          "type": "string",
+          "enum": [
+            "UpToDate",
+            "Expiring",
+            "Expired",
+            "NewVersionAvailable",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayVersionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the gateway.  After successful creation, the value is Succeeded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the gateway.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "The time at which the gateway was created in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "registerTime": {
+          "description": "The time at which the gateway was registered in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "description": "The time at which the gateway will expire in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastConnectTime": {
+          "description": "The most recent time at which the gateway was connected in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastUpgradeResult": {
+          "description": "The result of the most recent gateway upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "multiNodeSupportEnabled": {
+          "description": "Indicates whether this gateway supports multi-node configuration.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isCredentailSyncFailed": {
+          "description": "Indicates whether last credential sync failed.  Spelling will change soon.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "The list of nodes for this gateway, may be more than one if multi-node gateways are enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayNodeProperties"
+          }
+        }
+      }
+    },
+    "PipelineResource": {
+      "description": "Pipeline resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FactoryResource": {
+      "description": "Factory resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryProperties"
+        }
+      }
+    },
+    "FactoryUpdateParameters": {
+      "description": "Parameters for updating a factory resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      }
+    },
+    "DatasetReference": {
+      "description": "Dataset reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "DatasetReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "$ref": "#/definitions/ArgumentSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "GatewayResource": {
+      "description": "Gateway resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayProperties"
+        }
+      }
+    },
+    "DatasetResource": {
+      "description": "Dataset resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DatasetInline": {
+      "description": "Inline dataset reference type.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "LinkedServiceReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "arguments": {
+          "$ref": "#/definitions/ArgumentSetSpecification"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceResource": {
+      "description": "Linked service resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceInline": {
+      "description": "Inline linked service reference type.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService"
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "PipelineRunListResponse": {
+      "description": "A list pipeline runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "Information about a pipeline run.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Internal identifier of the pipeline run, the schema is {Tenant}_{EventNamespace}_{Scope}_{Id}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "The timestamp of the event in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryName": {
+          "description": "The factory name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The pipeline name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The full or partial list of parameters used in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parametersCount": {
+          "description": "The count of parameters used in the pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "parameterNames": {
+          "description": "The full or partial list of parameter names used in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parameterNamesCount": {
+          "description": "The count of parameter names used in the pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "parameterValues": {
+          "description": "The full or partial list of parameter values used in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parameterValuesCount": {
+          "description": "The count of parameter values used in the pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "runStart": {
+          "description": "The start time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runEnd": {
+          "description": "The end time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of a pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message from a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PipelineRunQueryParameters": {
+      "description": "Parameters to query pipeline runs.",
+      "type": "object",
+      "properties": {
+        "pipelineName": {
+          "description": "The name of the pipeline.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The full or partial list of parameters used in the pipeline run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isExactParametersMatch": {
+          "description": "True if the parameters argument is the full list of parameters, false if it's partial.",
+          "type": "boolean",
+          "default": false
+        },
+        "parameterNames": {
+          "description": "The full or partial list of parameter names used in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isExactParameterNamesMatch": {
+          "description": "True if the parameter names argument is the full list of parameter names, false if it's partial.",
+          "type": "boolean",
+          "default": false
+        },
+        "parameterValues": {
+          "description": "The full or partial list of parameter values used in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isExactParameterValuesMatch": {
+          "description": "True if the parameter values argument is the full list of parameter values, false if it's partial.",
+          "type": "boolean",
+          "default": false
+        },
+        "status": {
+          "description": "The status of the pipeline run attempt.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "Additional filter for pipeline run attempt.",
+          "type": "string"
+        },
+        "top": {
+          "description": "The number of pipeline run attempts to return.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "skip": {
+          "description": "The number of pipeline run attempts to skip.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "includeTotalResultCount": {
+          "description": "Indicates the count of the total number of pipeline run attempts matching the filter should be returned.",
+          "type": "boolean",
+          "default": false
+        },
+        "orderBy": {
+          "description": "List of columns that the result set is ordered by.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aggregates": {
+          "description": "List of columns to be aggregated.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PipelineRunQueryResponse": {
+      "description": "A query result for pipeline runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRunQueryResult"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRunQueryResult": {
+      "description": "The result of list pipeline runs, which contains timestamp, pipeline runs, and aggregates.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The total count of pipeline runs matching the filter.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "lastUpdate": {
+          "description": "The timestamp of the last indexed event in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "pipelineRuns": {
+          "description": "The list of pipeline runs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          },
+          "readOnly": true
+        },
+        "aggregates": {
+          "description": "The dictionary of pipeline run aggregates.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PipelineRunAggregate"
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PipelineRunAggregate": {
+      "description": "Aggregate of pipeline runs.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "value": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "ActivityRunsListResponse": {
+      "description": "A list activity runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivityRun"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ActivityRun": {
+      "description": "Information about an activity run in a pipeline.",
+      "type": "object",
+      "properties": {
+        "pipelineName": {
+          "description": "The name of the pipeline.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The id of the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityName": {
+          "description": "The name of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkedServiceName": {
+          "description": "The name of the compute linked service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "The timestamp for the activity run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "activityStart": {
+          "description": "The start time of the activity run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "activityEnd": {
+          "description": "The end time of the activity run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "input": {
+          "description": "The input for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "output": {
+          "description": "The output for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The error if any from the activity run.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "The subscription identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "factoryName": {
+      "name": "factoryName",
+      "description": "The factory name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "linkedServiceName": {
+      "name": "linkedServiceName",
+      "description": "The linked service name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "datasetName": {
+      "name": "datasetName",
+      "description": "The dataset name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "pipelineName": {
+      "name": "pipelineName",
+      "description": "The pipeline name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "runId": {
+      "name": "runId",
+      "description": "The pipeline run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]",
+      "minLength": 32,
+      "maxLength": 32,
+      "x-ms-parameter-location": "method"
+    },
+    "gatewayName": {
+      "name": "gatewayName",
+      "description": "The gateway name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "The API version.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
