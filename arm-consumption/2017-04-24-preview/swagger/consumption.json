@@ -61,14 +61,14 @@
         "parameters": [
           {
             "name": "scope", 
-            "description": "The scope of the usage details. The scope can be '/subscriptions/{subscriptionId}/' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}' for an invoice or /subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName} for a billing perdiod.", 
+            "description": "The scope of the usage details. The scope can be '/subscriptions/{subscriptionId}/' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}' for an invoice or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing perdiod.", 
             "in": "path",
             "required": true,
             "type": "string"
           },  
           {
             "name": "$expand",
-            "description": "May be used to expand the additionalProperties and meterDetails properties within a list of usage details. By default, these fields are not included.",
+            "description": "May be used to expand the additionalProperties or meterDetails property within a list of usage details. By default, these fields are not included when listing usage details.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -156,34 +156,35 @@
       "description": "The properties of the meter detail.",
       "properties": {
         "meterName": {
-          "description": "The name of the meter, within the given meter category.",
+          "description": "The name of the meter, within the given meter category",
           "type": "string",
-		  "readOnly": true
+    		  "readOnly": true
         },
         "meterCategory": {
-          "description": "The category of the meter, e.g., 'Cloud services', 'Networking', etc..",
+          "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
           "type": "string",
-		  "readOnly": true
+		      "readOnly": true
         },
         "meterSubCategory": {
-          "description": "The subcategory of the meter, e.g., 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
+          "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
           "type": "string",
-		  "readOnly": true
+		      "readOnly": true
         },
         "unit": {
-          "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc.",
+          "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
           "type": "string",
-		  "readOnly": true
+		      "readOnly": true
         },
         "meterLocation": {
           "description": "The location in which the Azure service is available.",
           "type": "string",
-		  "readOnly": true
+		      "readOnly": true
         },
-        "currency": {
-          "description": "The currency in which the meter is charged.",
-          "type": "string",
-		  "readOnly": true
+        "totalIncludedQuantity": {
+          "description": "The total included quantity associated with the offer.",
+          "type": "number",
+          "format": "decimal",
+		      "readOnly": true
         },
         "pretaxStandardRate": {
           "description": "The pretax listing price.",
@@ -229,23 +230,23 @@
 	"UsageDetailProperties":{
       "description": "The properties of the usage detail.",
       "properties": {
-        "billingPeriodName": {
-          "description": "The name of the billing period resource that the usage belongs to.",
+        "billingPeriodId": {
+          "description": "The id of the billing period resource that the usage belongs to.",
           "type": "string",
           "readOnly": true
         },
-        "invoiceName": {
-          "description": "The name of the invoice resource that the usage belongs to.",
+        "invoiceId": {
+          "description": "The id of the invoice resource that the usage belongs to.",
           "type": "string",
           "readOnly": true
         },
-		"usageStart": {
+        "usageStart": {
           "description": "The start of the date time range covered by the usage detail.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
-		"usageEnd": {
+        "usageEnd": {
           "description": "The end of the date time range covered by the usage detail.",
           "type": "string",
           "format": "date-time",
@@ -266,6 +267,11 @@
           "type": "string",
           "readOnly": true
         },
+        "currency": {
+          "description": "The ISO currency in which the meter is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
         "usageQuantity": {
           "description": "The quantity of usage.",
           "type": "number",
@@ -278,12 +284,6 @@
           "format": "decimal",
           "readOnly": true
         },
-        "consumedCredit": {
-          "description": "The amount of credit that has been consumed.",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
         "pretaxCost": {
           "description": "The amount of cost before tax.",
           "type": "number",
@@ -291,18 +291,18 @@
           "readOnly": true
         },
         "isEstimated": {
-          "description": "Whether the numbers in the usage are estimated ones. It is false for closed billing periods and true for open ones.",
+          "description": "The estimated usage is subject to change.",
           "type": "boolean",
           "readOnly": true
         },
-        "meterDetailsId": {
-          "description": "The uri of the meter details resource.",
+        "meterId": {
+          "description": "The meter id.",
           "type": "string",
           "readOnly": true
         },
         "meterDetails": {
           "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
-	      "$ref": "#/definitions/MeterDetails",
+          "$ref": "#/definitions/MeterDetails",
           "readOnly": true
         },
         "additionalProperties": {

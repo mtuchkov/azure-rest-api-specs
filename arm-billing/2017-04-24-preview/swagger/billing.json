@@ -40,7 +40,7 @@
           "BillingPeriods"
         ],
         "operationId": "BillingPeriods_List",
-        "description": "Lists the available billing periods for a subscription in reverse chronological order. Defaults to listing the latest 12 billing periods if no $filter or $top being specified.",
+        "description": "Lists the available billing periods for a subscription in reverse chronological order.",
         "externalDocs": {
           "url": "https://go.microsoft.com/fwlink/?linkid=844490"
         },
@@ -54,13 +54,23 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "$filter",
             "description": "May be used to filter billing periods by billingPeriodEndDate. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
             "in": "query",
             "required": false,
             "type": "string"
           },          
-		  {
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+		      {
             "name": "$top",
             "description": "May be used to limit the number of results to the most recent N billing periods.",
             "in": "query",
@@ -68,9 +78,6 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 100
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -107,6 +114,9 @@
         "parameters": [
           {                                 
             "$ref": "#/parameters/subscriptionIdParameter"
+          },   
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "billingPeriodName", 
@@ -114,9 +124,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },   
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -158,6 +165,9 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "name": "$expand",
             "description": "May be used to expand the downloadUrl property within a list of invoices. This enables download links to be generated for multiple invoices at once. By default, downloadURLs are not included when listing invoices.",
             "in": "query",
@@ -186,9 +196,6 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 100
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -225,6 +232,9 @@
         "parameters": [
           {                                 
             "$ref": "#/parameters/subscriptionIdParameter"
+          },   
+          {
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "invoiceName", 
@@ -232,9 +242,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },   
-          {
-            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -289,121 +296,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/meterDetails": {
-      "get": {
-        "tags": [
-          "MeterDetails"
-        ],
-        "operationId": "MeterDetails_List",
-        "description": "Lists the available meter details that are being used in the billing period.",
-        "externalDocs": {
-          "url": "https://go.microsoft.com/fwlink/?linkid=845274"
-        },
-        "x-ms-examples": {
-          "MeterDetailsList": {
-            "$ref": "../examples/MeterDetailsList.json" 
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "billingPeriodName", 
-            "description": "The name of a BillingPeriod resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },   
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N meterDetails.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/MeterDetailsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/meterDetails/{meterDetailName}": {
-      "get": {
-        "tags": [
-          "MeterDetails"
-        ],
-        "operationId": "MeterDetails_Get",
-        "description": "Gets a named meterDetail resource.",
-        "x-ms-examples": {
-          "MeterDetailsGet": {
-            "$ref": "../examples/MeterDetailsGet.json" 
-          }
-        },
-        "parameters": [
-          {                                 
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "billingPeriodName", 
-            "description": "The name of a BillingPeriod resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },   
-          {
-            "name": "meterDetailName", 
-            "description": "The name of a MeterDetail resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },   
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-                "$ref": "#/definitions/MeterDetail"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/operations": {
       "get": {
         "tags": [
@@ -437,7 +329,7 @@
     }
   },
   "definitions": {
-	"BillingPeriod": {
+	  "BillingPeriod": {
       "description": "A billing period resource.",
       "type": "object",
       "allOf": [
@@ -452,7 +344,7 @@
         }
       }
     },
-	"BillingPeriodsListResult": {
+	  "BillingPeriodsListResult": {
       "description": "Result of listing billing periods. It contains a list of available billing periods in reverse chronological order.",
       "properties": {
         "value": {
@@ -470,7 +362,7 @@
         }
       }
     },
-	"BillingPeriodProperties":{
+	  "BillingPeriodProperties":{
       "description": "The properties of the billing period.",
       "properties": {
         "billingPeriodStartDate": {
@@ -488,7 +380,7 @@
         "invoiceIds": {
           "description": "Array of invoice ids that associated with.",
           "type": "array",
-		  "readOnly": true,
+		    "readOnly": true,
           "items": {
             "type": "string"
           }
@@ -595,86 +487,12 @@
         "billingPeriodIds": {
           "description": "Array of billing perdiod ids that the invoice is attributed to.",
           "type": "array",
-		  "readOnly": true,
+		      "readOnly": true,
           "items": {
             "type": "string"
           }
         }
       }
-    },
-	"MeterDetail": {
-      "description": "A meter detail resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MeterDetailProperties"
-        }
-      }
-    },
-	"MeterDetailsListResult": {
-      "description": "Result of listing meter details.",
-      "properties": {
-        "value": {
-          "description": "The list of meter details.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/MeterDetail"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-	"MeterDetailProperties":{
-      "description": "The properties of the meter detail.",
-      "properties": {
-        "meterName": {
-          "description": "The name of the meter, within the given meter category.",
-          "type": "string",
-		  "readOnly": true
-        },
-        "meterCategory": {
-          "description": "The category of the meter, e.g., 'Cloud services', 'Networking', etc..",
-          "type": "string",
-		  "readOnly": true
-        },
-        "meterSubCategory": {
-          "description": "The subcategory of the meter, e.g., 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
-          "type": "string",
-		  "readOnly": true
-        },
-        "unit": {
-          "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc.",
-          "type": "string",
-		  "readOnly": true
-        },
-        "meterLocation": {
-          "description": "The location in which the Azure service is available.",
-          "type": "string",
-		  "readOnly": true
-        },
-        "currency": {
-          "description": "The currency in which the meter is charged.",
-          "type": "string",
-		  "readOnly": true
-        },
-        "pretaxStandardRate": {
-          "description": "The pretax listing price.",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        }
-	  }
     },
     "Operation": {
       "description": "A Billing REST API operation.",
