@@ -12,9 +12,11 @@
         "type": "Microsoft.Billing/billingPeriods",
         "properties": {
           "billingPeriodStartDate": "2017-01-01",
-          "billingPeriodEndDate":  "2017-02-01",
-		      "invoiceIds": ["/subscriptions/subid/providers/Microsoft.Billing/invoices/2017-02-05-123456789", 
-              "/subscriptions/subid/providers/Microsoft.Billing/invoices/2017-01-05-987654321"]
+          "billingPeriodEndDate": "2017-02-01",
+          "invoiceIds": [
+            "/subscriptions/subid/providers/Microsoft.Billing/invoices/2017-02-05-123456789",
+            "/subscriptions/subid/providers/Microsoft.Billing/invoices/2017-01-05-987654321"
+          ]
         }
       }
     }

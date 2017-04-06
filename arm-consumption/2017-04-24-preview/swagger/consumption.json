@@ -49,23 +49,23 @@
             "$ref": "../examples/UsageDetailsListForBillingPeriod.json"
           },
           "UsageDetailsListForInvoice": {
-            "$ref": "../examples/UsageDetailsListForInvoice.json"		
+            "$ref": "../examples/UsageDetailsListForInvoice.json"
           },
           "UsageDetailsList": {
-            "$ref": "../examples/UsageDetailsList.json"			
+            "$ref": "../examples/UsageDetailsList.json"
           },
           "UsageDetailsExpand": {
-            "$ref": "../examples/UsageDetailsExpand.json" 
+            "$ref": "../examples/UsageDetailsExpand.json"
           }
         },
         "parameters": [
           {
-            "name": "scope", 
-            "description": "The scope of the usage details. The scope can be '/subscriptions/{subscriptionId}/' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}' for an invoice or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing perdiod.", 
+            "name": "scope",
+            "description": "The scope of the usage details. The scope can be '/subscriptions/{subscriptionId}/' for a subscription, or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/invoices/{invoiceName}' for an invoice or '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}' for a billing perdiod.",
             "in": "path",
             "required": true,
             "type": "string"
-          },  
+          },
           {
             "name": "$expand",
             "description": "May be used to expand the additionalProperties or meterDetails property within a list of usage details. By default, these fields are not included when listing usage details.",
@@ -152,39 +152,39 @@
     }
   },
   "definitions": {
-  	"MeterDetails":{
+    "MeterDetails": {
       "description": "The properties of the meter detail.",
       "properties": {
         "meterName": {
           "description": "The name of the meter, within the given meter category",
           "type": "string",
-    		  "readOnly": true
+          "readOnly": true
         },
         "meterCategory": {
           "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
           "type": "string",
-		      "readOnly": true
+          "readOnly": true
         },
         "meterSubCategory": {
           "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
           "type": "string",
-		      "readOnly": true
+          "readOnly": true
         },
         "unit": {
           "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
           "type": "string",
-		      "readOnly": true
+          "readOnly": true
         },
         "meterLocation": {
           "description": "The location in which the Azure service is available.",
           "type": "string",
-		      "readOnly": true
+          "readOnly": true
         },
         "totalIncludedQuantity": {
           "description": "The total included quantity associated with the offer.",
           "type": "number",
           "format": "decimal",
-		      "readOnly": true
+          "readOnly": true
         },
         "pretaxStandardRate": {
           "description": "The pretax listing price.",
@@ -192,9 +192,9 @@
           "format": "decimal",
           "readOnly": true
         }
-	  }
+      }
     },
-	"UsageDetail": {
+    "UsageDetail": {
       "description": "An usage detail resource.",
       "type": "object",
       "allOf": [
@@ -209,7 +209,7 @@
         }
       }
     },
-	"UsageDetailsListResult": {
+    "UsageDetailsListResult": {
       "description": "Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.",
       "properties": {
         "value": {
@@ -227,7 +227,7 @@
         }
       }
     },
-	"UsageDetailProperties":{
+    "UsageDetailProperties": {
       "description": "The properties of the usage detail.",
       "properties": {
         "billingPeriodId": {
@@ -333,14 +333,14 @@
           "type": "string",
           "readOnly": true
         }
-      }      
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {
-           "$ref": "#/definitions/ErrorDetails"
+          "$ref": "#/definitions/ErrorDetails"
         }
       }
     },
@@ -376,12 +376,12 @@
       }
     },
     "OperationListResult": {
-     "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
           "type": "array",
-          "readOnly": true, 
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           }
@@ -413,13 +413,13 @@
         },
         "tags": {
           "readOnly": true,
-   	      "type": "object",
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags."
         }
-   	  },
+      },
       "x-ms-azure-resource": true
     }
   },
