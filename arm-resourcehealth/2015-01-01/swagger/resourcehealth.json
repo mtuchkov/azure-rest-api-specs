@@ -180,7 +180,7 @@
 						"$ref": "#/parameters/ResourceProviderParameter"
 					},
 					{
-						"$ref": "#/parameters/resourceTypeParameter"
+						"$ref": "#/parameters/ResourceTypeParameter"
 					}
 				],
 				"responses": {
@@ -302,7 +302,7 @@
 						"$ref": "#/parameters/ResourceProviderParameter"
 					},
 					{
-						"$ref": "#/parameters/resourceTypeParameter"
+						"$ref": "#/parameters/ResourceTypeParameter"
 					}
 				],
 				"responses": {
