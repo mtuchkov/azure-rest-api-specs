@@ -8,7 +8,7 @@
          "body":{  
             "value":[  
                {  
-                  "id":"/subscriptions/4970d23e-ed41-4670-9c1902a1d2808ff9/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
+                  "id":"/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
                   "name":"current",
                   "type":"Microsoft.ResourceHealth/AvailabilityStatuses",
                   "location":"eastus",
@@ -39,7 +39,7 @@
                   }
                },
                {  
-                  "id":"/subscriptions/4970d23e-ed41-4670-9c1902a1d2808ff9/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/2016-03-28+16%3a23%3a00Z",
+                  "id":"/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/2016-03-28+16%3a23%3a00Z",
                   "name":"2016-03-28+16%3a23%3a00Z",
                   "type":"Microsoft.ResourceHealth/AvailabilityStatuses",
                   "location":"eastus",
