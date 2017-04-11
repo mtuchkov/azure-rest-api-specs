@@ -114,7 +114,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/providers/Microsoft.ResourceHealth/availabilityStatuses/current": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current": {
       "get": {
         "tags": [
           "AvailabilityStatuses"
@@ -123,29 +123,18 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
-            "name": "resourceName",
+            "name": "resourceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource."
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
           },
           {
             "$ref": "#/parameters/ExpandParameter"
@@ -167,7 +156,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{resourceType}/{resourceName}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
       "get": {
         "tags": [
           "AvailabilityStatuses"
@@ -176,96 +165,18 @@
         "description": "Lists the historical availability statuses for a single resource. Use the nextLink property in the response to get the next page of availability status",
         "parameters": [
           {
-            "name": "resourceName",
+            "name": "resourceId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource."
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API support not nested and one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name} and /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains the list of the historical availability statuses for a single resource",
-            "schema": {
-              "$ref": "#/definitions/availabilityStatusListResult"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}/providers/Microsoft.ResourceHealth/availabilityStatuses/current": {
-      "get": {
-        "tags": [
-          "AvailabilityStatuses"
-        ],
-        "operationId": "AvailabilityStatus_GetByNestedResource",
-        "description": "Lists the current availability status for a single nested resource",
-        "parameters": [
-          {
-            "name": "parentResourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the parent resource."
-          },
-          {
-            "name": "parentResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the parent resource."
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource."
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
           },
           {
             "$ref": "#/parameters/ExpandParameter"
@@ -273,71 +184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the details of the current availability status for a single nested resource",
-            "schema": {
-              "$ref": "#/definitions/availabilityStatus"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProvider}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
-      "get": {
-        "tags": [
-          "AvailabilityStatuses"
-        ],
-        "operationId": "Availabilitystatuses_ListForNestedResource",
-        "description": "Lists the historical availability statuses for a nested resource. Use the nextLink property in the response to get the next page of availability status",
-        "parameters": [
-          {
-            "name": "parentResourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the parent resource."
-          },
-          {
-            "name": "parentResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the parent resource."
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource."
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains the list of the historical availability statuses for a nested resource.",
+            "description": "The body contains the list of the historical availability statuses for a single resource",
             "schema": {
               "$ref": "#/definitions/availabilityStatusListResult"
             }
