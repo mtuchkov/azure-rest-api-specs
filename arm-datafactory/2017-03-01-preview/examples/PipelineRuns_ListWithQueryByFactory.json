@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "queryParameters": {
+      "filter": "RunId eq '0348d473f88bc582cbf1a313f3e4ff58'",
+      "top": 1
+    },
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:33:41 GMT",
+        "x-ms-request-id": "8a51b3c5-eef9-41c1-b7e6-233691969349",
+        "x-ms-ratelimit-remaining-subscription-writes": "1199",
+        "x-ms-correlation-request-id": "59981029-3070-47c5-bd73-2d7f65398ade"
+      },
+      "body": {
+        "value": [
+          {
+            "lastUpdate": "2017-03-26T10:33:22.6183916Z",
+            "pipelineRuns": [
+              {
+                "key": "Production_ADF2_Global_exampleFactoryName_examplePipeline_636260958737451664_1116378542_0348d473f88bc582cbf1a313f3e4ff58",
+                "runId": "0348d473f88bc582cbf1a313f3e4ff58",
+                "dataFactoryName": "exampleFactoryName",
+                "pipelineName": "examplePipeline",
+                "parameters": [
+                  "OutputBlobName: exampleoutput.csv"
+                ],
+                "parametersCount": 1,
+                "parameterNames": [
+                  "OutputBlobName"
+                ],
+                "parameterNamesCount": 1,
+                "parameterValues": [
+                  "exampleoutput.csv"
+                ],
+                "parameterValuesCount": 1,
+                "runStart": "2017-03-26T03:32:27.517Z",
+                "runEnd": "2017-03-26T03:32:27.517Z",
+                "durationInMs": 0,
+                "status": "Succeeded",
+                "message": "",
+                "timestamp": "2017-03-26T03:31:13.745Z"
+              }
+            ],
+            "aggregates": {}
+          }
+        ]
+      }
+    }
+  }
+}

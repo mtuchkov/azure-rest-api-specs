@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:31:08 GMT",
+        "x-ms-request-id": "3ba4ed14-f571-4a84-a90c-4a62393587a3",
+        "x-ms-ratelimit-remaining-subscription-reads": "14933",
+        "x-ms-correlation-request-id": "f46339e6-825b-4422-9720-50ca39bb2c5a"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/datasets/exampleDataset",
+            "name": "exampleDataset",
+            "properties": {
+              "type": "AzureBlob",
+              "typeProperties": {
+                "folderPath": "examplecontainer/examplecontainer.csv",
+                "format": {
+                  "type": "TextFormat"
+                }
+              },
+              "description": "Example description",
+              "linkedServiceName": {
+                "referenceName": "exampleLinkedService",
+                "type": "LinkedServiceReference"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

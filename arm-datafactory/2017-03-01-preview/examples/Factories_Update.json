@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "factoryUpdateParameters": {
+      "tags": {
+        "exampleTag": "exampleValue"
+      }
+    },
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:30:32 GMT",
+        "x-ms-request-id": "c2da4a56-6706-45ff-8f65-d1bbb8a0cf17",
+        "x-ms-ratelimit-remaining-subscription-writes": "1188",
+        "x-ms-correlation-request-id": "0080c9cf-4bbf-4154-9928-c4d7700a14af"
+      },
+      "body": {
+        "name": "exampleFactoryName",
+        "tags": {
+          "exampleTag": "exampleValue"
+        },
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/exampleresourcegroup/providers/Microsoft.DataFactory/factories/exampleFactoryName",
+        "type": "Microsoft.DataFactory/factories",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "loggingStorageAccountName": "examplestorageaccount",
+          "createTime": "2017-03-26T03:30:30.972256Z",
+          "loggingStorageAccountKey": "**********"
+        }
+      }
+    }
+  }
+}

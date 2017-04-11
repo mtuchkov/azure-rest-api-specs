@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "gatewayName": "exampleGateway",
+    "parameters": {
+      "properties": {
+        "description": "Example gateway"
+      }
+    },
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sun, 26 Mar 2017 03:30:34 GMT",
+        "x-ms-request-id": "beef768f-78f9-4a63-bb7b-d62aad4da451",
+        "x-ms-ratelimit-remaining-subscription-writes": "1186",
+        "x-ms-correlation-request-id": "ee9e2320-07eb-435d-b625-38e2f572415e"
+      },
+      "body": {
+        "name": "exampleGateway",
+        "properties": {
+          "description": "Example gateway",
+          "dataFactoryName": "examplefactoryname",
+          "status": "NeedRegistration",
+          "capabilityStatus": {
+            "copyAuthoringAvailable": true
+          },
+          "versionStatus": "None",
+          "provisioningState": "Succeeded",
+          "createTime": "2017-03-26T03:30:33.8905627Z",
+          "lastUpgradeResult": "",
+          "multiNodeSupportEnabled": false,
+          "nodes": [
+            {
+              "nodeName": "exampleGateway",
+              "isActiveDispatcher": true,
+              "status": "NeedRegistration",
+              "versionStatus": "None",
+              "createTime": "2017-03-26T03:30:33.8905627Z",
+              "lastUpgradeResult": "None"
+            }
+          ],
+          "isCredentailSyncFailed": false
+        },
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/gateways/exampleGateway"
+      }
+    }
+  }
+}
