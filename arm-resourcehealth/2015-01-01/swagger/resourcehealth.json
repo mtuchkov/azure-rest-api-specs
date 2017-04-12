@@ -123,7 +123,7 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
@@ -165,7 +165,7 @@
         "description": "Lists the historical availability statuses for a single resource. Use the nextLink property in the response to get the next page of availability status",
         "parameters": [
           {
-            "name": "resourceId",
+            "name": "resourceUri",
             "in": "path",
             "required": true,
             "type": "string",
