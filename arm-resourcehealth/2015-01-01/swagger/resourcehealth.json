@@ -69,11 +69,11 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-		"x-ms-examples": {
-					"ListHealthBySubscriptionId": {
-						"$ref": "../examples/AvailabilityStatuses_ListBySubscriptionId.json"
-					}
-		}
+        "x-ms-examples": {
+          "ListHealthBySubscriptionId": {
+            "$ref": "../examples/AvailabilityStatuses_ListBySubscriptionId.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
@@ -117,11 +117,11 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-		"x-ms-examples": {
-					"ListByResourceGroup": {
-						"$ref": "../examples/AvailabilityStatuses_ListBySubscriptionId.json"
-					}
-		}
+        "x-ms-examples": {
+          "ListByResourceGroup": {
+            "$ref": "../examples/AvailabilityStatuses_ListBySubscriptionId.json"
+          }
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current": {
@@ -164,11 +164,11 @@
             }
           }
         },
-		"x-ms-examples": {
-					"GetCurrentHealthByResource": {
-						"$ref": "../examples/AvailabilityStatus_GetByResource.json"
-					}
-		}
+        "x-ms-examples": {
+          "GetCurrentHealthByResource": {
+            "$ref": "../examples/AvailabilityStatus_GetByResource.json"
+          }
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
@@ -214,11 +214,11 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-		"x-ms-examples": {
-					"GetHealthHistoryByResource": {
-						"$ref": "../examples/Availabilitystatuses_List.json"
-					}
-		}
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "../examples/Availabilitystatuses_List.json"
+          }
+        }
       }
     },
     "/providers/Microsoft.ResourceHealth/operations": {
@@ -244,8 +244,6 @@
             "description": "DefaultErrorResponse",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
-            }
             }
           }
         }
@@ -375,14 +373,14 @@
             },
             "recommendedActions": {
               "type": "array",
-			  "description": "Lists actions the user can take based on the current availabilityState of the resource.",
+              "description": "Lists actions the user can take based on the current availabilityState of the resource.",
               "items": {
                 "$ref": "#/definitions/recommendedAction"
               }
             },
             "serviceImpactingEvents": {
               "type": "array",
-			  "description": "Lists the service impacting events that may be affecting the health of the resource.",
+              "description": "Lists the service impacting events that may be affecting the health of the resource.",
               "items": {
                 "$ref": "#/definitions/serviceImpactingEvent"
               }
