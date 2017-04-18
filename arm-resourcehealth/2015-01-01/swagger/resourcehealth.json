@@ -85,6 +85,9 @@
         "description": "Lists the current availability status for all the resources in the resource group. Use the nextLink property in the response to get the next page of availability statuses.",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -92,9 +95,6 @@
           },
           {
             "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ExpandParameter"
@@ -338,8 +338,8 @@
               "type": "string",
               "description": "Chronicity of the availability transition.",
               "enum": [
-                "transient",
-                "persistent"
+                "Transient",
+                "Persistent"
               ],
               "x-ms-enum": {
                 "name": "reasonChronicityTypes",

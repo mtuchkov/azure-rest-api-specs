@@ -22,7 +22,7 @@
                      "reportedTime":"2016-05-04T14:11:29.7598931Z",
                      "rootCauseAttributionTime":"2016-03-29T09:13:00Z",
                      "resolutionETA":"2016-03-29T09:37:00Z",
-                     "serviceImpactingEvents":{  
+                     "serviceImpactingEvents": [{  
                         "eventStartTime":"2016-05-02T19:23:13.7115125Z",
                         "eventStatusLastModifiedTime":"2016-05-02T19:27:04.9543491Z",
                         "correlationId":"b56d0180-2d6c-4f7b-b750-c1eca681874c",
@@ -35,7 +35,7 @@
                            "region":"East US",
                            "incidentType":"outage"
                         }
-                     }
+                     }]
                   }
                },
                {  
