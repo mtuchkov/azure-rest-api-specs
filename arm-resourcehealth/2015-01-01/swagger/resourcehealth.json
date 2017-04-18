@@ -119,7 +119,7 @@
         },
         "x-ms-examples": {
           "ListByResourceGroup": {
-            "$ref": "../examples/AvailabilityStatuses_ListBySubscriptionId.json"
+            "$ref": "../examples/AvailabilityStatuses_ListByResourceGroup.json"
           }
         }
       }
