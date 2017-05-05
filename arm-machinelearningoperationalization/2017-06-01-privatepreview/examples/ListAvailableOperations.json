@@ -1,0 +1,57 @@
+{
+    "parameters": {
+        "api-version": "2017-06-01-privatepreview"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "name": "Microsoft.MachineLearningOperationalization/register/action",
+                        "display": {
+                            "provider": "Microsoft Machine Learning Hosting Accounts Management",
+                            "resource": "Machine Learning Operationalization Hosting Accounts Provider",
+                            "operation": "Register the provider",
+                            "description": "Registers the subscription for the machine learning hosting accounts resource provider and enables the creation of hosting account."
+                        },
+                        "origin": "user,system",
+                        "properties": {}
+                    },
+                    {
+                        "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/read",
+                        "display": {
+                            "provider": "Microsoft Machine Learning Hosting Accounts Management",
+                            "resource": "Machine Learning Operationalization Hosting Account",
+                            "operation": "Read the hosting account",
+                            "description": "Read any hosting account"
+                        },
+                        "origin": "user,system",
+                        "properties": {}
+                    },
+                    {
+                        "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/write",
+                        "display": {
+                            "provider": "Microsoft Machine Learning Hosting Accounts Management",
+                            "resource": "Machine Learning Operationalization Hosting Account",
+                            "operation": "Write the hosting account",
+                            "description": "Create or update any hosting account"
+                        },
+                        "origin": "user,system",
+                        "properties": {}
+                    },
+                    {
+                        "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/delete",
+                        "display": {
+                            "provider": "Microsoft Machine Learning Hosting Accounts Management",
+                            "resource": "Machine Learning Operationalization Hosting Account",
+                            "operation": "Delete the hosting account",
+                            "description": "Delete any hosting account"
+                        },
+                        "origin": "user,system",
+                        "properties": {}
+                    }
+                ]
+            }
+        }
+    }
+}

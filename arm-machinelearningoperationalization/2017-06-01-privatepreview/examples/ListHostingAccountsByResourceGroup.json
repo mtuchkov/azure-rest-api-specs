@@ -1,0 +1,55 @@
+{
+    "parameters": {
+        "subcriptionId": "00000000-1111-2222-3333-444444444444",
+        "resourceGroupName": "testResourceGroup",
+        "api-version": "2017-06-01-privatepreview"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount1",
+                        "name": "MyHostingAccount1",
+                        "type": "Microsoft.MachineLearningOperationalization/hostingAccounts",
+                        "location": "West Central Us",
+                        "tags": {
+                            "key1": "alpha",
+                            "key2": "beta"
+                        },
+                        "sku": {
+                            "name": "S2",
+                            "tier": "Premium"
+                        },
+                        "properties": {
+                            "createdOn": "2017-05-04T07:12:28.1911545Z",
+                            "modifiedOn": "2017-05-04T07:12:28.1911545Z",
+                            "description": "My Hosting Account1",
+                            "modelManagementSwaggerLocation": "https://westcentralus.mms.azureml.net/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount1/swagger.json"
+                        }
+                    },
+                    {
+                        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount2",
+                        "name": "MyHostingAccount2",
+                        "type": "Microsoft.MachineLearningOperationalization/hostingAccounts",
+                        "location": "West Central Us",
+                        "tags": {
+                            "key1": "alpha",
+                            "key2": "beta"
+                        },
+                        "sku": {
+                            "name": "S2",
+                            "tier": "Premium"
+                        },
+                        "properties": {
+                            "createdOn": "2017-05-05T07:12:28.1911545Z",
+                            "modifiedOn": "2017-05-05T07:12:28.1911545Z",
+                            "description": "My Hosting Account2",
+                            "modelManagementSwaggerLocation": "https://westcentralus.mms.azureml.net/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount2/swagger.json"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,670 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Azure Machine Learning Hosting Account",
+        "description": "These APIs allow end users to operate on Azure Machine Learning Hosting Account. They support the following operations:<ul><li>Create or update a hosting account</li><li>Get a hosting account</li><li>Patch a hosting account</li><li>Delete a hosting account</li><li>Get all hosting accounts in a Resource Group </li><li>Get all hosting account in a Subscription</li><li>List hosting account keys</li></ul>",
+        "version": "2017-06-01-privatepreview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow.",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningOperationalization/hostingAccounts/{hostingAccountName}": {
+            "put": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_CreateOrUpdate",
+                "description": "Create or update a hosting account. This call will overwrite an existing hosting account. Note that there is no warning or confirmation. This is a nonrecoverable operation. If your intent is to create a new hosting account, call the Get operation first to verify that it does not exist.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HostingAccountNameParameter"
+                    },
+                    {
+                        "in": "body",
+                        "name": "parameters",
+                        "description": "The payload that is used to create or update the hosting account.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. This response is returned for an update hosting account operation. The response payload is identical to the response payload that is returned by the GET operation.",
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    "201": {
+                        "description": "Created. This response is returned for a create hosting account operation.",
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/CreateOrUpdateHostingAccount.json"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_Get",
+                "description": "Gets the hosting account Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and hosting account token are not returned by this call. To get the hosting account access token, call List Tokens.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HostingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success.",
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/GetHostingAccount.json"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_Update",
+                "description": "Modifies an existing hosting account resource.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HostingAccountNameParameter"
+                    },
+                    {
+                        "in": "body",
+                        "name": "parameters",
+                        "description": "The payload to use to patch the hosting account.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response payload is identical to the response payload that is returned by the GET operation.",
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccount"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/UpdateHostingAccount.json"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_Delete",
+                "description": "Deletes the specified hosting account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HostingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK, the object exists and was deleted successfully."
+                    },
+                    "204": {
+                        "description": "No Content, if the resource does not exist and the request is well formed"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/DeleteHostingAccount.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningOperationalization/hostingAccounts/{hostingAccountName}/listTokens": {
+            "post": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_ListTokens",
+                "description": "Gets the access tokens for the specified hosting account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/HostingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success.",
+                        "schema": {
+                            "$ref": "#/definitions/HostingAccountTokens"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/ListHostingAccountTokens.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningOperationalization/hostingAccounts": {
+            "get": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "operationId": "HostingAccounts_ListByResourceGroup",
+                "description": "Gets the hosting accounts in the specified resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "in": "query",
+                        "name": "$skiptoken",
+                        "type": "string",
+                        "description": "Continuation token for pagination.",
+                        "required": false
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response includes a paginated array of hosting account objects and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedHostingAccountsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/ListHostingAccountsByResourceGroup.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningOperationalization/hostingAccounts": {
+            "get": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "operationId": "HostingAccounts_ListBySubscriptionId",
+                "description": "Gets the hosting accounts in the specified subscription.",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "$skiptoken",
+                        "type": "string",
+                        "description": "Continuation token for pagination.",
+                        "required": false
+                    },
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. The response includes a paginated array of hosting account objects and a URI to the next set of results, if any.",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatedHostingAccountsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/ListHostingAccountsBySubscriptionId.json"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.MachineLearningOperationalization/operations": {
+            "get": {
+                "tags": [
+                    "HostingAccounts"
+                ],
+                "operationId": "HostingAccounts_ListAvailableOperation",
+                "description": "Gets all available operations.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/APIVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succeess",
+                        "schema": {
+                            "$ref": "#/definitions/AvailableOperations"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "TeamAccountCreate": {
+                        "$ref": "../examples/ListAvailableOperations.json"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "description": "The Azure subscription ID.",
+            "in": "path",
+            "type": "string",
+            "required": true
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group in which the hosting account is located.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "HostingAccountNameParameter": {
+            "name": "hostingAccountName",
+            "description": "The name of the hosting account.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "APIVersionParameter": {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
+            "required": true
+        }
+    },
+    "definitions": {
+        "Resource": {
+            "description": "ARM resource envelope",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "id": {
+                    "description": "Specifies the resource ID.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Specifies the name of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "location": {
+                    "description": "Specifies the location of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Specifies the type of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "tags": {
+                    "description": "Contains resource tags defined as key/value pairs.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "sku": {
+                    "description": "The SKU of hosting account",
+                    "$ref": "#/definitions/Sku"
+                }
+            }
+        },
+        "Sku": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the sku name. Required for account creation, optional for update.",
+                    "enum": [
+                        "F0",
+                        "P0",
+                        "P1",
+                        "P2",
+                        "S0",
+                        "S1",
+                        "S2",
+                        "S3",
+                        "S4",
+                        "S5",
+                        "S6"
+                    ],
+                    "x-ms-enum": {
+                        "name": "SkuName",
+                        "modelAsString": true
+                    }
+                },
+                "tier": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Gets the sku tier. This is based on the SKU name.",
+                    "enum": [
+                        "Free",
+                        "Basic",
+                        "Standard",
+                        "Premium"
+                    ],
+                    "x-ms-enum": {
+                        "name": "SkuTier",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "description": "The SKU of the hosting account account."
+        },
+        "HostingAccount": {
+            "type": "object",
+            "description": "Instance of an Azure ML hosting account resource.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "description": "The properties of the machine learning hosting account",
+                    "$ref": "#/definitions/HostingAccountProperties",
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "HostingAccountProperties": {
+            "type": "object",
+            "description": "The set of properties specific to the Azure ML hosting account resource.",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the hosting account."
+                },
+                "createdOn": {
+                    "type": "string",
+                    "description": "Read Only: The date and time when the hosting account was created.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "modifiedOn": {
+                    "type": "string",
+                    "description": "Read Only: The date and time when the hosting account was last modified.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "modelManagementSwaggerLocation": {
+                    "type": "string",
+                    "description": "Read Only: Contains the URI of the swagger spec of Model Management Service.",
+                    "readOnly": true
+                }
+            }
+        },
+        "HostingAccountTokens": {
+            "type": "object",
+            "description": "Access keys for the hosting account calls.",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "The access token to Model Management Service."
+                }
+            }
+        },
+        "PaginatedHostingAccountsList": {
+            "type": "object",
+            "description": "Paginated list of hosting accounts.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "An array of hosting account objects.",
+                    "items": {
+                        "$ref": "#/definitions/HostingAccount"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "A continuation link (absolute URI) to the next page of results in the list."
+                }
+            }
+        },
+        "AvailableOperations": {
+            "type": "object",
+            "description": "Available operation list",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "An array of available operations",
+                    "items": {
+                        "$ref": "#/definitions/ResourceOperation"
+                    }
+                }
+            }
+        },
+        "ResourceOperation": {
+            "type": "object",
+            "description": "Resource operation",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of this operation."
+                },
+                "display": {
+                    "type": "object",
+                    "description": "Display of the operation",
+                    "properties": {
+                        "provider": {
+                            "type": "string",
+                            "description": "The resource provider name"
+                        },
+                        "resource": {
+                            "type": "string",
+                            "description": "The resource name"
+                        },
+                        "operation": {
+                            "type": "string",
+                            "description": "The operation"
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "The description of the operation"
+                        }
+                    }
+                },
+                "origin": {
+                    "type": "string",
+                    "description": "The operation origin"
+                }
+            }
+        },
+        "ErrorResponse": {
+            "type": "object",
+            "description": "Hosting account error object.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "error code"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Error message"
+                },
+                "details": {
+                    "type": "array",
+                    "description": "An array of error detail objects.",
+                    "items": {
+                        "$ref": "#/definitions/ErrorDetail"
+                    }
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "ErrorDetail": {
+            "type": "object",
+            "description": "Hosting account error detail.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "error code"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "error message"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ]
+        }
+    }
+}
