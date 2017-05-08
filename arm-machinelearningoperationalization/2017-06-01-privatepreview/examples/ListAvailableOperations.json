@@ -14,8 +14,7 @@
                             "operation": "Register the provider",
                             "description": "Registers the subscription for the machine learning hosting accounts resource provider and enables the creation of hosting account."
                         },
-                        "origin": "user,system",
-                        "properties": {}
+                        "origin": "user,system"
                     },
                     {
                         "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/read",
@@ -25,8 +24,7 @@
                             "operation": "Read the hosting account",
                             "description": "Read any hosting account"
                         },
-                        "origin": "user,system",
-                        "properties": {}
+                        "origin": "user,system"
                     },
                     {
                         "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/write",
@@ -36,8 +34,7 @@
                             "operation": "Write the hosting account",
                             "description": "Create or update any hosting account"
                         },
-                        "origin": "user,system",
-                        "properties": {}
+                        "origin": "user,system"
                     },
                     {
                         "name": "Microsoft.MachineLearningOperationalization/hostingAccounts/delete",
@@ -47,8 +44,7 @@
                             "operation": "Delete the hosting account",
                             "description": "Delete any hosting account"
                         },
-                        "origin": "user,system",
-                        "properties": {}
+                        "origin": "user,system"
                     }
                 ]
             }
