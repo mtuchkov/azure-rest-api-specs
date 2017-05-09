@@ -1,0 +1,38 @@
+{
+    "parameters": {
+        "subscriptionId": "00000000-1111-2222-3333-444444444444",
+        "resourceGroupName": "testResourceGroup",
+        "hostingAccountName": "MyHostingAccount",
+        "api-version": "2017-06-01-privatepreview",
+        "parameters": {
+            "sku": {
+                "name": "P2",
+                "tier": "Basic"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount",
+                "name": "MyHostingAccount",
+                "type": "Microsoft.MachineLearningOperationalization/hostingAccounts",
+                "location": "West Central Us",
+                "tags": {
+                    "key1": "alpha",
+                    "key2": "beta"
+                },
+                "sku": {
+                    "name": "P2",
+                    "tier": "Basic"
+                },
+                "properties": {
+                    "createdOn": "2017-05-04T07:12:28.1911545Z",
+                    "modifiedOn": "2017-05-05T07:12:28.1911545Z",
+                    "description": "My Hosting Account",
+                    "modelManagementSwaggerLocation": "https://westcentralus.mms.azureml.net/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.MachineLearning/hostingAccounts/MyHostingAccount/swagger.json"
+                }
+            }
+        }
+    }
+}
