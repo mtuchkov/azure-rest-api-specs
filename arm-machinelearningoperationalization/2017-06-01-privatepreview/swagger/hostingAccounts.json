@@ -371,7 +371,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Succeess",
+                        "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/AvailableOperations"
                         }
@@ -499,9 +499,6 @@
                     }
                 }
             },
-            "required": [
-                "name"
-            ],
             "description": "The SKU of the hosting account account."
         },
         "HostingAccount": {
